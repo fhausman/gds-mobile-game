@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class Score : MonoBehaviour
@@ -15,7 +13,6 @@ public class Score : MonoBehaviour
         uiScore = GetComponent<Text>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         uiScore.text = score.ToString();

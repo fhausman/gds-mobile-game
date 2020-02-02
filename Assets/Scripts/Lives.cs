@@ -22,6 +22,7 @@ public class Lives : MonoBehaviour
         if (livesLeft < 0)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            return;
         }
 
         livesUi.text = "Lives left: " + livesLeft.ToString();

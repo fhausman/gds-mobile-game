@@ -22,6 +22,7 @@ public class HoleManager : MonoBehaviour
             newHole.GetComponent<Hole>().MoveSpeed += speedDelta * spawnedCount;
 
             spawnedCount++;
+            Norm.norm -= 10;
         }
     }
 }
