@@ -5,24 +5,43 @@ using UnityEngine;
 public class HoleManager : MonoBehaviour
 {
     public GameObject holePrefab;
-    public float speedDelta = 50.0f;
+    public static float startingSpeed = 200.0f;
+    public static float speedDelta = 50.0f;
     public Vector3 spawnPoint = new Vector3(11.03f, -3.99f, 0.0f);
 
-    private uint spawnedCount = 0;
+    public static float currentSpeed { get => startingSpeed + speedDelta * spawnedCount; }
+    private static uint spawnedCount = 0;
+
+    void Start()
+    {
+        spawnedCount = 0;
+    }
+
+    void Update()
+    {
+        if (GameObject.FindGameObjectsWithTag("Hole").Length == 0)
+        {
+            SpawnHole();
+        }
+    }
 
     void OnTriggerExit2D(Collider2D col)
     {
         if(col.tag == "Hole")
         {
-            Debug.Log("Hole left the stage");
             Destroy(col.gameObject);
-
-            var newHole = Instantiate(holePrefab);
-            newHole.transform.position = spawnPoint;
-            newHole.GetComponent<Hole>().MoveSpeed += speedDelta * spawnedCount;
-
-            spawnedCount++;
-            Norm.norm -= 10;
+            if (!col.GetComponent<Hole>().hitted)
+            {
+                Norm.norm -= 10;
+            }
         }
+    }
+
+    public void SpawnHole()
+    {
+        var newHole = Instantiate(holePrefab, transform);
+        newHole.transform.position = spawnPoint;
+        newHole.GetComponent<Hole>().moveSpeed = currentSpeed;
+        spawnedCount++;
     }
 }

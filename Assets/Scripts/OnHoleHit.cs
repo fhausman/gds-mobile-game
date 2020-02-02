@@ -11,6 +11,12 @@ public class OnHoleHit : MonoBehaviour
             Score.score += 1;
             Destroy(col.gameObject);
             transform.gameObject.SetActive(false);
+
+            var hole = GetComponentInParent<Hole>();
+            hole.moveSpeed += 50.0f;
+            hole.hitted = true;
+
+            GetComponentInParent<HoleManager>().SpawnHole();
         }
     }
 }

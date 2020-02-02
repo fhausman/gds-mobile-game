@@ -1,18 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Hole : MonoBehaviour
 {
-    public float MoveSpeed = 100.0f;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public float moveSpeed = 0f;
+    public bool hitted = false;
 
     void Update()
     {
-        transform.position += Vector3.left * MoveSpeed * Time.deltaTime / 100.0f;
+        transform.position += Vector3.left * moveSpeed * Time.deltaTime / 100.0f;
     }
 }
