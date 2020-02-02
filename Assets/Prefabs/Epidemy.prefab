@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3864340141778764184}
   - component: {fileID: 2192246918782105060}
   - component: {fileID: 7398364070242877137}
+  - component: {fileID: 385397761550054916}
   m_Layer: 0
   m_Name: Epidemy
   m_TagString: Untagged
@@ -98,3 +99,15 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &385397761550054916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2076163970964745890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a5ac7f561905cc468d86a28b44d7d0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
