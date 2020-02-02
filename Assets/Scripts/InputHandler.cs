@@ -25,6 +25,7 @@ public class InputHandler : MonoBehaviour
             if(clickedObject != null)
             {
                 Debug.Log(clickedObject);
+                clickedObject.GetComponent<Outbreak>().Shrink();
                 clickedObject = null;
             }
         }
