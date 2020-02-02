@@ -27,7 +27,5 @@ public class Farmer : MonoBehaviour
 
             velocity = 0.0f;
         }
-
-        Debug.Log(velocity);
     }
 }
