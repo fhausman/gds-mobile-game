@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34bfd59c7eaa0ac4e96fa3af354679f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: 10
+  velocity: 0
   angle: 50
   resolution: 10
 --- !u!1 &5916445089534737768
@@ -250,3 +250,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   potatoPrefab: {fileID: 1896640199915796141, guid: f10fbbcf9955d1742bf95c044a23dde2,
     type: 3}
+  throwAngle: 0
