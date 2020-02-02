@@ -250,4 +250,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   potatoPrefab: {fileID: 1896640199915796141, guid: f10fbbcf9955d1742bf95c044a23dde2,
     type: 3}
-  throwAngle: 0
+  throwAngle: 30

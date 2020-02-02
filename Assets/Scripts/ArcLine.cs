@@ -48,7 +48,7 @@ public class ArcLine : MonoBehaviour
         for (int i = 0; i < positionCount; ++i)
         {
             var delta = i / (float)resolution;
-            points[i] = CalculatePoint(delta, maxDistance*1.5f);
+            points[i] = CalculatePoint(delta, maxDistance*1.8f);
         }
 
         return points;

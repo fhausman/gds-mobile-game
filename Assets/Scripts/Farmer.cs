@@ -23,14 +23,10 @@ public class Farmer : MonoBehaviour
     {
         arc.angle = throwAngle;
         arc.velocity = velocity;
-        //if(Input.GetMouseButtonDown(0))
-        //{
-        //    velocity = 0.0f;
-        //}
 
         if (Input.GetMouseButton(0))
         {
-            velocity += 0.1f;
+            velocity += 10.0f*Time.deltaTime;
             if (velocity > MaxVelocity)
                 velocity = MaxVelocity;
         }
