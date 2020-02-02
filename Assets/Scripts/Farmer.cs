@@ -9,12 +9,25 @@ public class Farmer : MonoBehaviour
     private float MaxVelocity = 1000.0f;
     private float velocity = 0.0f;
 
+    private ArcLine arc;
+
+    void Start()
+    {
+        arc = GetComponentInChildren<ArcLine>();
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButton(0))
+        arc.velocity = velocity;
+        if(Input.GetMouseButtonDown(0))
         {
-            velocity += 10.0f;
+            velocity = 0.0f;
+        }
+
+        if (Input.GetMouseButton(0))
+        {
+            velocity += 0.1f;
             if (velocity > MaxVelocity)
                 velocity = MaxVelocity;
         }
@@ -22,10 +35,10 @@ public class Farmer : MonoBehaviour
         if(Input.GetMouseButtonUp(0))
         {
             var potato = Instantiate(potatoPrefab);
-            potato.transform.position = transform.position + new Vector3(0.0f, 3.0f);
-            potato.GetComponent<Rigidbody2D>().AddForce(new Vector2(1* velocity, 0));
-
-            velocity = 0.0f;
+            potato.transform.position = arc.transform.position;
+            potato.GetComponent<Rigidbody2D>().AddForce(new Vector2(Mathf.Cos(Mathf.Deg2Rad * 45.0f), Mathf.Sin(Mathf.Deg2Rad * 45.0f)) * velocity, ForceMode2D.Impulse);
+            Debug.Log(velocity);
+            //velocity = 0.0f;
         }
     }
 }
