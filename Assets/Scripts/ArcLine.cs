@@ -28,8 +28,16 @@ public class ArcLine : MonoBehaviour
 
     void RenderArc()
     {
-        lr.positionCount = positionCount;
-        lr.SetPositions(GetArcPoints());
+        if (velocity > 0.0f)
+        {
+            lr.enabled = true;
+            lr.positionCount = positionCount;
+            lr.SetPositions(GetArcPoints());
+        }
+        else
+        {
+            lr.enabled = false;
+        }
     }
 
     Vector3[] GetArcPoints()

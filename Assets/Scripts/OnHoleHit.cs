@@ -8,7 +8,9 @@ public class OnHoleHit : MonoBehaviour
     {
         if(col.tag == "Potato")
         {
+            Score.score += 1;
             Destroy(col.gameObject);
+            transform.gameObject.SetActive(false);
         }
     }
 }

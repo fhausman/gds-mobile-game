@@ -5,9 +5,11 @@ using UnityEngine;
 public class Farmer : MonoBehaviour
 {
     public GameObject potatoPrefab;
+    public float throwAngle;
 
     private float MaxVelocity = 1000.0f;
     private float velocity = 0.0f;
+    private Vector2 normalizedDirection { get => new Vector2(Mathf.Cos(Mathf.Deg2Rad * throwAngle), Mathf.Sin(Mathf.Deg2Rad * throwAngle)); }
 
     private ArcLine arc;
 
@@ -19,11 +21,12 @@ public class Farmer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        arc.angle = throwAngle;
         arc.velocity = velocity;
-        if(Input.GetMouseButtonDown(0))
-        {
-            velocity = 0.0f;
-        }
+        //if(Input.GetMouseButtonDown(0))
+        //{
+        //    velocity = 0.0f;
+        //}
 
         if (Input.GetMouseButton(0))
         {
@@ -36,9 +39,8 @@ public class Farmer : MonoBehaviour
         {
             var potato = Instantiate(potatoPrefab);
             potato.transform.position = arc.transform.position;
-            potato.GetComponent<Rigidbody2D>().AddForce(new Vector2(Mathf.Cos(Mathf.Deg2Rad * 45.0f), Mathf.Sin(Mathf.Deg2Rad * 45.0f)) * velocity, ForceMode2D.Impulse);
-            Debug.Log(velocity);
-            //velocity = 0.0f;
+            potato.GetComponent<Rigidbody2D>().AddForce(normalizedDirection * velocity, ForceMode2D.Impulse);
+            velocity = 0.0f;
         }
     }
 }

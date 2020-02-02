@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 10
-  angle: 45
+  angle: 50
   resolution: 10
 --- !u!1 &5916445089534737768
 GameObject:
