@@ -4,8 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Hole
-  - Potato
+  - Stake
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -15,9 +15,9 @@ TagManager:
   - UI
   - 
   - 
-  - Holes
-  - Potatos
-  - 
+  - Ground
+  - Objects
+  - Enemies
   - 
   - 
   - 
