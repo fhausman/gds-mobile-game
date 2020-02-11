@@ -26,16 +26,17 @@ public class ArcLine : MonoBehaviour
 
     void RenderArc()
     {
-        if (range > 0.0f)
+        if (range > 0.0f + float.Epsilon)
         {
             lr.enabled = true;
             lr.positionCount = resolution;
             lr.SetPositions(GetArcPoints());
         }
-        //else
-        //{
-        //    lr.enabled = false;
-        //}
+        else
+        {
+            lr.positionCount = 1;
+            lr.enabled = false;
+        }
     }
 
     Vector3[] GetArcPoints()
