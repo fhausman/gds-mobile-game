@@ -7,7 +7,6 @@ public class Witch : MonoBehaviour
     public GameObject projectile;
     public float chargeSpeed = 10.0f;
 
-    private float range = 0.0f;
     private ArcLine arc;
 
     void Start()
@@ -25,16 +24,16 @@ public class Witch : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
-            range += chargeSpeed * Time.deltaTime;
-            arc.range = range;
+            arc.range += chargeSpeed * Time.deltaTime;
         }
 
         if (Input.GetMouseButtonUp(0))
         {
             var proj = Instantiate(projectile);
             proj.transform.position = transform.position;
-            proj.GetComponent<Rigidbody2D>().AddForce(arc.direction * LaunchSpeed(range, transform.position.y + 5.0f, Physics2D.gravity.magnitude, 0), ForceMode2D.Impulse);
-            range = 0.0f;
+            proj.GetComponent<Rigidbody2D>().AddForce(arc.direction * LaunchSpeed(arc.range, transform.position.y + 5.0f, Physics2D.gravity.magnitude, 0), ForceMode2D.Impulse);
+
+            arc.range = 0.0f;
         }
     }
 

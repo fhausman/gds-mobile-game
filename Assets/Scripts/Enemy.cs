@@ -23,6 +23,7 @@ public class Enemy : MonoBehaviour
 
     void Die()
     {
+        Score.value += 1;
         Destroy(gameObject);
     }
 }
