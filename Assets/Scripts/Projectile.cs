@@ -22,5 +22,11 @@ public class Projectile : MonoBehaviour
     {
         anim["Explode"].speed = 6.0f;
         anim.Play("Explode");
+
+        var objs = Physics2D.OverlapCircleAll(transform.position, 1.0f, LayerMask.GetMask("Enemies"));
+        foreach(var obj in objs)
+        {
+            obj.SendMessage("Die");
+        }
     }
 }
