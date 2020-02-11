@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3427207164983983957}
   - component: {fileID: 3427207164983983956}
+  - component: {fileID: 6688648191211769477}
   m_Layer: 9
   m_Name: Witch
   m_TagString: Untagged
@@ -82,6 +83,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6688648191211769477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3427207164983983947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3737f012d803bc49822418255326935, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 5331731768593307225, guid: 7d3cecc124c4d1a49b4c193bae376602,
+    type: 3}
 --- !u!1 &4421698581098401676
 GameObject:
   m_ObjectHideFlags: 0
@@ -153,14 +168,7 @@ LineRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Positions:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0.5, y: -0.25, z: 0}
-  - {x: 1, y: -1, z: 0}
-  - {x: 1.5, y: -1, z: 0}
-  - {x: 2, y: -4, z: 0}
-  - {x: 2.5, y: -4, z: 0}
-  - {x: 3, y: -9, z: 0}
+  m_Positions: []
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -228,6 +236,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34bfd59c7eaa0ac4e96fa3af354679f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: 0
-  angle: 0
   resolution: 100
+  range: 6.07

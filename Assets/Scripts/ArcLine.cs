@@ -6,6 +6,8 @@ public class ArcLine : MonoBehaviour
     private LineRenderer lr;
     private Vector3 startPosition;
     private Vector3 endPosition = new Vector3(0.0f, 5.0f);
+    private float a { get => (-c / (range * range)); }
+    private float c { get => startPosition.y + endPosition.y; }
 
     public int resolution;
     public float range = 0.0f;
@@ -26,6 +28,7 @@ public class ArcLine : MonoBehaviour
         if (range > 0.0f)
         {
             lr.enabled = true;
+            lr.positionCount = resolution;
             lr.SetPositions(GetArcPoints());
         }
         //else
@@ -37,7 +40,7 @@ public class ArcLine : MonoBehaviour
     Vector3[] GetArcPoints()
     {
         var points = new Vector3[resolution];
-        var delta = (endPosition.y + startPosition.y) / (float)resolution;
+        var delta = range / (float)resolution;
 
         for (int i = 0; i < resolution; ++i)
         {
@@ -49,9 +52,10 @@ public class ArcLine : MonoBehaviour
 
     Vector3 CalculatePoint(float delta)
     {
-        var y = delta;
-        var x = Mathf.Sqrt(y) * range;
+        var x = delta;
+        var y = a*x*x + startPosition.y;
+        Debug.Log(a);
         
-        return new Vector3(x, -y + startPosition.y);
+        return new Vector3(x, y);
     }
 }
