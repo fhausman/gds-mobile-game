@@ -97,6 +97,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectile: {fileID: 5331731768593307225, guid: 7d3cecc124c4d1a49b4c193bae376602,
     type: 3}
+  chargeSpeed: 10
 --- !u!1 &4421698581098401676
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,4 +238,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resolution: 100
-  range: 6.07
+  range: 0
+  direction: {x: 1, y: 0}

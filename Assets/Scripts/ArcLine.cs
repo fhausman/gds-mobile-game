@@ -11,6 +11,7 @@ public class ArcLine : MonoBehaviour
 
     public int resolution;
     public float range = 0.0f;
+    public Vector2 direction = Vector2.right;
 
     void Awake()
     {
@@ -52,9 +53,8 @@ public class ArcLine : MonoBehaviour
 
     Vector3 CalculatePoint(float delta)
     {
-        var x = delta;
+        var x = delta*direction.x;
         var y = a*x*x + startPosition.y;
-        Debug.Log(a);
         
         return new Vector3(x, y);
     }

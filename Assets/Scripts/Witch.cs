@@ -5,12 +5,9 @@ using UnityEngine;
 public class Witch : MonoBehaviour
 {
     public GameObject projectile;
-    //public float throwAngle;
+    public float chargeSpeed = 10.0f;
 
-    //private float MaxVelocity = 1000.0f;
     private float range = 0.0f;
-    //private Vector2 normalizedDirection { get => new Vector2(Mathf.Cos(Mathf.Deg2Rad * throwAngle), Mathf.Sin(Mathf.Deg2Rad * throwAngle)); }
-
     private ArcLine arc;
 
     void Start()
@@ -20,9 +17,15 @@ public class Witch : MonoBehaviour
 
     void Update()
     {
+        if(Input.GetMouseButtonDown(0))
+        {
+            var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            arc.direction = mousePos.x < 0 ? Vector2.left : Vector2.right;
+        }
+
         if (Input.GetMouseButton(0))
         {
-            range += 1.0f * Time.deltaTime;
+            range += chargeSpeed * Time.deltaTime;
             arc.range = range;
         }
 
@@ -30,7 +33,7 @@ public class Witch : MonoBehaviour
         {
             var proj = Instantiate(projectile);
             proj.transform.position = transform.position;
-            proj.GetComponent<Rigidbody2D>().velocity = Vector3.right * LaunchSpeed(range, transform.position.y + 5.0f, Physics2D.gravity.magnitude, 0);
+            proj.GetComponent<Rigidbody2D>().AddForce(arc.direction * LaunchSpeed(range, transform.position.y + 5.0f, Physics2D.gravity.magnitude, 0), ForceMode2D.Impulse);
             range = 0.0f;
         }
     }
