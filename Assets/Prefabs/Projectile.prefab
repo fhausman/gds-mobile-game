@@ -9,9 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2488290590423920547}
+  - component: {fileID: 6023502914366897346}
   - component: {fileID: 9044180951990069983}
   - component: {fileID: 7184367330773365869}
   - component: {fileID: 8732568971741635917}
+  - component: {fileID: 3596962819363853113}
   m_Layer: 0
   m_Name: Projectile
   m_TagString: Untagged
@@ -33,6 +35,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!111 &6023502914366897346
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5331731768593307225}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: c7ff3ad8404f53247864298a89c27de3, type: 2}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!212 &9044180951990069983
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -120,3 +137,15 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &3596962819363853113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5331731768593307225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 427013808640ab54c93143d5bdb263fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
