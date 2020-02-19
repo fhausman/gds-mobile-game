@@ -2,9 +2,9 @@
 
 public interface IState
 {
-    public void Init();
-    public void Update();
-    public void Exit();
+    void Init();
+    void Update();
+    void Exit();
 }
 
 public class EmptyState : IState
