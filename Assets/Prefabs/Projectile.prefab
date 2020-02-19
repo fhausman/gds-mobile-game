@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7184367330773365869}
   - component: {fileID: 8732568971741635917}
   - component: {fileID: 3596962819363853113}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,8 @@ Animation:
   m_Enabled: 1
   serializedVersion: 3
   m_Animation: {fileID: 7400000, guid: c7ff3ad8404f53247864298a89c27de3, type: 2}
-  m_Animations: []
+  m_Animations:
+  - {fileID: 7400000, guid: c7ff3ad8404f53247864298a89c27de3, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
@@ -149,3 +150,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 427013808640ab54c93143d5bdb263fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shouldDestroy: 0
