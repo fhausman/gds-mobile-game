@@ -15,7 +15,7 @@ public class SpawnPoint : MonoBehaviour
 
         var enemy = Instantiate(enemies[0]);
         enemy.transform.position = transform.position;
-        enemy.GetComponent<Enemy>().direction = spawnDir;
+        enemy.GetComponent<BasicMob>().direction = spawnDir;
 
         yield return new WaitForSeconds(1.25f);
 
