@@ -10,8 +10,10 @@ public class ArcLine : MonoBehaviour
     private float c { get => startPosition.y + endPosition.y; }
 
     public int resolution;
-    public float range = 0.0f;
+    public float range = baseRange;
     public Vector2 direction = Vector2.right;
+
+    public static readonly float baseRange = 0.6f;
 
     void Awake()
     {
@@ -26,7 +28,7 @@ public class ArcLine : MonoBehaviour
 
     void RenderArc()
     {
-        if (range > 0.0f + float.Epsilon)
+        if (range > baseRange + float.Epsilon)
         {
             lr.enabled = true;
             lr.positionCount = resolution;

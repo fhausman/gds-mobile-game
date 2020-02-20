@@ -69,7 +69,7 @@ public class Released : IState
     public void Init()
     {
         obj.InstatiateProjectile();
-        obj.arc.range = 0.0f;
+        obj.ResetArcRange();
     }
 
     public void Update()
@@ -108,6 +108,11 @@ public class Witch : MonoBehaviour
         var proj = Instantiate(projectile);
         proj.transform.position = transform.position;
         proj.GetComponent<Rigidbody2D>().AddForce(arc.direction * LaunchSpeed(arc.range, transform.position.y + 5.0f, Physics2D.gravity.magnitude, 0), ForceMode2D.Impulse);
+    }
+
+    public void ResetArcRange()
+    {
+        arc.range = ArcLine.baseRange;
     }
 
     private float LaunchSpeed(float distance, float yOffset, float gravity, float angle)
