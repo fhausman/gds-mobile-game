@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class BMStates
+public static class MobStates
 {
     public const int
         Running = 0,
         Dead = 1;
 }
 
-public class BMRunning : IState
+public class MobRunning : IState
 {
-    public BasicMob obj;
+    public Mob mob;
 
     public void Exit()
     {
@@ -23,13 +23,13 @@ public class BMRunning : IState
 
     public void Update()
     {
-        obj.SetVelocity(obj.speed * obj.direction);
+        mob.SetVelocity(mob.speed * mob.direction);
     }
 }
 
-public class BMDead : IState
+public class MobDead : IState
 {
-    public BasicMob obj;
+    public Mob mob;
 
     public void Exit()
     {
@@ -37,7 +37,7 @@ public class BMDead : IState
 
     public void Init()
     {
-        obj.Destroy();
+        mob.Destroy();
     }
 
     public void Update()
@@ -45,10 +45,11 @@ public class BMDead : IState
     }
 }
 
-public class BasicMob : MonoBehaviour
+public class Mob : MonoBehaviour
 {
     public Vector2 direction;
     public float speed;
+    public int numberOfLives;
     public StateMachine stateMachine { get; private set; } = new StateMachine();
 
     private Rigidbody2D rb;
@@ -66,9 +67,9 @@ public class BasicMob : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        stateMachine.AddState(BMStates.Running, new BMRunning { obj = this });
-        stateMachine.AddState(BMStates.Dead, new BMDead { obj = this });
-        stateMachine.ChangeState(BMStates.Running);
+        stateMachine.AddState(MobStates.Running, new MobRunning { mob = this });
+        stateMachine.AddState(MobStates.Dead, new MobDead { mob = this });
+        stateMachine.ChangeState(MobStates.Running);
     }
 
     void Update()
@@ -76,9 +77,13 @@ public class BasicMob : MonoBehaviour
         stateMachine.Update();
     }
 
-    void Die()
+    void Hit()
     {
-        Score.value += 1;
-        stateMachine.ChangeState(BMStates.Dead);
+        --numberOfLives;
+        if (numberOfLives == 0)
+        {
+            Score.value += 1;
+            stateMachine.ChangeState(MobStates.Dead);
+        }
     }
 }
