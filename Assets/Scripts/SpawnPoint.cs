@@ -21,6 +21,8 @@ public class SpawnPoint : MonoBehaviour
     private bool spawnBasicMob = false;
     private bool spawnStrongMob = false;
 
+    private float spawnNoise { get => Random.Range(-0.75f, 0.75f); }
+
     private IEnumerator BasicMobSpawnDelay()
     {
         yield return new WaitForSeconds(basicMobSpawnDelay);
@@ -42,7 +44,7 @@ public class SpawnPoint : MonoBehaviour
         enemy.transform.position = transform.position;
         enemy.GetComponent<Mob>().direction = spawnDir;
 
-        yield return new WaitForSeconds(basicMobSpawnRate);
+        yield return new WaitForSeconds(basicMobSpawnRate + spawnNoise);
 
         spawnBasicMob = true;
     }
@@ -54,7 +56,7 @@ public class SpawnPoint : MonoBehaviour
         enemy.transform.position = transform.position;
         enemy.GetComponent<Mob>().direction = spawnDir;
 
-        yield return new WaitForSeconds(strongMobSpawnRate);
+        yield return new WaitForSeconds(strongMobSpawnRate + spawnNoise);
 
         spawnStrongMob = true;
     }
