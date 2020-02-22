@@ -34,11 +34,11 @@ public class ArcLine : MonoBehaviour
             lr.positionCount = resolution;
             lr.SetPositions(GetArcPoints());
         }
-        else
-        {
-            lr.positionCount = 1;
-            lr.enabled = false;
-        }
+        //else
+        //{
+        //    lr.positionCount = 1;
+        //    lr.enabled = false;
+        //}
     }
 
     Vector3[] GetArcPoints()
@@ -57,7 +57,7 @@ public class ArcLine : MonoBehaviour
     Vector3 CalculatePoint(float delta)
     {
         var x = delta*direction.x;
-        var y = a*x*x + startPosition.y;
+        var y = 4*a*x*x + startPosition.y;
         
         return new Vector3(x, y);
     }
