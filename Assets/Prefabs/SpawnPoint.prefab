@@ -46,8 +46,11 @@ MonoBehaviour:
   enemies:
   - {fileID: 6360650250871298978, guid: d52f8e232168ee74f9e5d1ed9962ea7e, type: 3}
   - {fileID: 5973525381690631707, guid: 6a788e624b7e09b4393a3df2d36d558c, type: 3}
+  - {fileID: 8993641077376842587, guid: 73123233afd767046874e9695b9765bf, type: 3}
   spawnDir: {x: 1, y: 0}
+  priestTarget: {fileID: 0}
   basicMobSpawnDelay: 1
   basicMobSpawnRate: 2
   strongMobSpawnDelay: 5
   strongMobSpawnRate: 10
+  priestSpawnDelay: 10

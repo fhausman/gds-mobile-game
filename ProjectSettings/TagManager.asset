@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Stake
   - Enemy
+  - Priest
   layers:
   - Default
   - TransparentFX
