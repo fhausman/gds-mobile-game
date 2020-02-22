@@ -26,7 +26,7 @@ public class Idle : IState
 
     public void Update()
     {
-        if (Input.GetMouseButton(0) && Input.touchCount == 1)
+        if (Input.GetMouseButton(0))// && Input.touchCount == 1)
         {
             obj.inputState.ChangeState(InputStates.Charging);
         }
@@ -47,7 +47,7 @@ public class Charging : IState
 
     public void Update()
     {
-        if (Input.GetMouseButton(0) && Input.touchCount == 1)
+        if (Input.GetMouseButton(0))// && Input.touchCount == 1)
         {
             obj.arc.range += obj.chargeSpeed * Time.deltaTime;
         }

@@ -23,7 +23,7 @@ public class MobRunning : IState
 
     public void Update()
     {
-        mob.SetVelocity(mob.speed * mob.direction);
+        mob.SetVelocity(mob.speedMultiplier * mob.speed * mob.direction * Time.deltaTime);
     }
 }
 
@@ -49,8 +49,9 @@ public class Mob : MonoBehaviour
 {
     public Vector2 direction;
     public float speed;
+    public float speedMultiplier = 1.0f;
     public int numberOfLives;
-    public StateMachine stateMachine { get; private set; } = new StateMachine();
+    public StateMachine stateMachine { get; } = new StateMachine();
 
     private Rigidbody2D rb;
 
@@ -85,5 +86,10 @@ public class Mob : MonoBehaviour
             Score.value += 1;
             stateMachine.ChangeState(MobStates.Dead);
         }
+    }
+
+    void IncreaseSpeed()
+    {
+        speedMultiplier = 2.0f;
     }
 }
