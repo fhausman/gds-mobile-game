@@ -18,7 +18,7 @@ public class Projectile : MonoBehaviour
             Destroy(gameObject);
     }
 
-    private void OnCollisionEnter2D(Collision2D col)
+    private void OnTriggerEnter2D(Collider2D col)
     {
         anim["Explode"].speed = 6.0f;
         anim.Play("Explode");
