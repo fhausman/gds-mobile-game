@@ -58,6 +58,7 @@ public class SlybootThrowing: IState
     {
         yield return new WaitForSeconds(1.0f);
 
+        slyboot.Throw();
         slyboot.stateMachine.ChangeState(SlybootStates.Running);
     }
 }
@@ -85,6 +86,7 @@ public class Slyboot : MonoBehaviour
     public Vector2 direction;
     public float speed;
     public float speedMultiplier = 1.0f;
+    public GameObject torch;
     public StateMachine stateMachine { get; } = new StateMachine();
 
     private Rigidbody2D rb;
@@ -97,6 +99,16 @@ public class Slyboot : MonoBehaviour
     public void ChangeDirection()
     {
         direction = -direction;
+    }
+
+    public void Throw()
+    {
+        var torchInstance = Instantiate(torch);
+        torchInstance.transform.position = gameObject.transform.position;
+
+        var trb = torchInstance.GetComponent<Rigidbody2D>();
+        trb.AddForce(new Vector2(0.1f, 1) * 20.0f, ForceMode2D.Impulse);
+        trb.AddTorque(-1.0f, ForceMode2D.Impulse);
     }
 
     public void Destroy()
