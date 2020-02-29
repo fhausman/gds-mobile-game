@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2844125083151891958}
   - component: {fileID: -7417719404131696708}
-  m_Layer: 0
-  m_Name: SlybootMovmentBounds
+  m_Layer: 11
+  m_Name: SlybootMovementBounds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
