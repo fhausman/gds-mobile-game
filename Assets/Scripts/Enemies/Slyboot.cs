@@ -20,11 +20,19 @@ public class SlybootRunning : IState
 
     public void Init()
     {
+        slyboot.StartCoroutine(ThrowDelay());
     }
 
     public void Update()
     {
-        slyboot.SetVelocity(slyboot.speedMultiplier * slyboot.speed * slyboot.direction * Time.deltaTime);
+        slyboot.SetVelocity(slyboot.speedMultiplier * slyboot.speed * slyboot.direction);
+    }
+
+    IEnumerator ThrowDelay()
+    {
+        yield return new WaitForSeconds(5.0f);
+
+        slyboot.stateMachine.ChangeState(SlybootStates.Throwing);
     }
 }
 
@@ -32,33 +40,25 @@ public class SlybootThrowing: IState
 {
     public Slyboot slyboot;
 
-    private bool isThrowing = false;
-
     public void Exit()
     {
     }
 
     public void Init()
     {
+        slyboot.StartCoroutine(Throwing());
+        slyboot.SetVelocity(Vector2.zero);
     }
 
     public void Update()
     {
-        if (!isThrowing)
-        {
-            slyboot.StartCoroutine(Throwing());
-        }
     }
 
     IEnumerator Throwing()
     {
-        isThrowing = true;
-
-        Debug.Log("Started throwing");
         yield return new WaitForSeconds(1.0f);
-        Debug.Log("Thrown");
 
-        isThrowing = false;
+        slyboot.stateMachine.ChangeState(SlybootStates.Running);
     }
 }
 
@@ -113,8 +113,7 @@ public class Slyboot : MonoBehaviour
         stateMachine.ChangeState(SlybootStates.Running);
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         stateMachine.Update();
     }

@@ -23,7 +23,7 @@ public class MobRunning : IState
 
     public void Update()
     {
-        mob.SetVelocity(mob.speedMultiplier * mob.speed * mob.direction * Time.deltaTime);
+        mob.SetVelocity(mob.speedMultiplier * mob.speed * mob.direction);
     }
 }
 
