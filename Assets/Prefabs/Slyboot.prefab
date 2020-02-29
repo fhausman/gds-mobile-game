@@ -146,4 +146,5 @@ MonoBehaviour:
   direction: {x: 1, y: 0}
   speed: 1
   speedMultiplier: 1
+  throwAngle: 80
   torch: {fileID: 2344935337246766510, guid: 5f3a3765158934448aaf2e4374be9747, type: 3}

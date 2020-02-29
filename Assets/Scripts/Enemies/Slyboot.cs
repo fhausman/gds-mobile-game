@@ -86,10 +86,12 @@ public class Slyboot : MonoBehaviour
     public Vector2 direction;
     public float speed;
     public float speedMultiplier = 1.0f;
+    public float throwAngle = 80.0f;
     public GameObject torch;
     public StateMachine stateMachine { get; } = new StateMachine();
 
     private Rigidbody2D rb;
+    private Transform stakeTransform;
 
     public void SetVelocity(Vector2 v)
     {
@@ -107,7 +109,9 @@ public class Slyboot : MonoBehaviour
         torchInstance.transform.position = gameObject.transform.position;
 
         var trb = torchInstance.GetComponent<Rigidbody2D>();
-        trb.AddForce(new Vector2(0.1f, 1) * 20.0f, ForceMode2D.Impulse);
+        trb.AddForce(
+            Arc.CalcLaunchSpeed(Mathf.Abs(transform.position.x-stakeTransform.position.x), 0, Physics2D.gravity.magnitude, Mathf.Deg2Rad * throwAngle) * (Quaternion.Euler(0, 0, throwAngle) * Vector2.right),
+            ForceMode2D.Impulse);
         trb.AddTorque(-1.0f, ForceMode2D.Impulse);
     }
 
@@ -119,6 +123,8 @@ public class Slyboot : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        stakeTransform = GameObject.Find("Stake").transform;
+
         stateMachine.AddState(SlybootStates.Running, new SlybootRunning { slyboot = this });
         stateMachine.AddState(SlybootStates.Throwing, new SlybootThrowing { slyboot = this });
         stateMachine.AddState(SlybootStates.Dead, new SlybootDead { slyboot = this });

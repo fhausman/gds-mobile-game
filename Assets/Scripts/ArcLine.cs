@@ -1,5 +1,15 @@
 ﻿using UnityEngine;
 
+public static class Arc
+{
+    static public float CalcLaunchSpeed(float distance, float yOffset, float gravity, float angle)
+    {
+        float speed = (distance * Mathf.Sqrt(gravity) * Mathf.Sqrt(1 / Mathf.Cos(angle))) / Mathf.Sqrt(2 * distance * Mathf.Sin(angle) + 2 * yOffset * Mathf.Cos(angle));
+
+        return speed;
+    }
+}
+
 [RequireComponent(typeof(LineRenderer))]
 public class ArcLine : MonoBehaviour
 {

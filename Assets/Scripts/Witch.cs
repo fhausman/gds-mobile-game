@@ -107,19 +107,12 @@ public class Witch : MonoBehaviour
     {
         var proj = Instantiate(projectile);
         proj.transform.position = transform.position;
-        proj.GetComponent<Rigidbody2D>().AddForce(arc.direction * LaunchSpeed(arc.range, transform.position.y + 5.0f, Physics2D.gravity.magnitude, 0), ForceMode2D.Impulse);
+        proj.GetComponent<Rigidbody2D>().AddForce(arc.direction * Arc.CalcLaunchSpeed(arc.range, transform.position.y + 5.0f, Physics2D.gravity.magnitude, 0), ForceMode2D.Impulse);
     }
 
     public void ResetArcRange()
     {
         arc.range = ArcLine.baseRange;
-    }
-
-    private float LaunchSpeed(float distance, float yOffset, float gravity, float angle)
-    {
-        float speed = (distance * Mathf.Sqrt(gravity) * Mathf.Sqrt(1 / Mathf.Cos(angle))) / Mathf.Sqrt(2 * distance * Mathf.Sin(angle) + 2 * yOffset * Mathf.Cos(angle));
-
-        return speed;
     }
 
     private IEnumerator InputDelay()
