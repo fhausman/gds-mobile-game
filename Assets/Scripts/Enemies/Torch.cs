@@ -15,9 +15,9 @@ public class Torch : MonoBehaviour
 
     void Hit()
     {
-        if (!landed)
-        {
+        //if (!landed)
+        //{
             Destroy(gameObject);
-        }
+        //}
     }
 }

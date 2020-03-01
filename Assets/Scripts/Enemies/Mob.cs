@@ -111,6 +111,10 @@ public class Mob : MonoBehaviour
             Score.value += 1;
             stateMachine.ChangeState(MobStates.Dead);
         }
+        //else
+        //{
+        //    stateMachine.ChangeState(MobStates.Stay);
+        //}
     }
 
     void IncreaseSpeed()
