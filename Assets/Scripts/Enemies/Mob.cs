@@ -6,7 +6,8 @@ public static class MobStates
 {
     public const int
         Running = 0,
-        Dead = 1;
+        Stay = 1,
+        Dead = 2;
 }
 
 public class MobRunning : IState
@@ -24,6 +25,24 @@ public class MobRunning : IState
     public void Update()
     {
         mob.SetVelocity(mob.speedMultiplier * mob.speed * mob.direction);
+    }
+}
+
+public class MobStay : IState
+{
+    public Mob mob;
+
+    public void Exit()
+    {
+    }
+
+    public void Init()
+    {
+        mob.SetVelocity(Vector2.zero);
+    }
+
+    public void Update()
+    {
     }
 }
 
@@ -65,10 +84,16 @@ public class Mob : MonoBehaviour
         Destroy(gameObject);
     }
 
+    public void Stop()
+    {
+        stateMachine.ChangeState(MobStates.Stay);
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         stateMachine.AddState(MobStates.Running, new MobRunning { mob = this });
+        stateMachine.AddState(MobStates.Stay, new MobStay { mob = this });
         stateMachine.AddState(MobStates.Dead, new MobDead { mob = this });
         stateMachine.ChangeState(MobStates.Running);
     }

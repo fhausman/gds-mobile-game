@@ -144,6 +144,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: {x: 0, y: 0}
-  speed: 80
+  speed: 0.8
   speedMultiplier: 1
   numberOfLives: 2
