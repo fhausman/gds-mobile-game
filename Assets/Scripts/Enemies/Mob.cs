@@ -69,6 +69,7 @@ public class Mob : MonoBehaviour
     public Vector2 direction;
     public float speed;
     public float speedMultiplier = 1.0f;
+    public int score = 100;
     public int numberOfLives;
     public StateMachine stateMachine { get; } = new StateMachine();
 
@@ -108,9 +109,13 @@ public class Mob : MonoBehaviour
         --numberOfLives;
         if (numberOfLives == 0)
         {
-            Score.value += 1;
+            Score.value += score;
             stateMachine.ChangeState(MobStates.Dead);
         }
+        //else
+        //{
+        //    stateMachine.ChangeState(MobStates.Stay);
+        //}
     }
 
     void IncreaseSpeed()

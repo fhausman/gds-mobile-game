@@ -138,7 +138,7 @@ public class Slyboot : MonoBehaviour
 
     void Hit()
     {
-        Score.value += 1;
+        Score.value += 300;
         stateMachine.ChangeState(SlybootStates.Dead);
     }
 

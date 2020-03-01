@@ -4,29 +4,38 @@ using UnityEngine;
 
 public class SpawnPoint : MonoBehaviour
 {
+    public static bool isPriestOnBoard = false;
+
     public static class Enemies
     {
         public const int
             BasicMob = 0,
             StrongMob = 1,
-            Priest = 2;
+            Priest = 2,
+            Slyboot = 3;
     }
 
     public GameObject[] enemies;
     public Vector2 spawnDir = Vector2.right;
     public Transform priestTarget;
+
     public float basicMobSpawnDelay = 1.0f;
     public float basicMobSpawnRate = 1.25f;
     public float strongMobSpawnDelay = 5.0f;
     public float strongMobSpawnRate = 3.0f;
     public float priestSpawnDelay = 10.0f;
+    public float slybootSpawnDelay = 30.0f;
+    public float slybootSpawnRate = 15.0f;
 
+    public float additionalSpeed = 0.25f;
+    public int scoreSpeedMultiplier { get => Score.value / 1000; }
 
     private bool spawnBasicMob = false;
     private bool spawnStrongMob = false;
     private bool spawnPriest = false;
+    private bool spawnSlyboot = false;
 
-    private GameObject priestInstance = null;
+    private GameObject slybootInstance = null;
 
     private float spawnNoise { get => Random.Range(-0.5f, 0.5f); }
 
@@ -59,6 +68,13 @@ public class SpawnPoint : MonoBehaviour
         spawnPriest = true;
     }
 
+    private IEnumerator SlybootSpawnDelay()
+    {
+        yield return new WaitForSeconds(slybootSpawnDelay);
+
+        spawnSlyboot = true;
+    }
+
     private IEnumerator SpawnBasicMob()
     {
         spawnBasicMob = false;
@@ -77,6 +93,24 @@ public class SpawnPoint : MonoBehaviour
 
         spawnStrongMob = true;
     }
+    private IEnumerator SpawnSlyboot()
+    {
+        spawnSlyboot = false;
+
+        slybootInstance = Instantiate(enemies[Enemies.Slyboot]);
+        SetTransform(slybootInstance.transform);
+
+        var slybootComp = slybootInstance.GetComponent<Slyboot>();
+        slybootComp.direction = spawnDir;
+        slybootComp.speed = 1.0f + scoreSpeedMultiplier*additionalSpeed;
+
+        while (slybootInstance != null)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
+        spawnSlyboot = true;
+    }
 
     private void SpawnMob(int mobType)
     {
@@ -84,25 +118,28 @@ public class SpawnPoint : MonoBehaviour
         SetTransform(enemy.transform);
         
         enemy.GetComponent<Mob>().direction = spawnDir;
+        enemy.GetComponent<Mob>().speed += scoreSpeedMultiplier * additionalSpeed;
     }
 
     private IEnumerator SpawnPriest()
     {
         spawnPriest = false;
 
-        priestInstance = Instantiate(enemies[Enemies.Priest]);
-        SetTransform(priestInstance.transform);
+        slybootInstance = Instantiate(enemies[Enemies.Priest]);
+        SetTransform(slybootInstance.transform);
 
-        var priestComp = priestInstance.GetComponent<Priest>();
+        var priestComp = slybootInstance.GetComponent<Priest>();
         priestComp.direction = spawnDir;
         priestComp.target = priestTarget.position;
-        priestComp.speed = 1.0f;
+        priestComp.speed = 1.0f + scoreSpeedMultiplier * additionalSpeed;
+        isPriestOnBoard = true;
 
-        while (priestInstance != null)
+        while (slybootInstance != null)
         {
             yield return new WaitForEndOfFrame();
         }
 
+        isPriestOnBoard = false;
         StartCoroutine("PriestSpawnDelay");
     }
 
@@ -111,6 +148,7 @@ public class SpawnPoint : MonoBehaviour
         StartCoroutine("BasicMobSpawnDelay");
         StartCoroutine("StrongMobSpawnDelay");
         StartCoroutine("PriestSpawnDelay");
+        StartCoroutine("SlybootSpawnDelay");
     }
 
     // Update is called once per frame
@@ -126,9 +164,14 @@ public class SpawnPoint : MonoBehaviour
             StartCoroutine("SpawnStrongMob");
         }
 
-        if (spawnPriest)
+        if (spawnPriest && !isPriestOnBoard)
         {
             StartCoroutine("SpawnPriest");
+        }
+
+        if (spawnSlyboot)
+        {
+            StartCoroutine("SpawnSlyboot");
         }
     }
 }

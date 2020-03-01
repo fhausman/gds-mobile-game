@@ -146,4 +146,5 @@ MonoBehaviour:
   direction: {x: 0, y: 0}
   speed: 0.8
   speedMultiplier: 1
+  score: 150
   numberOfLives: 2
