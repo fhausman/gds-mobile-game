@@ -2674,7 +2674,12 @@ PrefabInstance:
     - target: {fileID: 6047976500201208523, guid: 8c8a61cbc3ec7894785326bfb2b10b2c,
         type: 3}
       propertyPath: strongMobSpawnDelay
-      value: 7
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6047976500201208523, guid: 8c8a61cbc3ec7894785326bfb2b10b2c,
+        type: 3}
+      propertyPath: priestSpawnDelay
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 6568928539405662978, guid: 8c8a61cbc3ec7894785326bfb2b10b2c,
         type: 3}
@@ -6404,7 +6409,7 @@ PrefabInstance:
     - target: {fileID: 3427207164983983957, guid: c0eaa138e7dd04240bee4b4f26a593c4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.101
+      value: -0.55
       objectReference: {fileID: 0}
     - target: {fileID: 3427207164983983957, guid: c0eaa138e7dd04240bee4b4f26a593c4,
         type: 3}
@@ -6498,7 +6503,7 @@ PrefabInstance:
     - target: {fileID: 6071272140227611125, guid: 2304af61b686a5d4285731648c3b2b17,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.67
+      value: -6.08
       objectReference: {fileID: 0}
     - target: {fileID: 6071272140227611125, guid: 2304af61b686a5d4285731648c3b2b17,
         type: 3}
@@ -6573,6 +6578,16 @@ PrefabInstance:
         type: 3}
       propertyPath: basicMobSpawnRate
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6047976500201208523, guid: 8c8a61cbc3ec7894785326bfb2b10b2c,
+        type: 3}
+      propertyPath: strongMobSpawnDelay
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6047976500201208523, guid: 8c8a61cbc3ec7894785326bfb2b10b2c,
+        type: 3}
+      propertyPath: priestSpawnDelay
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 6568928539405662978, guid: 8c8a61cbc3ec7894785326bfb2b10b2c,
         type: 3}

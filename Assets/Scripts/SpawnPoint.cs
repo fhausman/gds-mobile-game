@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SpawnPoint : MonoBehaviour
 {
+    public static bool isPriestOnBoard = false;
+
     public static class Enemies
     {
         public const int
@@ -98,12 +100,14 @@ public class SpawnPoint : MonoBehaviour
         priestComp.direction = spawnDir;
         priestComp.target = priestTarget.position;
         priestComp.speed = 1.0f;
+        isPriestOnBoard = true;
 
         while (priestInstance != null)
         {
             yield return new WaitForEndOfFrame();
         }
 
+        isPriestOnBoard = false;
         StartCoroutine("PriestSpawnDelay");
     }
 
@@ -127,7 +131,7 @@ public class SpawnPoint : MonoBehaviour
             StartCoroutine("SpawnStrongMob");
         }
 
-        if (spawnPriest)
+        if (spawnPriest && !isPriestOnBoard)
         {
             StartCoroutine("SpawnPriest");
         }
