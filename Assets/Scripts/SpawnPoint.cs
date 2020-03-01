@@ -15,6 +15,7 @@ public class SpawnPoint : MonoBehaviour
     public GameObject[] enemies;
     public Vector2 spawnDir = Vector2.right;
     public Transform priestTarget;
+
     public float basicMobSpawnDelay = 1.0f;
     public float basicMobSpawnRate = 1.25f;
     public float strongMobSpawnDelay = 5.0f;

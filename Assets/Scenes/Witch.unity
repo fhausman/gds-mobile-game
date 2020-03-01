@@ -2661,6 +2661,21 @@ PrefabInstance:
       propertyPath: priestTarget
       value: 
       objectReference: {fileID: 1692077843}
+    - target: {fileID: 6047976500201208523, guid: 8c8a61cbc3ec7894785326bfb2b10b2c,
+        type: 3}
+      propertyPath: basicMobSpawnRate
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6047976500201208523, guid: 8c8a61cbc3ec7894785326bfb2b10b2c,
+        type: 3}
+      propertyPath: basicMobSpawnDelay
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6047976500201208523, guid: 8c8a61cbc3ec7894785326bfb2b10b2c,
+        type: 3}
+      propertyPath: strongMobSpawnDelay
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 6568928539405662978, guid: 8c8a61cbc3ec7894785326bfb2b10b2c,
         type: 3}
       propertyPath: m_Name
@@ -6554,6 +6569,11 @@ PrefabInstance:
       propertyPath: priestTarget
       value: 
       objectReference: {fileID: 353214428}
+    - target: {fileID: 6047976500201208523, guid: 8c8a61cbc3ec7894785326bfb2b10b2c,
+        type: 3}
+      propertyPath: basicMobSpawnRate
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6568928539405662978, guid: 8c8a61cbc3ec7894785326bfb2b10b2c,
         type: 3}
       propertyPath: m_Name

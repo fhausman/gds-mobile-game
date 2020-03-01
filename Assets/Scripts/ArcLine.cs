@@ -67,7 +67,7 @@ public class ArcLine : MonoBehaviour
     Vector3 CalculatePoint(float delta)
     {
         var x = delta*direction.x;
-        var y = 4*a*x*x + startPosition.y;
+        var y = 2*a*x*x + startPosition.y;
         
         return new Vector3(x, y);
     }
