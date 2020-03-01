@@ -6485,6 +6485,16 @@ PrefabInstance:
       propertyPath: damagePerSecond
       value: 0.25
       objectReference: {fileID: 0}
+    - target: {fileID: 6071272140227611122, guid: 2304af61b686a5d4285731648c3b2b17,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 0.03673771
+      objectReference: {fileID: 0}
+    - target: {fileID: 6071272140227611122, guid: 2304af61b686a5d4285731648c3b2b17,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.5688704
+      objectReference: {fileID: 0}
     - target: {fileID: 6071272140227611124, guid: 2304af61b686a5d4285731648c3b2b17,
         type: 3}
       propertyPath: m_Color.g
