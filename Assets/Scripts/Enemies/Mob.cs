@@ -56,11 +56,27 @@ public class MobDead : IState
 
     public void Init()
     {
-        mob.Destroy();
+        mob.Disable();
+        mob.StartCoroutine(ScorchAndDestroy());
     }
 
     public void Update()
     {
+
+    }
+
+    IEnumerator ScorchAndDestroy()
+    {
+        float time = 0.5f;
+        while(time > 0.0f)
+        {
+            time -= Time.deltaTime;
+            mob.Scorch(time / 0.5f);
+
+            yield return null;
+        }
+
+        mob.Destroy();
     }
 }
 
@@ -74,6 +90,7 @@ public class Mob : MonoBehaviour
     public StateMachine stateMachine { get; } = new StateMachine();
 
     private Rigidbody2D rb;
+    private Material material;
 
     public void SetVelocity(Vector2 v)
     {
@@ -90,9 +107,21 @@ public class Mob : MonoBehaviour
         stateMachine.ChangeState(MobStates.Stay);
     }
 
+    public void Disable()
+    {
+        Destroy(rb);
+    }
+
+    public void Scorch(float scorchLevel)
+    {
+        material.SetFloat("_Fade", scorchLevel);
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        material = GetComponent<SpriteRenderer>().material;
+
         stateMachine.AddState(MobStates.Running, new MobRunning { mob = this });
         stateMachine.AddState(MobStates.Stay, new MobStay { mob = this });
         stateMachine.AddState(MobStates.Dead, new MobDead { mob = this });
