@@ -89,6 +89,7 @@ public class Priest : MonoBehaviour
 
     public void Destroy()
     {
+        buffArea.SetActive(false);
         Destroy(gameObject);
     }
 
