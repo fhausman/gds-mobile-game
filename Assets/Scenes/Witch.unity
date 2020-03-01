@@ -6441,6 +6441,16 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6688648191211769477, guid: c0eaa138e7dd04240bee4b4f26a593c4,
+        type: 3}
+      propertyPath: chargeSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6688648191211769477, guid: c0eaa138e7dd04240bee4b4f26a593c4,
+        type: 3}
+      propertyPath: inputDelay
+      value: 0.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0eaa138e7dd04240bee4b4f26a593c4, type: 3}
 --- !u!1001 &6071272139386292750
@@ -6450,6 +6460,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 150803779032360875, guid: 2304af61b686a5d4285731648c3b2b17,
+        type: 3}
+      propertyPath: damagePerSecond
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 6071272140227611124, guid: 2304af61b686a5d4285731648c3b2b17,
         type: 3}
       propertyPath: m_Color.g
