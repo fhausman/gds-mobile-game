@@ -27,6 +27,9 @@ public class SpawnPoint : MonoBehaviour
     public float slybootSpawnDelay = 30.0f;
     public float slybootSpawnRate = 15.0f;
 
+    public float additionalSpeed = 0.25f;
+    public int scoreSpeedMultiplier { get => Score.value / 1000; }
+
     private bool spawnBasicMob = false;
     private bool spawnStrongMob = false;
     private bool spawnPriest = false;
@@ -99,7 +102,7 @@ public class SpawnPoint : MonoBehaviour
 
         var slybootComp = slybootInstance.GetComponent<Slyboot>();
         slybootComp.direction = spawnDir;
-        slybootComp.speed = 1.0f;
+        slybootComp.speed = 1.0f + scoreSpeedMultiplier*additionalSpeed;
 
         while (slybootInstance != null)
         {
@@ -115,6 +118,7 @@ public class SpawnPoint : MonoBehaviour
         SetTransform(enemy.transform);
         
         enemy.GetComponent<Mob>().direction = spawnDir;
+        enemy.GetComponent<Mob>().speed += scoreSpeedMultiplier * additionalSpeed;
     }
 
     private IEnumerator SpawnPriest()
@@ -127,7 +131,7 @@ public class SpawnPoint : MonoBehaviour
         var priestComp = slybootInstance.GetComponent<Priest>();
         priestComp.direction = spawnDir;
         priestComp.target = priestTarget.position;
-        priestComp.speed = 1.0f;
+        priestComp.speed = 1.0f + scoreSpeedMultiplier * additionalSpeed;
         isPriestOnBoard = true;
 
         while (slybootInstance != null)
