@@ -28,7 +28,7 @@ public class Idle : IState
     {
         if (Input.GetMouseButton(0))// && Input.touchCount == 1)
         {
-            obj.inputState.ChangeState(InputStates.Charging);
+            obj.stateMachine.ChangeState(InputStates.Charging);
         }
     }
 }
@@ -53,7 +53,7 @@ public class Charging : IState
         }
         else
         {
-            obj.inputState.ChangeState(InputStates.Released);
+            obj.stateMachine.ChangeState(InputStates.Released);
         }
     }
 }
@@ -61,6 +61,8 @@ public class Charging : IState
 public class Released : IState
 {
     public Witch obj;
+
+    private float time = 0.0f;
 
     public void Exit()
     {
@@ -70,11 +72,24 @@ public class Released : IState
     {
         obj.InstatiateProjectile();
         obj.ResetArcRange();
+        obj.StartCoroutine(InputDelay());
+        obj.spriteRenderer.color = Color.yellow;
+
+        time = 0.0f;
     }
 
     public void Update()
     {
-        obj.StartCoroutine("InputDelay");
+        time += Time.deltaTime / obj.inputDelay;
+        var newColor = Color.Lerp(Color.yellow, Color.white, time);
+        obj.spriteRenderer.color = newColor;
+    }
+
+    IEnumerator InputDelay()
+    {
+        yield return new WaitForSeconds(obj.inputDelay);
+
+        obj.stateMachine.ChangeState(InputStates.Idle);
     }
 }
 
@@ -82,25 +97,29 @@ public class Witch : MonoBehaviour
 {
     public GameObject projectile;
     public float chargeSpeed = 10.0f;
+    public float inputDelay = 0.25f;
     
     [HideInInspector]
     public ArcLine arc;
+    [HideInInspector]
+    public SpriteRenderer spriteRenderer;
 
-    public StateMachine inputState { get; private set; } = new StateMachine();
+    public StateMachine stateMachine { get; private set; } = new StateMachine();
 
     void Start()
     {
         arc = GetComponentInChildren<ArcLine>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
-        inputState.AddState(InputStates.Idle, new Idle { obj = this });
-        inputState.AddState(InputStates.Charging, new Charging { obj = this });
-        inputState.AddState(InputStates.Released, new Released { obj = this });
-        inputState.ChangeState(InputStates.Idle);
+        stateMachine.AddState(InputStates.Idle, new Idle { obj = this });
+        stateMachine.AddState(InputStates.Charging, new Charging { obj = this });
+        stateMachine.AddState(InputStates.Released, new Released { obj = this });
+        stateMachine.ChangeState(InputStates.Idle);
     }
 
     void Update()
     {
-        inputState.Update();
+        stateMachine.Update();
     }
 
     public void InstatiateProjectile()
@@ -118,6 +137,6 @@ public class Witch : MonoBehaviour
     private IEnumerator InputDelay()
     {
         yield return new WaitForSeconds(0.025f);
-        inputState.ChangeState(InputStates.Idle);
+        stateMachine.ChangeState(InputStates.Idle);
     }
 }
