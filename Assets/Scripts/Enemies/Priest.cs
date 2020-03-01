@@ -110,7 +110,7 @@ public class Priest : MonoBehaviour
 
     void Hit()
     {
-        Score.value += 1;
+        Score.value += 50;
         stateMachine.ChangeState(PriestStates.Dead);
     }
 }
