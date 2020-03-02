@@ -17,7 +17,10 @@ public class Idle : IState
     public void Exit()
     {
         var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        obj.arc.direction = mousePos.x < 0 ? Vector2.left : Vector2.right;
+        bool isLeftSideOfScreenClicked = mousePos.x < 0;
+
+        obj.arc.direction = isLeftSideOfScreenClicked ? Vector2.left : Vector2.right;
+        obj.spriteRenderer.flipX = isLeftSideOfScreenClicked;
     }
 
     public void Init()
