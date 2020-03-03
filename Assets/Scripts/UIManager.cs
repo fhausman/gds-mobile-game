@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
     GameObject credits;
     GameObject hud;
 
+    Spellbook spellbookManager;
     AudioListener audioListener;
 
     void Start()
@@ -20,6 +21,7 @@ public class UIManager : MonoBehaviour
         credits = transform.Find("Credits").gameObject;
         hud = transform.Find("HUD").gameObject;
 
+        spellbookManager = GameObject.Find("SpellManager").GetComponent<Spellbook>();
         audioListener = GameObject.Find("Main Camera").GetComponent<AudioListener>();
     }
 
@@ -37,12 +39,14 @@ public class UIManager : MonoBehaviour
         GameObject.Find("Witch").GetComponent<Witch>().enabled = true;
         mainMenu.SetActive(false);
         hud.SetActive(true);
+        spellbookManager.UpdateActiveSpells();
     }
 
     public void Spellbook()
     {
         DisableAllChildren();
         spellbook.SetActive(true);
+        spellbookManager.UpdateShop();
     }
     public void Credits()
     {
