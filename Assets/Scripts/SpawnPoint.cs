@@ -36,12 +36,19 @@ public class SpawnPoint : MonoBehaviour
     private bool spawnSlyboot = false;
 
     private GameObject slybootInstance = null;
+    private GameObject priestInstance = null;
 
     private float spawnNoise { get => Random.Range(-0.5f, 0.5f); }
 
-    private void SetTransform(Transform t)
+    private void SetTransform(Transform t, bool addYNoise = false)
     {
-        t.position = transform.position;
+        var newPosition = transform.position;
+        if (addYNoise)
+        {
+            newPosition.y += Random.Range(-0.5f, 0);
+        }
+        newPosition.z = newPosition.y;
+        t.position = newPosition;
         
         var newScale = t.localScale;
         newScale.x *= spawnDir.x;
@@ -115,7 +122,7 @@ public class SpawnPoint : MonoBehaviour
     private void SpawnMob(int mobType)
     {
         var enemy = Instantiate(enemies[mobType]);
-        SetTransform(enemy.transform);
+        SetTransform(enemy.transform, mobType == Enemies.BasicMob);
         
         enemy.GetComponent<Mob>().direction = spawnDir;
         enemy.GetComponent<Mob>().speed += scoreSpeedMultiplier * additionalSpeed;
@@ -125,16 +132,16 @@ public class SpawnPoint : MonoBehaviour
     {
         spawnPriest = false;
 
-        slybootInstance = Instantiate(enemies[Enemies.Priest]);
-        SetTransform(slybootInstance.transform);
+        priestInstance = Instantiate(enemies[Enemies.Priest]);
+        SetTransform(priestInstance.transform);
 
-        var priestComp = slybootInstance.GetComponent<Priest>();
+        var priestComp = priestInstance.GetComponent<Priest>();
         priestComp.direction = spawnDir;
         priestComp.target = priestTarget.position;
         priestComp.speed = 1.0f + scoreSpeedMultiplier * additionalSpeed;
         isPriestOnBoard = true;
 
-        while (slybootInstance != null)
+        while (priestInstance != null)
         {
             yield return new WaitForEndOfFrame();
         }
