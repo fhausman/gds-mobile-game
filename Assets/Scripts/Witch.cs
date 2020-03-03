@@ -17,7 +17,10 @@ public class Idle : IState
     public void Exit()
     {
         var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        obj.arc.direction = mousePos.x < 0 ? Vector2.left : Vector2.right;
+        bool isLeftSideOfScreenClicked = mousePos.x < 0;
+
+        obj.arc.direction = isLeftSideOfScreenClicked ? Vector2.left : Vector2.right;
+        obj.spriteRenderer.flipX = isLeftSideOfScreenClicked;
     }
 
     public void Init()
@@ -43,6 +46,7 @@ public class Charging : IState
 
     public void Init()
     {
+        obj.InstatiateProjectile();
     }
 
     public void Update()
@@ -70,7 +74,7 @@ public class Released : IState
 
     public void Init()
     {
-        obj.InstatiateProjectile();
+        obj.ReleaseProjectile();
         obj.ResetArcRange();
         obj.StartCoroutine(InputDelay());
         obj.spriteRenderer.color = Color.yellow;
@@ -98,6 +102,7 @@ public class Witch : MonoBehaviour
     public GameObject projectile;
     public float chargeSpeed = 10.0f;
     public float inputDelay = 0.25f;
+    private GameObject projectileInstance;
     
     [HideInInspector]
     public ArcLine arc;
@@ -124,9 +129,15 @@ public class Witch : MonoBehaviour
 
     public void InstatiateProjectile()
     {
-        var proj = Instantiate(projectile);
-        proj.transform.position = transform.position;
-        proj.GetComponent<Rigidbody2D>().AddForce(arc.direction * Arc.CalcLaunchSpeed(arc.range, transform.position.y + 5.0f, Physics2D.gravity.magnitude, 0), ForceMode2D.Impulse);
+        projectileInstance = Instantiate(projectile);
+        projectileInstance.transform.position = arc.transform.position;
+        projectileInstance.GetComponent<Rigidbody2D>().isKinematic = true;
+    }
+
+    public void ReleaseProjectile()
+    {
+        projectileInstance.GetComponent<Rigidbody2D>().isKinematic = false;
+        projectileInstance.GetComponent<Rigidbody2D>().AddForce(arc.direction * Arc.CalcLaunchSpeed(arc.range, transform.position.y + 5.0f, Physics2D.gravity.magnitude, 0), ForceMode2D.Impulse);
     }
 
     public void ResetArcRange()

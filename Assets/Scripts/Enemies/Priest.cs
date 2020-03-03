@@ -62,7 +62,8 @@ public class PriestDead : IState
 
     public void Init()
     {
-        priest.Destroy();
+        priest.Disable();
+        priest.StartCoroutine(priest.scorcher.ScorchAndDestroy());
     }
 
     public void Update()
@@ -77,9 +78,11 @@ public class Priest : MonoBehaviour
     public float speed;
 
     public StateMachine stateMachine { get; } = new StateMachine();
+    public Scorcher scorcher;
 
     private Rigidbody2D rb;
     private GameObject buffArea;
+    private Material material;
 
     public void ActivateBuffArea()
     {
@@ -93,10 +96,18 @@ public class Priest : MonoBehaviour
         Destroy(gameObject);
     }
 
+    public void Disable()
+    {
+        Destroy(rb);
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         buffArea = transform.GetChild(0).gameObject;
+        material = GetComponent<SpriteRenderer>().material;
+
+        scorcher = new Scorcher(gameObject, material);
 
         stateMachine.AddState(PriestStates.Walking, new PriestWalking { priest = this });
         stateMachine.AddState(PriestStates.Buffing, new PriestBuffing { priest = this });

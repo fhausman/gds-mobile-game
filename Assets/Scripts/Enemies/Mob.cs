@@ -57,26 +57,12 @@ public class MobDead : IState
     public void Init()
     {
         mob.Disable();
-        mob.StartCoroutine(ScorchAndDestroy());
+        mob.StartCoroutine(mob.scorcher.ScorchAndDestroy());
     }
 
     public void Update()
     {
 
-    }
-
-    IEnumerator ScorchAndDestroy()
-    {
-        float time = 0.5f;
-        while(time > 0.0f)
-        {
-            time -= Time.deltaTime;
-            mob.Scorch(time / 0.5f);
-
-            yield return null;
-        }
-
-        mob.Destroy();
     }
 }
 
@@ -88,13 +74,15 @@ public class Mob : MonoBehaviour
     public int score = 100;
     public int numberOfLives;
     public StateMachine stateMachine { get; } = new StateMachine();
+    public Scorcher scorcher;
 
     private Rigidbody2D rb;
     private Material material;
 
     public void SetVelocity(Vector2 v)
     {
-        rb.velocity = v;
+        if(rb != null) 
+            rb.velocity = v;
     }
 
     public void Destroy()
@@ -121,6 +109,8 @@ public class Mob : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         material = GetComponent<SpriteRenderer>().material;
+
+        scorcher = new Scorcher(gameObject, material);
 
         stateMachine.AddState(MobStates.Running, new MobRunning { mob = this });
         stateMachine.AddState(MobStates.Stay, new MobStay { mob = this });

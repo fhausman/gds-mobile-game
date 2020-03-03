@@ -73,7 +73,8 @@ public class SlybootDead : IState
 
     public void Init()
     {
-        slyboot.Destroy();
+        slyboot.Disable();
+        slyboot.StartCoroutine(slyboot.scorcher.ScorchAndDestroy());
     }
 
     public void Update()
@@ -89,9 +90,11 @@ public class Slyboot : MonoBehaviour
     public float throwAngle = 80.0f;
     public GameObject torch;
     public StateMachine stateMachine { get; } = new StateMachine();
+    public Scorcher scorcher;
 
     private Rigidbody2D rb;
     private Transform stakeTransform;
+    private Material material;
 
     public void SetVelocity(Vector2 v)
     {
@@ -120,10 +123,18 @@ public class Slyboot : MonoBehaviour
         Destroy(gameObject);
     }
 
+    public void Disable()
+    {
+        Destroy(rb);
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         stakeTransform = GameObject.Find("Stake").transform;
+        material = GetComponent<SpriteRenderer>().material;
+
+        scorcher = new Scorcher(gameObject, material);
 
         stateMachine.AddState(SlybootStates.Running, new SlybootRunning { slyboot = this });
         stateMachine.AddState(SlybootStates.Throwing, new SlybootThrowing { slyboot = this });

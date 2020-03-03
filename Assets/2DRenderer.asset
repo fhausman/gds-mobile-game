@@ -15,7 +15,7 @@ MonoBehaviour:
   m_RendererFeatures: []
   m_HDREmulationScale: 1
   m_LightBlendStyles:
-  - enabled: 1
+  - enabled: 0
     name: Default
     maskTextureChannel: 0
     renderTextureScale: 1
