@@ -27,7 +27,8 @@ public class PriestWalking : IState
         float step = priest.speed * Time.deltaTime;
         priest.transform.position = Vector2.MoveTowards(priest.transform.position, priest.target, step);
 
-        if(Mathf.Abs(priest.transform.position.x - priest.target.x) <= 0 + step)
+        Debug.Log(priest.transform.position.x - priest.target.x);
+        if(Mathf.Abs(priest.transform.position.x - priest.target.x) <= 0 + 0.1f)
         {
             priest.stateMachine.ChangeState(PriestStates.Buffing);
         }
@@ -81,30 +82,30 @@ public class Priest : MonoBehaviour
     public Scorcher scorcher;
 
     private Rigidbody2D rb;
-    private GameObject buffArea;
+    private PriestBuffArea buffArea;
     private Material material;
 
     public void ActivateBuffArea()
     {
         Debug.Log("Buff area activated!");
-        buffArea.SetActive(true);
+        buffArea.Active(true);
     }
 
     public void Destroy()
     {
-        buffArea.SetActive(false);
         Destroy(gameObject);
     }
 
     public void Disable()
     {
+        buffArea.Active(false);
         Destroy(rb);
     }
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        buffArea = transform.GetChild(0).gameObject;
+        buffArea = transform.GetChild(0).gameObject.GetComponent<PriestBuffArea>();
         material = GetComponent<SpriteRenderer>().material;
 
         scorcher = new Scorcher(gameObject, material);

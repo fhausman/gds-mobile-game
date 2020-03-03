@@ -82,7 +82,7 @@ public class SlybootDead : IState
     }
 }
 
-public class Slyboot : MonoBehaviour
+public class Slyboot : MonoBehaviour, ISpeedable
 {
     public Vector2 direction;
     public float speed;
@@ -128,6 +128,11 @@ public class Slyboot : MonoBehaviour
         Destroy(rb);
     }
 
+    public void IncreaseSpeed()
+    {
+        speedMultiplier = 2.0f;
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -151,10 +156,5 @@ public class Slyboot : MonoBehaviour
     {
         Score.value += 300;
         stateMachine.ChangeState(SlybootStates.Dead);
-    }
-
-    void IncreaseSpeed()
-    {
-        speedMultiplier = 2.0f;
     }
 }

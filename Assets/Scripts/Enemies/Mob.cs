@@ -66,7 +66,7 @@ public class MobDead : IState
     }
 }
 
-public class Mob : MonoBehaviour
+public class Mob : MonoBehaviour, ISpeedable
 {
     public Vector2 direction;
     public float speed;
@@ -105,6 +105,11 @@ public class Mob : MonoBehaviour
         material.SetFloat("_Fade", scorchLevel);
     }
 
+    public void IncreaseSpeed()
+    {
+        speedMultiplier = 2.0f;
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -135,10 +140,5 @@ public class Mob : MonoBehaviour
         //{
         //    stateMachine.ChangeState(MobStates.Stay);
         //}
-    }
-
-    void IncreaseSpeed()
-    {
-        speedMultiplier = 2.0f;
     }
 }
