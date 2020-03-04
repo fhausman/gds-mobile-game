@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public static class InputStates
 {
@@ -31,6 +32,11 @@ public class Idle : IState
     {
         if (Input.GetMouseButton(0))// && Input.touchCount == 1)
         {
+            if(EventSystem.current.IsPointerOverGameObject(/*Input.GetTouch(0).fingerId*/))
+            {
+                return;
+            }
+
             obj.stateMachine.ChangeState(InputStates.Charging);
         }
     }
