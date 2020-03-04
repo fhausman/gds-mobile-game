@@ -96,6 +96,20 @@ public class Slyboot : MonoBehaviour, ISpeedable
     private Transform stakeTransform;
     private Material material;
 
+    private Vector2 throwVector { 
+        get
+        {
+            if(direction == Vector2.right)
+            {
+                return (Quaternion.Euler(0, 0, throwAngle) * Vector2.right);
+            }
+            else
+            {
+                return (Quaternion.Euler(0, 0, -throwAngle) * Vector2.left);
+            }
+        } 
+    }
+
     public void SetVelocity(Vector2 v)
     {
         rb.velocity = v;
@@ -113,7 +127,7 @@ public class Slyboot : MonoBehaviour, ISpeedable
 
         var trb = torchInstance.GetComponent<Rigidbody2D>();
         trb.AddForce(
-            Arc.CalcLaunchSpeed(Mathf.Abs(transform.position.x-stakeTransform.position.x), 0, Physics2D.gravity.magnitude, Mathf.Deg2Rad * throwAngle) * (Quaternion.Euler(0, 0, throwAngle) * Vector2.right),
+            Arc.CalcLaunchSpeed(Mathf.Abs(transform.position.x-stakeTransform.position.x), 0, Physics2D.gravity.magnitude, Mathf.Deg2Rad * throwAngle) * throwVector,
             ForceMode2D.Impulse);
         trb.AddTorque(-1.0f, ForceMode2D.Impulse);
     }
