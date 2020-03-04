@@ -27,7 +27,6 @@ public class PriestWalking : IState
         float step = priest.speed * Time.deltaTime;
         priest.transform.position = Vector2.MoveTowards(priest.transform.position, priest.target, step);
 
-        Debug.Log(priest.transform.position.x - priest.target.x);
         if(Mathf.Abs(priest.transform.position.x - priest.target.x) <= 0 + 0.1f)
         {
             priest.stateMachine.ChangeState(PriestStates.Buffing);
