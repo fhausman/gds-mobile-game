@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public static class Arc
 {
@@ -41,8 +42,10 @@ public class ArcLine : MonoBehaviour
         if (range > baseRange + float.Epsilon)
         {
             lr.enabled = true;
-            lr.positionCount = resolution;
-            lr.SetPositions(GetArcPoints());
+
+            var points = GetArcPoints();
+            lr.positionCount = points.Length;
+            lr.SetPositions(points);
         }
         else
         {
@@ -53,15 +56,19 @@ public class ArcLine : MonoBehaviour
 
     Vector3[] GetArcPoints()
     {
-        var points = new Vector3[resolution];
+        var points = new List<Vector3>(resolution);
         var delta = range / (float)resolution;
 
         for (int i = 0; i < resolution; ++i)
         {
-            points[i] = CalculatePoint(delta*i);
+            var p = CalculatePoint(delta * i);
+            if(p.y < -4.0f)
+                break;
+
+            points.Add(p);
         }
 
-        return points;
+        return points.ToArray();
     }
 
     Vector3 CalculatePoint(float delta)
