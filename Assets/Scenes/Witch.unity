@@ -8005,31 +8005,6 @@ PrefabInstance:
       propertyPath: range
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1416351046030590325, guid: c0eaa138e7dd04240bee4b4f26a593c4,
-        type: 3}
-      propertyPath: m_Positions.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1416351046030590325, guid: c0eaa138e7dd04240bee4b4f26a593c4,
-        type: 3}
-      propertyPath: m_Parameters.widthCurve.m_Curve.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1416351046030590325, guid: c0eaa138e7dd04240bee4b4f26a593c4,
-        type: 3}
-      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].time
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1416351046030590325, guid: c0eaa138e7dd04240bee4b4f26a593c4,
-        type: 3}
-      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].value
-      value: 0.017456055
-      objectReference: {fileID: 0}
-    - target: {fileID: 1416351046030590325, guid: c0eaa138e7dd04240bee4b4f26a593c4,
-        type: 3}
-      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
-      value: 0.03062588
-      objectReference: {fileID: 0}
     - target: {fileID: 3427207164983983947, guid: c0eaa138e7dd04240bee4b4f26a593c4,
         type: 3}
       propertyPath: m_Name
