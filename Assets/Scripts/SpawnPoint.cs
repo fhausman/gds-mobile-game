@@ -116,7 +116,7 @@ public class SpawnPoint : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
 
-        spawnSlyboot = true;
+        StartCoroutine("SlybootSpawnDelay");
     }
 
     private void SpawnMob(int mobType)
