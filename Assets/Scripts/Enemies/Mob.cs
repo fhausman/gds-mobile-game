@@ -6,8 +6,9 @@ public static class MobStates
 {
     public const int
         Running = 0,
-        Stay = 1,
-        Dead = 2;
+        SetFire = 1,
+        Damaged = 2,
+        Dead = 3;
 }
 
 public class MobRunning : IState
@@ -20,6 +21,7 @@ public class MobRunning : IState
 
     public void Init()
     {
+        mob.anim.SetTrigger("Run");
     }
 
     public void Update()
@@ -28,7 +30,7 @@ public class MobRunning : IState
     }
 }
 
-public class MobStay : IState
+public class MobSetFire : IState
 {
     public Mob mob;
 
@@ -39,10 +41,36 @@ public class MobStay : IState
     public void Init()
     {
         mob.SetVelocity(Vector2.zero);
+        mob.anim.SetTrigger("SetFire");
     }
 
     public void Update()
     {
+    }
+}
+
+public class MobDamaged : IState
+{
+    public Mob mob;
+    private int previousState;
+
+    public void Exit()
+    {
+    }
+
+    public void Init()
+    {
+        mob.SetVelocity(Vector2.zero);
+        mob.anim.SetTrigger("Damage");
+        previousState = mob.stateMachine.currentStateId;
+    }
+
+    public void Update()
+    {
+        if(mob.anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+        {
+            mob.stateMachine.ChangeState(previousState);
+        }
     }
 }
 
@@ -62,7 +90,6 @@ public class MobDead : IState
 
     public void Update()
     {
-
     }
 }
 
@@ -75,9 +102,10 @@ public class Mob : MonoBehaviour, ISpeedable
     public int numberOfLives;
     public StateMachine stateMachine { get; } = new StateMachine();
     public Scorcher scorcher;
+    public bool DealsDamage { get => anim.GetCurrentAnimatorStateInfo(0).IsName("Setting Fire"); }
 
     private Rigidbody2D rb;
-    private Animator anim;
+    public Animator anim { get; private set; }
     private Material material;
 
     public void SetVelocity(Vector2 v)
@@ -93,18 +121,15 @@ public class Mob : MonoBehaviour, ISpeedable
 
     public void StartSettingFire()
     {
-        if(!anim.GetCurrentAnimatorStateInfo(0).IsTag("SettingFire"))
+        if(stateMachine.currentStateId != MobStates.SetFire)
         {
-            Stop();
-            anim.SetTrigger("StartFire");
+            stateMachine.ChangeState(MobStates.SetFire);
         }
     }
 
-    public bool DealsDamage { get => anim.GetCurrentAnimatorStateInfo(0).IsName("Setting Fire"); }
-
-    public void Stop()
+    public void SetDamage()
     {
-        stateMachine.ChangeState(MobStates.Stay);
+        stateMachine.ChangeState(MobStates.Damaged);
     }
 
     public void Disable()
@@ -131,7 +156,8 @@ public class Mob : MonoBehaviour, ISpeedable
         scorcher = new Scorcher(gameObject, material);
 
         stateMachine.AddState(MobStates.Running, new MobRunning { mob = this });
-        stateMachine.AddState(MobStates.Stay, new MobStay { mob = this });
+        stateMachine.AddState(MobStates.SetFire, new MobSetFire { mob = this });
+        stateMachine.AddState(MobStates.Damaged, new MobDamaged { mob = this });
         stateMachine.AddState(MobStates.Dead, new MobDead { mob = this });
         stateMachine.ChangeState(MobStates.Running);
     }
@@ -149,9 +175,9 @@ public class Mob : MonoBehaviour, ISpeedable
             Score.value += score;
             stateMachine.ChangeState(MobStates.Dead);
         }
-        //else
-        //{
-        //    stateMachine.ChangeState(MobStates.Stay);
-        //}
+        else
+        {
+            SetDamage();
+        }
     }
 }
