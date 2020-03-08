@@ -442,6 +442,11 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7926515646705302079, guid: 1639ae03e4508cf45871561513f94309,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 999
+      objectReference: {fileID: 0}
     - target: {fileID: 2151335820213750299, guid: 1639ae03e4508cf45871561513f94309,
         type: 3}
       propertyPath: m_Controller
