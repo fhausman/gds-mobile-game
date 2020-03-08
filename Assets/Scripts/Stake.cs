@@ -33,7 +33,12 @@ public class Stake : MonoBehaviour
             }
             else if(obj.gameObject.CompareTag("Enemy"))
             {
-                obj.gameObject.SendMessage("Stop");
+                var mob = obj.GetComponent<Mob>();
+                if (!mob.DealsDamage)
+                {
+                    obj.gameObject.SendMessage("StartSettingFire");
+                    continue;
+                }
             }
 
             durability -= damagePerSecond * Time.fixedDeltaTime;

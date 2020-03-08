@@ -77,6 +77,7 @@ public class Mob : MonoBehaviour, ISpeedable
     public Scorcher scorcher;
 
     private Rigidbody2D rb;
+    private Animator anim;
     private Material material;
 
     public void SetVelocity(Vector2 v)
@@ -89,6 +90,17 @@ public class Mob : MonoBehaviour, ISpeedable
     {
         Destroy(gameObject);
     }
+
+    public void StartSettingFire()
+    {
+        if(!anim.GetCurrentAnimatorStateInfo(0).IsTag("SettingFire"))
+        {
+            Stop();
+            anim.SetTrigger("StartFire");
+        }
+    }
+
+    public bool DealsDamage { get => anim.GetCurrentAnimatorStateInfo(0).IsName("Setting Fire"); }
 
     public void Stop()
     {
@@ -113,6 +125,7 @@ public class Mob : MonoBehaviour, ISpeedable
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
         material = GetComponent<SpriteRenderer>().material;
 
         scorcher = new Scorcher(gameObject, material);
