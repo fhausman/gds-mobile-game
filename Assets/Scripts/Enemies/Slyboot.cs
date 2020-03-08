@@ -112,7 +112,8 @@ public class Slyboot : MonoBehaviour, ISpeedable
 
     public void SetVelocity(Vector2 v)
     {
-        rb.velocity = v;
+        if(rb != null)
+            rb.velocity = v;
     }
 
     public void ChangeDirection()
