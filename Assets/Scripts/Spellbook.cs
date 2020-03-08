@@ -124,7 +124,15 @@ public class Spellbook : MonoBehaviour
     public void UnholyChant()
     {
         Debug.Log("Cast UC!!!");
+        StartCoroutine(KillPriest());
         unholyChant.castButton.interactable = false;
+    }
+
+    IEnumerator KillPriest()
+    {
+        var priest = GameObject.FindGameObjectWithTag("Priest");
+        yield return null;
+        priest.SendMessage("SetDead");
     }
 
     public void FightFireWithFire()
