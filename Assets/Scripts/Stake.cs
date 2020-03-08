@@ -7,12 +7,14 @@ public class Stake : MonoBehaviour
     public float damagePerSecond = 0.5f;
 
     private SpriteRenderer sr;
+    private Animator anim;
     private Bounds bounds;
 
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
         bounds = GetComponent<BoxCollider2D>().bounds;
+        anim = GetComponentInChildren<Animator>();
     }
 
     void CheckForDamage()
@@ -41,10 +43,7 @@ public class Stake : MonoBehaviour
 
     void ShowDamage()
     {
-        var color = sr.color;
-        color.g = durability;
-        color.b = durability;
-        sr.color = color;
+        anim.SetFloat("Durability", durability);
     }
 
     void Update()
