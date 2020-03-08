@@ -97,7 +97,27 @@ public class Spellbook : MonoBehaviour
     public void PraiseSatan()
     {
         Debug.Log("Cast PS!!!");
+        StartCoroutine(KillAllEnemiesInRange());
         praiseSatan.castButton.interactable = false;
+    }
+
+    IEnumerator KillAllEnemiesInRange()
+    {
+        var time = 0.0f;
+        while (time < 1.0f)
+        {
+            var range = Mathf.Lerp(0.0f, 12.0f, time);
+
+            var enemiesInRange = Physics2D.OverlapCircleAll(new Vector3(0.0f, -4.0f), range, LayerMask.GetMask("Enemies"));
+            foreach (var enemy in enemiesInRange)
+            {
+                enemy.SendMessage("SetDead");
+            }
+
+            yield return null;
+
+            time += Time.deltaTime / 0.25f;
+        }
     }
 
     public void UnholyChant()

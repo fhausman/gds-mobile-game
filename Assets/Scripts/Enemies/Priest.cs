@@ -101,6 +101,15 @@ public class Priest : MonoBehaviour
         Destroy(rb);
     }
 
+    public void SetDead()
+    {
+        if (stateMachine.currentStateId == PriestStates.Dead)
+            return;
+
+        Score.value += 50;
+        stateMachine.ChangeState(PriestStates.Dead);
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -122,7 +131,6 @@ public class Priest : MonoBehaviour
 
     void Hit()
     {
-        Score.value += 50;
-        stateMachine.ChangeState(PriestStates.Dead);
+        SetDead();
     }
 }

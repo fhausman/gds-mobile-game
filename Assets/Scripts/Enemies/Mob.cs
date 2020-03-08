@@ -147,6 +147,15 @@ public class Mob : MonoBehaviour, ISpeedable
         speedMultiplier = 2.0f;
     }
 
+    public void SetDead()
+    {
+        if (stateMachine.currentStateId == MobStates.Dead)
+            return;
+        
+        Score.value += score;
+        stateMachine.ChangeState(MobStates.Dead);
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -172,8 +181,7 @@ public class Mob : MonoBehaviour, ISpeedable
         --numberOfLives;
         if (numberOfLives == 0)
         {
-            Score.value += score;
-            stateMachine.ChangeState(MobStates.Dead);
+            SetDead();
         }
         else
         {

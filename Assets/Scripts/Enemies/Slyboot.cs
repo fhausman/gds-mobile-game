@@ -148,6 +148,15 @@ public class Slyboot : MonoBehaviour, ISpeedable
         speedMultiplier = 2.0f;
     }
 
+    public void SetDead()
+    {
+        if (stateMachine.currentStateId == SlybootStates.Dead)
+            return;
+
+        Score.value += 300;
+        stateMachine.ChangeState(SlybootStates.Dead);
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -169,7 +178,6 @@ public class Slyboot : MonoBehaviour, ISpeedable
 
     void Hit()
     {
-        Score.value += 300;
-        stateMachine.ChangeState(SlybootStates.Dead);
+        SetDead();
     }
 }
