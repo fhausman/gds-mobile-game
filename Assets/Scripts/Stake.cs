@@ -10,6 +10,11 @@ public class Stake : MonoBehaviour
     private Animator anim;
     private Bounds bounds;
 
+    public void ResetDurability()
+    {
+        durability = 1.0f;
+    }
+
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();

@@ -26,6 +26,7 @@ public class Spellbook : MonoBehaviour
         }
     }
 
+    public Stake stake;
     public SpellData lilithsBlessing = new SpellData();
     public SpellData praiseSatan = new SpellData();
     public SpellData unholyChant = new SpellData();
@@ -129,6 +130,7 @@ public class Spellbook : MonoBehaviour
     public void FightFireWithFire()
     {
         Debug.Log("Cast FFWF!!!");
+        stake.ResetDurability();
         fightFireWithFire.castButton.interactable = false;
     }
 

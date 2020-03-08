@@ -240,6 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4595ef403924374783a82f33228be88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stake: {fileID: 1807828477}
   lilithsBlessing:
     basePrice: 1000
     multiplier: 3
@@ -281,7 +282,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 67514068}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 418.89365, y: 412.4478, z: -363}
+  m_LocalPosition: {x: -0, y: 0, z: -363}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1287,6 +1288,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1648133799}
     m_Modifications:
+    - target: {fileID: 150803779032360875, guid: 2304af61b686a5d4285731648c3b2b17,
+        type: 3}
+      propertyPath: damagePerSecond
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 2347877091794353763, guid: 2304af61b686a5d4285731648c3b2b17,
         type: 3}
       propertyPath: m_Layer
@@ -6695,6 +6701,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1807828477 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 150803779032360875, guid: 2304af61b686a5d4285731648c3b2b17,
+    type: 3}
+  m_PrefabInstance: {fileID: 283185676}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 057bc999f49445445b99f824cb02efdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1812650497
 GameObject:
   m_ObjectHideFlags: 0
