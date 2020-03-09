@@ -9,6 +9,7 @@ TagManager:
   - Priest
   - Slyboot
   - Torch
+  - SpawnPoint
   layers:
   - Default
   - TransparentFX

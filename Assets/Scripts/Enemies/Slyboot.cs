@@ -7,7 +7,8 @@ public static class SlybootStates
     public const int
         Running = 0,
         Throwing = 1,
-        Dead = 2;
+        Dead = 2,
+        Idle = 3;
 }
 
 public class SlybootRunning : IState
@@ -75,6 +76,24 @@ public class SlybootDead : IState
     {
         slyboot.Disable();
         slyboot.StartCoroutine(slyboot.scorcher.ScorchAndDestroy());
+    }
+
+    public void Update()
+    {
+    }
+}
+
+public class SlybootIdle : IState
+{
+    public Slyboot slyboot;
+
+    public void Exit()
+    {
+    }
+
+    public void Init()
+    {
+        slyboot.SetVelocity(Vector2.zero);
     }
 
     public void Update()
@@ -157,6 +176,16 @@ public class Slyboot : MonoBehaviour, ISpeedable
         stateMachine.ChangeState(SlybootStates.Dead);
     }
 
+    public void SetIdle()
+    {
+        stateMachine.ChangeState(SlybootStates.Idle);
+    }
+
+    public void RestorePreviousState()
+    {
+        stateMachine.ChangeState(SlybootStates.Running);
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -168,6 +197,7 @@ public class Slyboot : MonoBehaviour, ISpeedable
         stateMachine.AddState(SlybootStates.Running, new SlybootRunning { slyboot = this });
         stateMachine.AddState(SlybootStates.Throwing, new SlybootThrowing { slyboot = this });
         stateMachine.AddState(SlybootStates.Dead, new SlybootDead { slyboot = this });
+        stateMachine.AddState(SlybootStates.Idle, new SlybootIdle { slyboot = this });
         stateMachine.ChangeState(SlybootStates.Running);
     }
 

@@ -92,7 +92,34 @@ public class Spellbook : MonoBehaviour
     public void LilithsBlessing()
     {
         Debug.Log("Cast LB!!!");
+        StartCoroutine(StopEnemies());
         lilithsBlessing.castButton.interactable = false;
+    }
+
+    IEnumerator StopEnemies()
+    {
+        var spawnPoints = GameObject.FindGameObjectsWithTag("SpawnPoint");
+        var enemiesInRange = Physics2D.OverlapCircleAll(new Vector3(0.0f, -4.0f), 24.0f, LayerMask.GetMask("Enemies"));
+        foreach (var enemy in enemiesInRange)
+        {
+            enemy.SendMessage("SetIdle");
+        }
+        foreach(var point in spawnPoints)
+        {
+            point.SendMessage("Deactivate");
+        }
+
+        yield return new WaitForSeconds(5.0f);
+
+        enemiesInRange = Physics2D.OverlapCircleAll(new Vector3(0.0f, -4.0f), 24.0f, LayerMask.GetMask("Enemies"));
+        foreach (var enemy in enemiesInRange)
+        {
+            enemy.SendMessage("RestorePreviousState");
+        }
+        foreach (var point in spawnPoints)
+        {
+            point.SendMessage("Activate");
+        }
     }
 
     public void PraiseSatan()

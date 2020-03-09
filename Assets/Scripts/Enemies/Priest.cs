@@ -7,7 +7,8 @@ public static class PriestStates
     public const int
         Walking = 0,
         Buffing = 1,
-        Dead = 2;
+        Dead = 2,
+        Idle = 3;
 }
 
 public class PriestWalking : IState
@@ -71,6 +72,23 @@ public class PriestDead : IState
     }
 }
 
+public class PriestIdle : IState
+{
+    public Priest priest;
+
+    public void Exit()
+    {
+    }
+
+    public void Init()
+    {
+    }
+
+    public void Update()
+    {
+    }
+}
+
 public class Priest : MonoBehaviour
 {
     public Vector2 direction;
@@ -110,6 +128,16 @@ public class Priest : MonoBehaviour
         stateMachine.ChangeState(PriestStates.Dead);
     }
 
+    public void SetIdle()
+    {
+        stateMachine.ChangeState(PriestStates.Idle);
+    }
+
+    public void RestorePreviousState()
+    {
+        stateMachine.ChangeState(PriestStates.Walking);
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -121,6 +149,7 @@ public class Priest : MonoBehaviour
         stateMachine.AddState(PriestStates.Walking, new PriestWalking { priest = this });
         stateMachine.AddState(PriestStates.Buffing, new PriestBuffing { priest = this });
         stateMachine.AddState(PriestStates.Dead, new PriestDead { priest = this });
+        stateMachine.AddState(PriestStates.Idle, new PriestIdle { priest = this });
         stateMachine.ChangeState(PriestStates.Walking);
     }
 

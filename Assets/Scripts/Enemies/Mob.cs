@@ -8,7 +8,8 @@ public static class MobStates
         Running = 0,
         SetFire = 1,
         Damaged = 2,
-        Dead = 3;
+        Dead = 3,
+        Idle = 4;
 }
 
 public class MobRunning : IState
@@ -93,6 +94,25 @@ public class MobDead : IState
     }
 }
 
+public class MobIdle : IState
+{
+    public Mob mob;
+
+    public void Exit()
+    {
+    }
+
+    public void Init()
+    {
+        mob.anim.SetTrigger("Idle");
+        mob.SetVelocity(Vector2.zero);
+    }
+
+    public void Update()
+    {
+    }
+}
+
 public class Mob : MonoBehaviour, ISpeedable
 {
     public Vector2 direction;
@@ -121,7 +141,7 @@ public class Mob : MonoBehaviour, ISpeedable
 
     public void StartSettingFire()
     {
-        if(stateMachine.currentStateId != MobStates.SetFire)
+        if(stateMachine.currentStateId != MobStates.SetFire && stateMachine.currentStateId != MobStates.Idle)
         {
             stateMachine.ChangeState(MobStates.SetFire);
         }
@@ -156,6 +176,16 @@ public class Mob : MonoBehaviour, ISpeedable
         stateMachine.ChangeState(MobStates.Dead);
     }
 
+    public void SetIdle()
+    {
+        stateMachine.ChangeState(MobStates.Idle);
+    }
+
+    public void RestorePreviousState()
+    {
+        stateMachine.ChangeState(MobStates.Running);
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -168,6 +198,7 @@ public class Mob : MonoBehaviour, ISpeedable
         stateMachine.AddState(MobStates.SetFire, new MobSetFire { mob = this });
         stateMachine.AddState(MobStates.Damaged, new MobDamaged { mob = this });
         stateMachine.AddState(MobStates.Dead, new MobDead { mob = this });
+        stateMachine.AddState(MobStates.Idle, new MobIdle { mob = this });
         stateMachine.ChangeState(MobStates.Running);
     }
 

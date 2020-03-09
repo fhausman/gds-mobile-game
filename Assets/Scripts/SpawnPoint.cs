@@ -30,6 +30,7 @@ public class SpawnPoint : MonoBehaviour
     public float additionalSpeed = 0.25f;
     public int scoreSpeedMultiplier { get => Score.value / 1000; }
 
+    private bool active = true;
     private bool spawnBasicMob = false;
     private bool spawnStrongMob = false;
     private bool spawnPriest = false;
@@ -37,6 +38,16 @@ public class SpawnPoint : MonoBehaviour
 
     private GameObject slybootInstance = null;
     private GameObject priestInstance = null;
+
+    public void Activate()
+    {
+        active = true;
+    }
+
+    public void Deactivate()
+    {
+        active = false;
+    }
 
     private float spawnNoise { get => Random.Range(-0.5f, 0.5f); }
 
@@ -161,6 +172,9 @@ public class SpawnPoint : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!active)
+            return;
+
         if (spawnBasicMob)
         {
             StartCoroutine("SpawnBasicMob");
