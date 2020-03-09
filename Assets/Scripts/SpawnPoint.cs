@@ -30,7 +30,7 @@ public class SpawnPoint : MonoBehaviour
     public float additionalSpeed = 0.25f;
     public int scoreSpeedMultiplier { get => Score.value / 1000; }
 
-    private bool active = true;
+    private bool active = false;
     private bool spawnBasicMob = false;
     private bool spawnStrongMob = false;
     private bool spawnPriest = false;
@@ -42,12 +42,21 @@ public class SpawnPoint : MonoBehaviour
     public void Activate()
     {
         active = true;
+
+        StartCoroutine("BasicMobSpawnDelay");
+        StartCoroutine("StrongMobSpawnDelay");
+        StartCoroutine("PriestSpawnDelay");
+        StartCoroutine("SlybootSpawnDelay");
     }
 
     public void Deactivate()
     {
         active = false;
-    }
+        spawnBasicMob = false;
+        spawnStrongMob = false;
+        spawnPriest = false;
+        spawnSlyboot = false;
+}
 
     private float spawnNoise { get => Random.Range(-0.5f, 0.5f); }
 
@@ -163,10 +172,6 @@ public class SpawnPoint : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine("BasicMobSpawnDelay");
-        StartCoroutine("StrongMobSpawnDelay");
-        StartCoroutine("PriestSpawnDelay");
-        StartCoroutine("SlybootSpawnDelay");
     }
 
     // Update is called once per frame
