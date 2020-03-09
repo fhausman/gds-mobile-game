@@ -38,7 +38,12 @@ public class UIManager : MonoBehaviour
     public void Play()
     {
         gameManager.RestartGame();
-        mainMenu.SetActive(false);
+        PlayUi();
+    }
+
+    public void PlayUi()
+    {
+        DisableAllChildren();
         hud.SetActive(true);
         spellbookManager.UpdateActiveSpells();
     }
@@ -59,6 +64,12 @@ public class UIManager : MonoBehaviour
     {
         DisableAllChildren();
         mainMenu.SetActive(true);
+    }
+
+    public void GameOver()
+    {
+        DisableAllChildren();
+        gameOver.SetActive(true);
     }
 
     public void OnSoundToggleChange(bool val)

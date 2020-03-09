@@ -51,6 +51,8 @@ public class SpawnPoint : MonoBehaviour
 
     public void Deactivate()
     {
+        StopAllCoroutines();
+
         active = false;
         spawnBasicMob = false;
         spawnStrongMob = false;
