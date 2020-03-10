@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -8,24 +9,28 @@ public class UIManager : MonoBehaviour
     GameObject spellbook;
     GameObject credits;
     GameObject hud;
+    GameObject gameOver;
 
     Spellbook spellbookManager;
     AudioListener audioListener;
+    GameManager gameManager;
 
     void Start()
     {
-        Time.timeScale = 0.0f;
-
         mainMenu = transform.Find("MainMenu").gameObject;
         spellbook = transform.Find("Spellbook").gameObject;
         credits = transform.Find("Credits").gameObject;
         hud = transform.Find("HUD").gameObject;
+        gameOver = transform.Find("GameOverMenu").gameObject;
 
         spellbookManager = GameObject.Find("SpellManager").GetComponent<Spellbook>();
         audioListener = GameObject.Find("Main Camera").GetComponent<AudioListener>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
+        mainMenu.transform.Find("Tutorial").GetComponent<Toggle>().isOn = gameManager.tutorialEnabled;
     }
 
-    void DisableAllChildren()
+    public void DisableAllChildren()
     {
         foreach (Transform child in transform)
         {
@@ -35,9 +40,13 @@ public class UIManager : MonoBehaviour
 
     public void Play()
     {
-        Time.timeScale = 1.0f;
-        GameObject.Find("Witch").GetComponent<Witch>().enabled = true;
-        mainMenu.SetActive(false);
+        gameManager.RestartGame();
+        PlayUi();
+    }
+
+    public void PlayUi()
+    {
+        DisableAllChildren();
         hud.SetActive(true);
         spellbookManager.UpdateActiveSpells();
     }
@@ -60,6 +69,12 @@ public class UIManager : MonoBehaviour
         mainMenu.SetActive(true);
     }
 
+    public void GameOver()
+    {
+        DisableAllChildren();
+        gameOver.SetActive(true);
+    }
+
     public void OnSoundToggleChange(bool val)
     {
         audioListener.enabled = !audioListener.enabled;
@@ -67,6 +82,6 @@ public class UIManager : MonoBehaviour
 
     public void OnTutorialToggleChange(bool val)
     {
-        //enable tutorial
+        gameManager.tutorialEnabled = !gameManager.tutorialEnabled;
     }
 }

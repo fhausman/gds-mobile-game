@@ -8,7 +8,8 @@ public static class InputStates
     public const int
         Idle = 0,
         Charging = 1,
-        Released = 2;
+        Released = 2,
+        Inactive = 3;
 }
 
 public class Idle : IState
@@ -103,6 +104,23 @@ public class Released : IState
     }
 }
 
+public class Inactive : IState
+{
+    public Witch obj;
+
+    public void Exit()
+    {
+    }
+
+    public void Init()
+    {
+    }
+
+    public void Update()
+    {
+    }
+}
+
 public class Witch : MonoBehaviour
 {
     public GameObject projectile;
@@ -125,7 +143,8 @@ public class Witch : MonoBehaviour
         stateMachine.AddState(InputStates.Idle, new Idle { obj = this });
         stateMachine.AddState(InputStates.Charging, new Charging { obj = this });
         stateMachine.AddState(InputStates.Released, new Released { obj = this });
-        stateMachine.ChangeState(InputStates.Idle);
+        stateMachine.AddState(InputStates.Inactive, new Inactive { obj = this });
+        stateMachine.ChangeState(InputStates.Inactive);
     }
 
     void Update()
@@ -149,6 +168,16 @@ public class Witch : MonoBehaviour
     public void ResetArcRange()
     {
         arc.range = ArcLine.baseRange;
+    }
+
+    public void SetInactive()
+    {
+        stateMachine.ChangeState(InputStates.Inactive);
+    }
+
+    public void SetActive()
+    {
+        stateMachine.ChangeState(InputStates.Idle);
     }
 
     private IEnumerator InputDelay()

@@ -5,6 +5,9 @@ public class Stake : MonoBehaviour
 {
     public float durability = 1.0f;
     public float damagePerSecond = 0.5f;
+    public bool active = false;
+    public delegate void OnGameOver();
+    public OnGameOver onGameOver;
 
     private SpriteRenderer sr;
     private Animator anim;
@@ -59,11 +62,23 @@ public class Stake : MonoBehaviour
     void Update()
     {
         ShowDamage();
+        if (!active)
+            return;
+
         if (durability < 0.0f)
         {
-            var scene = SceneManager.GetActiveScene();
-            SceneManager.LoadScene(scene.name);
+            onGameOver();
         }
+    }
+
+    public void Deactivate()
+    {
+        active = false;
+    }
+
+    public void Activate()
+    {
+        active = true;
     }
 
     void FixedUpdate()
