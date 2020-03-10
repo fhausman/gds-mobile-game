@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2844125083151891958}
   - component: {fileID: -7417719404131696708}
+  - component: {fileID: 2151560795810486204}
   m_Layer: 11
   m_Name: SlybootMovementBounds
   m_TagString: Untagged
@@ -57,3 +58,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.908515, y: 4.8903913}
   m_EdgeRadius: 0
+--- !u!114 &2151560795810486204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5655149520233948250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 536bc29306643934ab48000c1e76a50e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

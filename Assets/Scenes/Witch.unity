@@ -1108,24 +1108,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 238891764}
   m_CullTransparentMesh: 0
---- !u!1 &246113637 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5655149520233948250, guid: 3430f4144ca193242bb47b89e3ca1d15,
-    type: 3}
-  m_PrefabInstance: {fileID: 7169667986944034695}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &246113640
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 246113637}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 536bc29306643934ab48000c1e76a50e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &260187809
 GameObject:
   m_ObjectHideFlags: 0
@@ -3052,7 +3034,12 @@ PrefabInstance:
     - target: {fileID: 6047976500201208523, guid: 8c8a61cbc3ec7894785326bfb2b10b2c,
         type: 3}
       propertyPath: slybootSpawnDelay
-      value: 60
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 6047976500201208523, guid: 8c8a61cbc3ec7894785326bfb2b10b2c,
+        type: 3}
+      propertyPath: slybootSpawnRate
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6568928539405662978, guid: 8c8a61cbc3ec7894785326bfb2b10b2c,
         type: 3}
@@ -8972,7 +8959,12 @@ PrefabInstance:
     - target: {fileID: 6047976500201208523, guid: 8c8a61cbc3ec7894785326bfb2b10b2c,
         type: 3}
       propertyPath: slybootSpawnDelay
-      value: 40
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 6047976500201208523, guid: 8c8a61cbc3ec7894785326bfb2b10b2c,
+        type: 3}
+      propertyPath: slybootSpawnRate
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6568928539405662978, guid: 8c8a61cbc3ec7894785326bfb2b10b2c,
         type: 3}

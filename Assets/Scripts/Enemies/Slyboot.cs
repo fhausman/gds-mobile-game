@@ -114,20 +114,8 @@ public class Slyboot : MonoBehaviour, ISpeedable
     private Rigidbody2D rb;
     private Transform stakeTransform;
     private Material material;
-
-    private Vector2 throwVector { 
-        get
-        {
-            if(direction == Vector2.right)
-            {
-                return (Quaternion.Euler(0, 0, throwAngle) * Vector2.right);
-            }
-            else
-            {
-                return (Quaternion.Euler(0, 0, -throwAngle) * Vector2.left);
-            }
-        } 
-    }
+    private Vector2 facingDirection;
+    private Vector2 throwVector { get => (Quaternion.Euler(0, 0, throwAngle * facingDirection.x) * facingDirection); }
 
     public void SetVelocity(Vector2 v)
     {
@@ -199,6 +187,8 @@ public class Slyboot : MonoBehaviour, ISpeedable
         stateMachine.AddState(SlybootStates.Dead, new SlybootDead { slyboot = this });
         stateMachine.AddState(SlybootStates.Idle, new SlybootIdle { slyboot = this });
         stateMachine.ChangeState(SlybootStates.Running);
+
+        facingDirection = direction;
     }
 
     void FixedUpdate()

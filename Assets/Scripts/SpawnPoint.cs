@@ -27,7 +27,7 @@ public class SpawnPoint : MonoBehaviour
     public float slybootSpawnDelay = 30.0f;
     public float slybootSpawnRate = 15.0f;
 
-    public float additionalSpeed = 0.25f;
+    public float additionalSpeed = 0.10f;
     public int scoreSpeedMultiplier { get => Score.value / 1000; }
 
     private bool active = false;
