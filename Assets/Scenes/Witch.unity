@@ -3499,6 +3499,7 @@ MonoBehaviour:
   stake: {fileID: 1807828477}
   spellbook: {fileID: 67514069}
   ui: {fileID: 1944189785}
+  tutorialEnabled: 1
 --- !u!1 &815539593
 GameObject:
   m_ObjectHideFlags: 0
