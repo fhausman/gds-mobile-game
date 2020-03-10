@@ -99,6 +99,7 @@ public class GameManager : MonoBehaviour
 
         spellbook.mana += Score.value / 5;
 
+        Score.value = 0;
         ui.GameOver();
         Save();
     }
