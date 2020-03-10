@@ -33,10 +33,10 @@ public class Spellbook : MonoBehaviour
     public SpellData fightFireWithFire = new SpellData();
     public TextMeshProUGUI manaText;
 
-    private List<SpellData> spelldata;
-    private int mana = 10000;
+    public List<SpellData> spelldata { get; set; }
+    public int mana { get; set; } = 0;
 
-    void Start()
+    void Awake()
     {
         spelldata = new List<SpellData> { lilithsBlessing, praiseSatan, unholyChant, fightFireWithFire };
     }

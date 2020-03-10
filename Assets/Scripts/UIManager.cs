@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -25,6 +26,8 @@ public class UIManager : MonoBehaviour
         spellbookManager = GameObject.Find("SpellManager").GetComponent<Spellbook>();
         audioListener = GameObject.Find("Main Camera").GetComponent<AudioListener>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
+        mainMenu.transform.Find("Tutorial").GetComponent<Toggle>().isOn = gameManager.tutorialEnabled;
     }
 
     public void DisableAllChildren()
@@ -79,6 +82,6 @@ public class UIManager : MonoBehaviour
 
     public void OnTutorialToggleChange(bool val)
     {
-        //enable tutorial
+        gameManager.tutorialEnabled = !gameManager.tutorialEnabled;
     }
 }
