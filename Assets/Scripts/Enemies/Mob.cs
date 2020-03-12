@@ -166,7 +166,9 @@ public class Mob : MonoBehaviour, ISpeedable
     public void IncreaseSpeed()
     {
         speedMultiplier = 2.0f;
-        hasteBuff.SetTrigger("Buff");
+
+        if(hasteBuff)
+            hasteBuff.SetTrigger("Buff");
     }
 
     public void SetDead()

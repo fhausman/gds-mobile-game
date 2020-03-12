@@ -6,27 +6,36 @@ public class Projectile : MonoBehaviour
 {
     public bool shouldDestroy = false;
 
-    private Animation anim;
+    private Animator anim;
+    private Rigidbody2D rb;
+    private CircleCollider2D coll;
+    private GameObject particleSystem;
     private void Start()
     {
-        anim = GetComponent<Animation>();
+        anim = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
+        coll = GetComponent<CircleCollider2D>();
+        particleSystem = transform.GetChild(0).gameObject;
     }
 
     private void Update()
     {
-        if (shouldDestroy)
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("End"))
             Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        anim["Explode"].speed = 6.0f;
-        anim.Play("Explode");
+        Destroy(rb);
+        Destroy(coll);
+        particleSystem.SetActive(false);
 
-        var objs = Physics2D.OverlapCircleAll(transform.position, 1.0f, LayerMask.GetMask("Enemies"));
-        foreach(var obj in objs)
+        anim.SetTrigger("Explode");
+        var objs = Physics2D.OverlapCircleAll(transform.position, 0.75f, LayerMask.GetMask("Enemies"));
+        foreach (var obj in objs)
         {
             obj.SendMessage("Hit");
         }
+
     }
 }
