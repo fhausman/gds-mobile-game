@@ -46,6 +46,7 @@ public class PriestBuffing : IState
     public void Init()
     {
         priest.ActivateBuffArea();
+        priest.anim.SetTrigger("Idle");
     }
 
     public void Update()
@@ -82,6 +83,7 @@ public class PriestIdle : IState
 
     public void Init()
     {
+        priest.anim.SetTrigger("Idle");
     }
 
     public void Update()
@@ -94,9 +96,11 @@ public class Priest : MonoBehaviour
     public Vector2 direction;
     public Vector2 target;
     public float speed;
+    private bool isCurrentlyBuffing { get => anim.GetCurrentAnimatorStateInfo(0).IsName("Cast"); }
 
     public StateMachine stateMachine { get; } = new StateMachine();
     public Scorcher scorcher;
+    public Animator anim;
 
     private Rigidbody2D rb;
     private PriestBuffArea buffArea;
@@ -138,10 +142,32 @@ public class Priest : MonoBehaviour
         stateMachine.ChangeState(PriestStates.Walking);
     }
 
+    public void PlayBuffAnimation(ISpeedable obj)
+    {
+        if(!isCurrentlyBuffing)
+            anim.SetTrigger("Cast");
+
+        StartCoroutine(SpeedMobUp(obj));
+    }
+
+    IEnumerator SpeedMobUp(ISpeedable obj)
+    {
+        yield return null;
+
+        while(isCurrentlyBuffing)
+        {
+            yield return null;
+        }
+
+        obj.IncreaseSpeed();
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
         buffArea = transform.GetChild(0).gameObject.GetComponent<PriestBuffArea>();
+        buffArea.onBuffBehaviour += PlayBuffAnimation;
         material = GetComponent<SpriteRenderer>().material;
 
         scorcher = new Scorcher(gameObject, material);

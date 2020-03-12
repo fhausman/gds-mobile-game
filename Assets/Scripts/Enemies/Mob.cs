@@ -127,6 +127,7 @@ public class Mob : MonoBehaviour, ISpeedable
     private Rigidbody2D rb;
     public Animator anim { get; private set; }
     private Material material;
+    private Animator hasteBuff;
 
     public void SetVelocity(Vector2 v)
     {
@@ -165,6 +166,7 @@ public class Mob : MonoBehaviour, ISpeedable
     public void IncreaseSpeed()
     {
         speedMultiplier = 2.0f;
+        hasteBuff.SetTrigger("Buff");
     }
 
     public void SetDead()
@@ -191,6 +193,7 @@ public class Mob : MonoBehaviour, ISpeedable
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         material = GetComponent<SpriteRenderer>().material;
+        hasteBuff = transform.GetChild(0).GetComponent<Animator>();
 
         scorcher = new Scorcher(gameObject, material);
 
