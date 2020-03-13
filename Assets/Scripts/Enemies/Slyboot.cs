@@ -137,7 +137,7 @@ public class Slyboot : MonoBehaviour, ISpeedable
         trb.AddForce(
             Arc.CalcLaunchSpeed(Mathf.Abs(transform.position.x-stakeTransform.position.x), 0, Physics2D.gravity.magnitude, Mathf.Deg2Rad * throwAngle) * throwVector,
             ForceMode2D.Impulse);
-        trb.AddTorque(-1.0f, ForceMode2D.Impulse);
+        trb.AddTorque(0.2f, ForceMode2D.Impulse);
     }
 
     public void Destroy()

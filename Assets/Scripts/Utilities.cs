@@ -12,7 +12,7 @@ public class Scorcher
     GameObject obj;
     Material material;
 
-    float scorchTime = 0.3f;
+    public float scorchTime = 0.3f;
 
     public Scorcher(GameObject o, Material mat)
     {
@@ -20,7 +20,7 @@ public class Scorcher
         material = mat;
     }
 
-    public IEnumerator ScorchAndDestroy()
+    public IEnumerator ScorchAndDestroy(bool destroy = true)
     {
         float time = scorchTime;
         while (time > 0.0f)
@@ -31,7 +31,8 @@ public class Scorcher
             yield return null;
         }
 
-        obj.SendMessage("Destroy");
+        if(destroy)
+            obj.SendMessage("Destroy");
     }
 
 }

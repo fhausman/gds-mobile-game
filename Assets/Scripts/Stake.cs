@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Stake : MonoBehaviour
@@ -35,9 +36,12 @@ public class Stake : MonoBehaviour
             if (obj.gameObject.CompareTag("Torch"))
             {
                 var torch = obj.gameObject.GetComponent<Torch>();
-                if (!torch.landed)
-                    continue;
-
+                if (torch.active)
+                {
+                    torch.Hit();
+                    durability -= damagePerSecond;
+                }
+                continue;
             }
             else if(obj.gameObject.CompareTag("Enemy"))
             {
@@ -52,6 +56,12 @@ public class Stake : MonoBehaviour
             durability -= damagePerSecond * Time.fixedDeltaTime;
             Debug.Log(durability);
         }
+    }
+
+    IEnumerator TorchHit(Torch torch)
+    {
+        yield return null;
+
     }
 
     void ShowDamage()
