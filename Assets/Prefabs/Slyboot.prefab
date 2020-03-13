@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8715525832719995042}
   - component: {fileID: 1970292168664775077}
   - component: {fileID: 7210083778010949356}
+  - component: {fileID: 9013208756697453908}
   - component: {fileID: 240328319691061432}
   m_Layer: 10
   m_Name: Slyboot
@@ -131,6 +132,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.077579215, y: 0.15302682}
   m_EdgeRadius: 0
+--- !u!95 &9013208756697453908
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1800140278667257363}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9e6c5df02df32214887fbfb629d2930a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &240328319691061432
 MonoBehaviour:
   m_ObjectHideFlags: 0

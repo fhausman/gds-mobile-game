@@ -21,6 +21,7 @@ public class SlybootRunning : IState
 
     public void Init()
     {
+        slyboot.anim.SetTrigger("Run");
         slyboot.StartCoroutine(ThrowDelay());
     }
 
@@ -57,7 +58,8 @@ public class SlybootThrowing: IState
 
     IEnumerator Throwing()
     {
-        yield return new WaitForSeconds(1.0f);
+        slyboot.anim.SetTrigger("Throw");
+        yield return new WaitForSeconds(0.6f);
 
         slyboot.Throw();
         slyboot.stateMachine.ChangeState(SlybootStates.Running);
@@ -93,6 +95,7 @@ public class SlybootIdle : IState
 
     public void Init()
     {
+        slyboot.anim.SetTrigger("Idle");
         slyboot.SetVelocity(Vector2.zero);
     }
 
@@ -110,6 +113,7 @@ public class Slyboot : MonoBehaviour, ISpeedable
     public GameObject torch;
     public StateMachine stateMachine { get; } = new StateMachine();
     public Scorcher scorcher;
+    public Animator anim;
 
     private Rigidbody2D rb;
     private Transform stakeTransform;
@@ -177,8 +181,9 @@ public class Slyboot : MonoBehaviour, ISpeedable
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        stakeTransform = GameObject.Find("Stake").transform;
+        anim = GetComponent<Animator>();
         material = GetComponent<SpriteRenderer>().material;
+        stakeTransform = GameObject.Find("Stake").transform;
 
         scorcher = new Scorcher(gameObject, material);
 
