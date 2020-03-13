@@ -59,9 +59,11 @@ public class SlybootThrowing: IState
     IEnumerator Throwing()
     {
         slyboot.anim.SetTrigger("Throw");
-        yield return new WaitForSeconds(0.6f);
+        yield return new WaitForSeconds(0.4f);
 
         slyboot.Throw();
+        yield return new WaitForSeconds(0.85f);
+
         slyboot.stateMachine.ChangeState(SlybootStates.Running);
     }
 }
@@ -107,13 +109,17 @@ public class SlybootIdle : IState
 public class Slyboot : MonoBehaviour, ISpeedable
 {
     public Vector2 direction;
+    public bool movingForward = true;
     public float speed;
     public float speedMultiplier = 1.0f;
     public float throwAngle = 80.0f;
     public GameObject torch;
+    public Transform torchSpawnPosition;
     public StateMachine stateMachine { get; } = new StateMachine();
     public Scorcher scorcher;
     public Animator anim;
+    public RuntimeAnimatorController ForwardsRuntimeController;
+    public AnimatorOverrideController BackwardsRuntimeController;
 
     private Rigidbody2D rb;
     private Transform stakeTransform;
@@ -129,13 +135,16 @@ public class Slyboot : MonoBehaviour, ISpeedable
 
     public void ChangeDirection()
     {
+        movingForward = !movingForward;
         direction = -direction;
+
+        anim.runtimeAnimatorController = movingForward ? ForwardsRuntimeController : BackwardsRuntimeController;
     }
 
     public void Throw()
     {
         var torchInstance = Instantiate(torch);
-        torchInstance.transform.position = gameObject.transform.position;
+        torchInstance.transform.position = torchSpawnPosition.position;
 
         var trb = torchInstance.GetComponent<Rigidbody2D>();
         trb.AddForce(
