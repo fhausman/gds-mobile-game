@@ -94,6 +94,7 @@ public class Spellbook : MonoBehaviour
         Debug.Log("Cast LB!!!");
         StartCoroutine(StopEnemies());
         lilithsBlessing.castButton.interactable = false;
+        lilithsBlessing.active = false;
     }
 
     IEnumerator StopEnemies()
@@ -127,6 +128,7 @@ public class Spellbook : MonoBehaviour
         Debug.Log("Cast PS!!!");
         StartCoroutine(KillAllEnemiesInRange());
         praiseSatan.castButton.interactable = false;
+        praiseSatan.active = false;
     }
 
     IEnumerator KillAllEnemiesInRange()
@@ -153,6 +155,7 @@ public class Spellbook : MonoBehaviour
         Debug.Log("Cast UC!!!");
         StartCoroutine(KillPriest());
         unholyChant.castButton.interactable = false;
+        unholyChant.active = false;
     }
 
     IEnumerator KillPriest()
@@ -167,6 +170,7 @@ public class Spellbook : MonoBehaviour
         Debug.Log("Cast FFWF!!!");
         stake.ResetDurability();
         fightFireWithFire.castButton.interactable = false;
+        fightFireWithFire.active = false;
     }
 
     private void Buy(SpellData obj)
