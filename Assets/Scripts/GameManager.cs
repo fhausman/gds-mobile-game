@@ -92,7 +92,13 @@ public class GameManager : MonoBehaviour
             point.GetComponent<SpawnPoint>().Deactivate();
         }
 
-        if(highScore < Score.value)
+        var projectiles = GameObject.FindGameObjectsWithTag("Projectile");
+        foreach (var projectile in projectiles)
+        {
+            Destroy(projectile.gameObject);
+        }
+
+        if (highScore < Score.value)
         {
             highScore = Score.value;
         }
