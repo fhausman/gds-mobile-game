@@ -96,7 +96,7 @@ public class Priest : MonoBehaviour
     public Vector2 direction;
     public Vector2 target;
     public float speed;
-    private bool isCurrentlyBuffing { get => anim.GetCurrentAnimatorStateInfo(0).IsName("Cast"); }
+    private bool isCurrentlyBuffing { get => anim.GetCurrentAnimatorStateInfo(0).IsName("Cast_1"); }
 
     public StateMachine stateMachine { get; } = new StateMachine();
     public Scorcher scorcher;
