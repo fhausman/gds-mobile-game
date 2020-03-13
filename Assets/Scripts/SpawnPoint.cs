@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class SpawnPoint : MonoBehaviour
 {
-    public static bool isPriestOnBoard = false;
-
     public static class Enemies
     {
         public const int
@@ -96,12 +94,24 @@ public class SpawnPoint : MonoBehaviour
     {
         yield return new WaitForSeconds(priestSpawnDelay);
 
+        var inst = GameObject.FindGameObjectWithTag("Priest");
+        while (inst != null)
+        {
+            yield return null;
+        }
+
         spawnPriest = true;
     }
 
     private IEnumerator SlybootSpawnDelay()
     {
         yield return new WaitForSeconds(slybootSpawnDelay);
+
+        var inst = GameObject.FindGameObjectWithTag("Slyboot");
+        while (inst != null)
+        {
+            yield return null;
+        }
 
         spawnSlyboot = true;
         startIncreasingSpeed = true;
@@ -165,14 +175,12 @@ public class SpawnPoint : MonoBehaviour
         priestComp.direction = spawnDir;
         priestComp.target = priestTarget.position;
         priestComp.speed = 1.0f + scoreSpeedMultiplier * additionalSpeed;
-        isPriestOnBoard = true;
 
         while (priestInstance != null)
         {
             yield return new WaitForEndOfFrame();
         }
 
-        isPriestOnBoard = false;
         StartCoroutine("PriestSpawnDelay");
     }
 
@@ -196,7 +204,7 @@ public class SpawnPoint : MonoBehaviour
             StartCoroutine("SpawnStrongMob");
         }
 
-        if (spawnPriest && !isPriestOnBoard)
+        if (spawnPriest)
         {
             StartCoroutine("SpawnPriest");
         }
