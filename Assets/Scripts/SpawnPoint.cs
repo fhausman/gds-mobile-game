@@ -28,13 +28,15 @@ public class SpawnPoint : MonoBehaviour
     public float slybootSpawnRate = 15.0f;
 
     public float additionalSpeed = 0.10f;
-    public int scoreSpeedMultiplier { get => Score.value / 1000; }
+    public int scoreSpeedMultiplier { get => startIncreasingSpeed ? (Score.value - scoreWhenAllTypesOfEnemiesSpawned) / 1000 : 1; }
 
     private bool active = false;
     private bool spawnBasicMob = false;
     private bool spawnStrongMob = false;
     private bool spawnPriest = false;
     private bool spawnSlyboot = false;
+    private bool startIncreasingSpeed = false;
+    private int scoreWhenAllTypesOfEnemiesSpawned = 0;
 
     private GameObject slybootInstance = null;
     private GameObject priestInstance = null;
@@ -102,6 +104,8 @@ public class SpawnPoint : MonoBehaviour
         yield return new WaitForSeconds(slybootSpawnDelay);
 
         spawnSlyboot = true;
+        startIncreasingSpeed = true;
+        scoreWhenAllTypesOfEnemiesSpawned = Score.value;
     }
 
     private IEnumerator SpawnBasicMob()
