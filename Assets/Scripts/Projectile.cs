@@ -9,13 +9,13 @@ public class Projectile : MonoBehaviour
     private Animator anim;
     private Rigidbody2D rb;
     private CircleCollider2D coll;
-    private GameObject particleSystem;
+    private GameObject ps;
     private void Start()
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         coll = GetComponent<CircleCollider2D>();
-        particleSystem = transform.GetChild(0).gameObject;
+        ps = transform.GetChild(0).gameObject;
     }
 
     private void Update()
@@ -28,7 +28,7 @@ public class Projectile : MonoBehaviour
     {
         Destroy(rb);
         Destroy(coll);
-        particleSystem.SetActive(false);
+        ps.SetActive(false);
 
         anim.SetTrigger("Explode");
         var objs = Physics2D.OverlapCircleAll(transform.position, 0.75f, LayerMask.GetMask("Enemies"));
