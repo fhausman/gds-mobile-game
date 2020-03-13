@@ -80,32 +80,11 @@ public class GameManager : MonoBehaviour
         stake.Deactivate();
         witch.SetInactive();
 
-        var enemies = Physics2D.OverlapAreaAll(new Vector2(-20.0f, 10.0f), new Vector2(20.0f, -10.0f), LayerMask.GetMask("Enemies"));
-        foreach (var enemy in enemies)
-        {
-            Destroy(enemy.gameObject);
-        }
+        DestroyEnemies(true);
+        DeactivateSpawnPoints();
+        DestroyProjectiles();
+        ManageScore();
 
-        var spawnPoints = GameObject.FindGameObjectsWithTag("SpawnPoint");
-        foreach (var point in spawnPoints)
-        {
-            point.GetComponent<SpawnPoint>().Deactivate();
-        }
-
-        var projectiles = GameObject.FindGameObjectsWithTag("Projectile");
-        foreach (var projectile in projectiles)
-        {
-            Destroy(projectile.gameObject);
-        }
-
-        if (highScore < Score.value)
-        {
-            highScore = Score.value;
-        }
-
-        spellbook.mana += Score.value / 5;
-
-        Score.value = 0;
         ui.GameOver();
         Save();
     }
@@ -114,14 +93,61 @@ public class GameManager : MonoBehaviour
     {
         ui.PlayUi();
 
+        DestroyEnemies(false);
+        ActivateSpawnPoints();
+
+        witch.SetActive();
+        stake.Activate();
+        stake.ResetDurability();
+    }
+
+    private void DestroyProjectiles()
+    {
+        var projectiles = GameObject.FindGameObjectsWithTag("Projectile");
+        foreach (var projectile in projectiles)
+        {
+            Destroy(projectile.gameObject);
+        }
+    }
+
+    private void DeactivateSpawnPoints()
+    {
+        var spawnPoints = GameObject.FindGameObjectsWithTag("SpawnPoint");
+        foreach (var point in spawnPoints)
+        {
+            point.GetComponent<SpawnPoint>().Deactivate();
+        }
+    }
+
+    private void ActivateSpawnPoints()
+    {
         var spawnPoints = GameObject.FindGameObjectsWithTag("SpawnPoint");
         foreach (var point in spawnPoints)
         {
             point.GetComponent<SpawnPoint>().Activate();
         }
+    }
 
-        witch.SetActive();
-        stake.Activate();
-        stake.ResetDurability();
+    private void DestroyEnemies(bool exceptTorch)
+    {
+        var enemies = Physics2D.OverlapAreaAll(new Vector2(-20.0f, 10.0f), new Vector2(20.0f, -10.0f), LayerMask.GetMask("Enemies"));
+        foreach (var enemy in enemies)
+        {
+            if (enemy.tag == "Torch" && exceptTorch)
+                continue;
+
+            Destroy(enemy.gameObject);
+        }
+    }
+
+    private void ManageScore()
+    {
+        if (highScore < Score.value)
+        {
+            highScore = Score.value;
+        }
+
+        spellbook.mana += Score.value / 5;
+        Score.value = 0;
     }
 }
