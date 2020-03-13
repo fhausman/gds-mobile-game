@@ -15,17 +15,23 @@ public class Torch : MonoBehaviour
     void Start()
     {
         scorcher = new Scorcher(gameObject, GetComponent<SpriteRenderer>().material);
-        scorcher.scorchTime = 0.5f;
 
         var fire = transform.GetChild(0).gameObject;
         subScorcher = new Scorcher(fire, fire.GetComponent<SpriteRenderer>().material);
-        subScorcher.scorchTime = 0.5f;
 
         rb = GetComponent<Rigidbody2D>();
     }
 
     public void Hit()
     {
+        Schorche(0.1f);
+    }
+
+    public void Schorche(float time)
+    {
+        scorcher.scorchTime = time;
+        subScorcher.scorchTime = time;
+
         active = false;
         StartCoroutine(subScorcher.ScorchAndDestroy(false));
         StartCoroutine(scorcher.ScorchAndDestroy());
