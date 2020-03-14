@@ -22,7 +22,9 @@ public class Idle : IState
         bool isLeftSideOfScreenClicked = mousePos.x < 0;
 
         obj.arc.direction = isLeftSideOfScreenClicked ? Vector2.left : Vector2.right;
-        obj.spriteRenderer.flipX = isLeftSideOfScreenClicked;
+        //var newScale = obj.transform.localScale;
+        //newScale.y = Mathf.Abs(newScale.y) * (isLeftSideOfScreenClicked ? -1.0f : 1.0f);
+        //obj.transform.localScale = newScale;
     }
 
     public void Init()
@@ -84,16 +86,12 @@ public class Released : IState
         obj.ReleaseProjectile();
         obj.ResetArcRange();
         obj.StartCoroutine(InputDelay());
-        obj.spriteRenderer.color = Color.yellow;
 
         time = 0.0f;
     }
 
     public void Update()
     {
-        time += Time.deltaTime / obj.inputDelay;
-        var newColor = Color.Lerp(Color.yellow, Color.white, time);
-        obj.spriteRenderer.color = newColor;
     }
 
     IEnumerator InputDelay()
@@ -130,15 +128,12 @@ public class Witch : MonoBehaviour
     
     [HideInInspector]
     public ArcLine arc;
-    [HideInInspector]
-    public SpriteRenderer spriteRenderer;
 
     public StateMachine stateMachine { get; private set; } = new StateMachine();
 
     void Start()
     {
         arc = GetComponentInChildren<ArcLine>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
 
         stateMachine.AddState(InputStates.Idle, new Idle { obj = this });
         stateMachine.AddState(InputStates.Charging, new Charging { obj = this });

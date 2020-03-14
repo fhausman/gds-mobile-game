@@ -67,10 +67,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 998
-  m_Sprite: {fileID: 21300000, guid: fef6b26531334a144ada592eb51f2a3a, type: 3}
+  m_SortingLayerID: -307401397
+  m_SortingLayer: 2
+  m_SortingOrder: 4
+  m_Sprite: {fileID: 21300000, guid: c39ea07dd8e60394dbe2001f8a8a544e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -148,10 +148,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9cd5f90cacc051c4ba126ffca6632e8c, type: 3}
+  m_SortingLayerID: -307401397
+  m_SortingLayer: 2
+  m_SortingOrder: 2
+  m_Sprite: {fileID: 21300000, guid: daf24edecd6e14b42b5ff959d9ff123a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -235,8 +235,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -307401397
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -289,6 +289,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   durability: 1
   damagePerSecond: 0.5
+  active: 0
 --- !u!1 &6702422645135444758
 GameObject:
   m_ObjectHideFlags: 0
@@ -356,10 +357,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9529d37e29c9dc04fabd4d444b36d2b9, type: 3}
+  m_SortingLayerID: -307401397
+  m_SortingLayer: 2
+  m_SortingOrder: 3
+  m_Sprite: {fileID: 21300000, guid: be719b3b5a8aa5442803654afa61b48a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -446,6 +447,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SortingOrder
       value: 999
+      objectReference: {fileID: 0}
+    - target: {fileID: -7926515646705302079, guid: 1639ae03e4508cf45871561513f94309,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: -307401397
+      objectReference: {fileID: 0}
+    - target: {fileID: -7926515646705302079, guid: 1639ae03e4508cf45871561513f94309,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2151335820213750299, guid: 1639ae03e4508cf45871561513f94309,
         type: 3}
