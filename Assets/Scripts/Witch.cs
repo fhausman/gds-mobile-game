@@ -203,6 +203,12 @@ public class Witch : MonoBehaviour
 
     public void SetInactive()
     {
+        foreach(var trigger in new string[] { "Idle", "Throw", "FastThrow", "Turn", "Charge"})
+        {
+            anim.ResetTrigger(trigger);
+        }
+        anim.SetTrigger("Idle");
+
         ResetArcRange();
         stateMachine.ChangeState(InputStates.Inactive);
     }
