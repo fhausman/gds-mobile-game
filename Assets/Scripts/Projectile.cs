@@ -9,12 +9,14 @@ public class Projectile : MonoBehaviour
     private Animator anim;
     private Rigidbody2D rb;
     private CircleCollider2D coll;
+    private SpriteRenderer sr;
     private GameObject ps;
-    private void Start()
+    private void Awake()
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         coll = GetComponent<CircleCollider2D>();
+        sr = GetComponent<SpriteRenderer>();
         ps = transform.GetChild(0).gameObject;
     }
 
@@ -37,5 +39,33 @@ public class Projectile : MonoBehaviour
             obj.SendMessage("Hit");
         }
 
+    }
+
+    public void SetFlip(bool flip)
+    {
+        sr.flipX = flip;
+    }
+
+    public void Turn()
+    {
+        sr.flipX = !sr.flipX;
+        anim.SetTrigger("Turn");
+    }
+
+    public void SetIdle()
+    {
+        ps.SetActive(false);
+        anim.SetTrigger("Idle");
+    }
+
+    public void SetCharge()
+    {
+        anim.SetTrigger("Charge");
+    }
+
+    public void Throw(float range)
+    {
+        ps.SetActive(true);
+        anim.SetTrigger(range > 3.0f ? "Throw" : "FastThrow");
     }
 }

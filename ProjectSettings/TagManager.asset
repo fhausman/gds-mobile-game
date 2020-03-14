@@ -51,3 +51,6 @@ TagManager:
   - name: Enemies
     uniqueID: 2421798559
     locked: 0
+  - name: Stake
+    uniqueID: 3987565899
+    locked: 0
