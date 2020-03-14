@@ -205,6 +205,8 @@ public class Witch : MonoBehaviour
 
     public void SetInactive()
     {
+        StopAllCoroutines();
+
         ResetArcRange();
         stateMachine.ChangeState(InputStates.Inactive);
     }
