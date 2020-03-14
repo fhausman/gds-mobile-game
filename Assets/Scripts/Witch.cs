@@ -26,6 +26,7 @@ public class Idle : IState
         {
             obj.spriteRenderer.flipX = isLeftSideOfScreenClicked;
             obj.anim.SetTrigger("Turn");
+            obj.projectileInstance.Turn();
             obj.turn = true;
         }
         //var newScale = obj.transform.localScale;
@@ -62,9 +63,11 @@ public class Charging : IState
 
     public void Init()
     {
-        obj.InstatiateProjectile();
-        if(!obj.turn)
+        if (!obj.turn)
+        {
             obj.anim.SetTrigger("Charge");
+            obj.projectileInstance.SetCharge();
+        }
     }
 
     public void Update()
@@ -92,6 +95,7 @@ public class Released : IState
     {
         obj.ReleaseProjectile();
         obj.ResetArcRange();
+        obj.projectileInstance.Throw();
         obj.anim.SetTrigger("Throw");
         obj.StartCoroutine(InputDelay());
     }
@@ -108,6 +112,13 @@ public class Released : IState
         }
 
         while (obj.anim.GetCurrentAnimatorStateInfo(0).IsName("Throw"))
+        {
+            yield return null;
+        }
+
+        obj.InstatiateProjectile();
+
+        while(obj.anim.GetCurrentAnimatorStateInfo(0).IsTag("Unresponsive"))
         {
             yield return null;
         }
@@ -140,10 +151,11 @@ public class Witch : MonoBehaviour
     public float inputDelay = 0.25f;
     public Animator anim;
     public SpriteRenderer spriteRenderer;
-    private GameObject projectileInstance;
     
     [HideInInspector]
     public ArcLine arc;
+    [HideInInspector]
+    public Projectile projectileInstance;
     [HideInInspector]
     public bool turn = false;
 
@@ -167,15 +179,20 @@ public class Witch : MonoBehaviour
 
     public void InstatiateProjectile()
     {
-        projectileInstance = Instantiate(projectile);
+        projectileInstance = Instantiate(projectile).GetComponent<Projectile>();
         projectileInstance.transform.position = arc.transform.position;
         projectileInstance.GetComponent<Rigidbody2D>().isKinematic = true;
+        projectileInstance.SetIdle();
+        projectileInstance.SetFlip(spriteRenderer.flipX);
     }
 
     public void ReleaseProjectile()
     {
-        projectileInstance.GetComponent<Rigidbody2D>().isKinematic = false;
-        projectileInstance.GetComponent<Rigidbody2D>().AddForce(arc.direction * Arc.CalcLaunchSpeed(arc.range, transform.position.y + 5.0f, Physics2D.gravity.magnitude, 0), ForceMode2D.Impulse);
+        if (projectileInstance)
+        {
+            projectileInstance.GetComponent<Rigidbody2D>().isKinematic = false;
+            projectileInstance.GetComponent<Rigidbody2D>().AddForce(arc.direction * Arc.CalcLaunchSpeed(arc.range, transform.position.y + 5.0f, Physics2D.gravity.magnitude, 0), ForceMode2D.Impulse);
+        }
     }
 
     public void ResetArcRange()
@@ -191,6 +208,7 @@ public class Witch : MonoBehaviour
 
     public void SetActive()
     {
+        InstatiateProjectile();
         stateMachine.ChangeState(InputStates.Idle);
     }
 
