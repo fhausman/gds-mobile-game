@@ -29,9 +29,6 @@ public class Idle : IState
             obj.projectileInstance.Turn();
             obj.turn = true;
         }
-        //var newScale = obj.transform.localScale;
-        //newScale.y = Mathf.Abs(newScale.y) * (isLeftSideOfScreenClicked ? -1.0f : 1.0f);
-        //obj.transform.localScale = newScale;
     }
 
     public void Init()
@@ -58,7 +55,6 @@ public class Charging : IState
 
     public void Exit()
     {
-        obj.turn = false;
     }
 
     public void Init()
@@ -68,6 +64,7 @@ public class Charging : IState
             obj.anim.SetTrigger("Charge");
             obj.projectileInstance.SetCharge();
         }
+        obj.turn = false;
     }
 
     public void Update()
@@ -138,6 +135,11 @@ public class Inactive : IState
 
     public void Init()
     {
+        foreach (var trigger in new string[] { "Idle", "Throw", "FastThrow", "Turn", "Charge" })
+        {
+            obj.anim.ResetTrigger(trigger);
+        }
+
     }
 
     public void Update()
@@ -203,18 +205,14 @@ public class Witch : MonoBehaviour
 
     public void SetInactive()
     {
-        foreach(var trigger in new string[] { "Idle", "Throw", "FastThrow", "Turn", "Charge"})
-        {
-            anim.ResetTrigger(trigger);
-        }
-        anim.SetTrigger("Idle");
-
         ResetArcRange();
         stateMachine.ChangeState(InputStates.Inactive);
     }
 
     public void SetActive()
     {
+        anim.Play("Idle");
+
         InstatiateProjectile();
         stateMachine.ChangeState(InputStates.Idle);
     }
