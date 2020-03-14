@@ -63,9 +63,9 @@ public class Projectile : MonoBehaviour
         anim.SetTrigger("Charge");
     }
 
-    public void Throw()
+    public void Throw(float range)
     {
         ps.SetActive(true);
-        anim.SetTrigger("Throw");
+        anim.SetTrigger(range > 3.0f ? "Throw" : "FastThrow");
     }
 }

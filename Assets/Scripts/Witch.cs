@@ -93,10 +93,11 @@ public class Released : IState
 
     public void Init()
     {
+        obj.projectileInstance.Throw(obj.arc.range);
+        obj.anim.SetTrigger(obj.arc.range > 3.0f ? "Throw" : "FastThrow");
+
         obj.ReleaseProjectile();
         obj.ResetArcRange();
-        obj.projectileInstance.Throw();
-        obj.anim.SetTrigger("Throw");
         obj.StartCoroutine(InputDelay());
     }
 
@@ -106,12 +107,12 @@ public class Released : IState
 
     IEnumerator InputDelay()
     {
-        while (!obj.anim.GetCurrentAnimatorStateInfo(0).IsName("Throw"))
+        while (!obj.anim.GetCurrentAnimatorStateInfo(0).IsTag("Throw"))
         {
             yield return null;
         }
 
-        while (obj.anim.GetCurrentAnimatorStateInfo(0).IsName("Throw"))
+        while (obj.anim.GetCurrentAnimatorStateInfo(0).IsTag("Throw"))
         {
             yield return null;
         }
