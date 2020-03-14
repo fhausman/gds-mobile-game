@@ -22,6 +22,12 @@ public class Idle : IState
         bool isLeftSideOfScreenClicked = mousePos.x < 0;
 
         obj.arc.direction = isLeftSideOfScreenClicked ? Vector2.left : Vector2.right;
+        if (isLeftSideOfScreenClicked != obj.spriteRenderer.flipX)
+        {
+            obj.spriteRenderer.flipX = isLeftSideOfScreenClicked;
+            obj.anim.SetTrigger("Turn");
+            obj.turn = true;
+        }
         //var newScale = obj.transform.localScale;
         //newScale.y = Mathf.Abs(newScale.y) * (isLeftSideOfScreenClicked ? -1.0f : 1.0f);
         //obj.transform.localScale = newScale;
@@ -51,11 +57,14 @@ public class Charging : IState
 
     public void Exit()
     {
+        obj.turn = false;
     }
 
     public void Init()
     {
         obj.InstatiateProjectile();
+        if(!obj.turn)
+            obj.anim.SetTrigger("Charge");
     }
 
     public void Update()
@@ -75,8 +84,6 @@ public class Released : IState
 {
     public Witch obj;
 
-    private float time = 0.0f;
-
     public void Exit()
     {
     }
@@ -85,9 +92,8 @@ public class Released : IState
     {
         obj.ReleaseProjectile();
         obj.ResetArcRange();
+        obj.anim.SetTrigger("Throw");
         obj.StartCoroutine(InputDelay());
-
-        time = 0.0f;
     }
 
     public void Update()
@@ -96,7 +102,15 @@ public class Released : IState
 
     IEnumerator InputDelay()
     {
-        yield return new WaitForSeconds(obj.inputDelay);
+        while (!obj.anim.GetCurrentAnimatorStateInfo(0).IsName("Throw"))
+        {
+            yield return null;
+        }
+
+        while (obj.anim.GetCurrentAnimatorStateInfo(0).IsName("Throw"))
+        {
+            yield return null;
+        }
 
         obj.stateMachine.ChangeState(InputStates.Idle);
     }
@@ -124,10 +138,14 @@ public class Witch : MonoBehaviour
     public GameObject projectile;
     public float chargeSpeed = 10.0f;
     public float inputDelay = 0.25f;
+    public Animator anim;
+    public SpriteRenderer spriteRenderer;
     private GameObject projectileInstance;
     
     [HideInInspector]
     public ArcLine arc;
+    [HideInInspector]
+    public bool turn = false;
 
     public StateMachine stateMachine { get; private set; } = new StateMachine();
 
