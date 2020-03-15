@@ -8,7 +8,8 @@ public static class PriestStates
         Walking = 0,
         Buffing = 1,
         Dead = 2,
-        Idle = 3;
+        Idle = 3,
+        DeadByLightning = 4;
 }
 
 public class PriestWalking : IState
@@ -73,6 +74,27 @@ public class PriestDead : IState
     }
 }
 
+public class PriestDeadByLightning : IState
+{
+    public Priest priest;
+
+    public void Exit()
+    {
+    }
+
+    public void Init()
+    {
+        priest.Disable();
+        priest.anim.Play("DeadByLightning");
+    }
+
+    public void Update()
+    {
+        if (!priest.anim.GetCurrentAnimatorStateInfo(0).IsName("DeadByLightning"))
+            priest.Destroy();
+    }
+}
+
 public class PriestIdle : IState
 {
     public Priest priest;
@@ -96,6 +118,7 @@ public class Priest : MonoBehaviour
     public Vector2 direction;
     public Vector2 target;
     public float speed;
+    public int score = 50;
     private bool isCurrentlyBuffing { get => anim.GetCurrentAnimatorStateInfo(0).IsName("Cast_1"); }
 
     public StateMachine stateMachine { get; } = new StateMachine();
@@ -128,8 +151,14 @@ public class Priest : MonoBehaviour
         if (stateMachine.currentStateId == PriestStates.Dead)
             return;
 
-        Score.value += 50;
+        Score.value += score;
         stateMachine.ChangeState(PriestStates.Dead);
+    }
+
+    public void DeadByLightning()
+    {
+        Score.value += score;
+        stateMachine.ChangeState(PriestStates.DeadByLightning);
     }
 
     public void SetIdle()
@@ -176,6 +205,7 @@ public class Priest : MonoBehaviour
         stateMachine.AddState(PriestStates.Buffing, new PriestBuffing { priest = this });
         stateMachine.AddState(PriestStates.Dead, new PriestDead { priest = this });
         stateMachine.AddState(PriestStates.Idle, new PriestIdle { priest = this });
+        stateMachine.AddState(PriestStates.DeadByLightning, new PriestDeadByLightning { priest = this });
         stateMachine.ChangeState(PriestStates.Walking);
     }
 

@@ -241,6 +241,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stake: {fileID: 1807828477}
+  lightning: {fileID: 6506551938280340838, guid: 554896d5a75a4e341b2f9a004af68c17,
+    type: 3}
   lilithsBlessing:
     basePrice: 1000
     multiplier: 3

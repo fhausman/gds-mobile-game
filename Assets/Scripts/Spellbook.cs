@@ -27,6 +27,7 @@ public class Spellbook : MonoBehaviour
     }
 
     public Stake stake;
+    public GameObject lightning;
     public SpellData lilithsBlessing = new SpellData();
     public SpellData praiseSatan = new SpellData();
     public SpellData unholyChant = new SpellData();
@@ -161,8 +162,22 @@ public class Spellbook : MonoBehaviour
     IEnumerator KillPriest()
     {
         var priest = GameObject.FindGameObjectWithTag("Priest");
-        yield return null;
-        priest.SendMessage("SetDead");
+        var lightningInstance = Instantiate(lightning);
+
+        if (priest != null)
+        {
+            var newPos = lightningInstance.transform.position;
+            newPos.x = priest.transform.position.x;
+            lightningInstance.transform.position = newPos;
+
+            yield return null;
+
+            priest.SendMessage("DeadByLightning");
+        }
+
+        yield return new WaitForSeconds(0.95f);
+
+        Destroy(lightningInstance);
     }
 
     public void FightFireWithFire()
