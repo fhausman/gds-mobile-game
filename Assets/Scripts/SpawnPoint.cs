@@ -101,6 +101,8 @@ public class SpawnPoint : MonoBehaviour
         }
 
         spawnPriest = true;
+        startIncreasingSpeed = true;
+        scoreWhenAllTypesOfEnemiesSpawned = Score.value;
     }
 
     private IEnumerator SlybootSpawnDelay()
@@ -114,8 +116,6 @@ public class SpawnPoint : MonoBehaviour
         }
 
         spawnSlyboot = true;
-        startIncreasingSpeed = true;
-        scoreWhenAllTypesOfEnemiesSpawned = Score.value;
     }
 
     private IEnumerator SpawnBasicMob()

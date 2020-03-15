@@ -3017,12 +3017,12 @@ PrefabInstance:
     - target: {fileID: 6047976500201208523, guid: 8c8a61cbc3ec7894785326bfb2b10b2c,
         type: 3}
       propertyPath: basicMobSpawnRate
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6047976500201208523, guid: 8c8a61cbc3ec7894785326bfb2b10b2c,
         type: 3}
       propertyPath: basicMobSpawnDelay
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6047976500201208523, guid: 8c8a61cbc3ec7894785326bfb2b10b2c,
         type: 3}
@@ -3032,17 +3032,22 @@ PrefabInstance:
     - target: {fileID: 6047976500201208523, guid: 8c8a61cbc3ec7894785326bfb2b10b2c,
         type: 3}
       propertyPath: priestSpawnDelay
-      value: 30
+      value: 68
       objectReference: {fileID: 0}
     - target: {fileID: 6047976500201208523, guid: 8c8a61cbc3ec7894785326bfb2b10b2c,
         type: 3}
       propertyPath: slybootSpawnDelay
-      value: 40
+      value: 48
       objectReference: {fileID: 0}
     - target: {fileID: 6047976500201208523, guid: 8c8a61cbc3ec7894785326bfb2b10b2c,
         type: 3}
       propertyPath: slybootSpawnRate
-      value: 10
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6047976500201208523, guid: 8c8a61cbc3ec7894785326bfb2b10b2c,
+        type: 3}
+      propertyPath: strongMobSpawnRate
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6568928539405662978, guid: 8c8a61cbc3ec7894785326bfb2b10b2c,
         type: 3}
@@ -9212,7 +9217,7 @@ PrefabInstance:
     - target: {fileID: 6047976500201208523, guid: 8c8a61cbc3ec7894785326bfb2b10b2c,
         type: 3}
       propertyPath: basicMobSpawnRate
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6047976500201208523, guid: 8c8a61cbc3ec7894785326bfb2b10b2c,
         type: 3}
@@ -9222,7 +9227,7 @@ PrefabInstance:
     - target: {fileID: 6047976500201208523, guid: 8c8a61cbc3ec7894785326bfb2b10b2c,
         type: 3}
       propertyPath: priestSpawnDelay
-      value: 35
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 6047976500201208523, guid: 8c8a61cbc3ec7894785326bfb2b10b2c,
         type: 3}
@@ -9232,7 +9237,12 @@ PrefabInstance:
     - target: {fileID: 6047976500201208523, guid: 8c8a61cbc3ec7894785326bfb2b10b2c,
         type: 3}
       propertyPath: slybootSpawnRate
-      value: 10
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6047976500201208523, guid: 8c8a61cbc3ec7894785326bfb2b10b2c,
+        type: 3}
+      propertyPath: strongMobSpawnRate
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6568928539405662978, guid: 8c8a61cbc3ec7894785326bfb2b10b2c,
         type: 3}
