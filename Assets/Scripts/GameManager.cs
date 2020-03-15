@@ -5,10 +5,13 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static bool acceptsPlayerInput = true;
+
     public Witch witch;
     public Stake stake;
     public Spellbook spellbook;
     public UIManager ui;
+    public Tutorial tut;
     public bool tutorialEnabled = true;
 
     private int highScore = 0;
@@ -24,7 +27,7 @@ public class GameManager : MonoBehaviour
         public List<bool> activeSpells = new List<bool>();
     }
 
-    void Save()
+    public void Save()
     {
         var formatter = new BinaryFormatter();
         var file = new FileStream(saveFilePath, FileMode.Create);
@@ -44,7 +47,7 @@ public class GameManager : MonoBehaviour
         file.Close();
     }
 
-    void Load()
+    public void Load()
     {
         SaveData saveData;
         if(File.Exists(saveFilePath))
@@ -60,6 +63,7 @@ public class GameManager : MonoBehaviour
         }
 
         tutorialEnabled = saveData.tutorialEnabled;
+        Debug.Log(tutorialEnabled);
         highScore = saveData.highScore;
         spellbook.mana = saveData.mana;
         for(int i = 0; i < saveData.buyCounts.Count; i++)
@@ -73,6 +77,7 @@ public class GameManager : MonoBehaviour
     {
         stake.onGameOver += GameOver;
         Load();
+        Debug.Log(tutorialEnabled);
     }
 
     public void GameOver()
@@ -91,14 +96,25 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
+        DestroyProjectiles();
         ui.PlayUi();
 
-        DestroyEnemies(false);
-        ActivateSpawnPoints();
+        Debug.Log(tutorialEnabled);
+        if (!tutorialEnabled)
+        {
+            DestroyEnemies(false);
+            ActivateSpawnPoints();
 
-        witch.SetActive();
-        stake.Activate();
-        stake.ResetDurability();
+            witch.SetActive();
+            stake.Activate();
+            stake.ResetDurability();
+
+            acceptsPlayerInput = true;
+        }
+        else
+        {
+            tut.gameObject.SetActive(true);
+        }
     }
 
     private void DestroyProjectiles()

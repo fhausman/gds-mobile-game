@@ -24,9 +24,7 @@ public class Idle : IState
         obj.arc.direction = isLeftSideOfScreenClicked ? Vector2.left : Vector2.right;
         if (isLeftSideOfScreenClicked != obj.spriteRenderer.flipX)
         {
-            obj.spriteRenderer.flipX = isLeftSideOfScreenClicked;
-            obj.anim.SetTrigger("Turn");
-            obj.projectileInstance.Turn();
+            obj.Turn();
             obj.turn = true;
         }
     }
@@ -37,7 +35,10 @@ public class Idle : IState
 
     public void Update()
     {
-        if (Input.GetMouseButton(0))// && Input.touchCount == 1)
+        if (obj.projectileInstance.anim.GetCurrentAnimatorStateInfo(0).IsName("Charging_new"))
+            return;
+
+        if (GameManager.acceptsPlayerInput && Input.GetMouseButton(0))// && Input.touchCount == 1)
         {
             if(EventSystem.current.IsPointerOverGameObject(/*Input.GetTouch(0).fingerId*/))
             {
@@ -217,6 +218,13 @@ public class Witch : MonoBehaviour
 
         InstatiateProjectile();
         stateMachine.ChangeState(InputStates.Idle);
+    }
+
+    public void Turn()
+    {
+        spriteRenderer.flipX = !spriteRenderer.flipX;
+        anim.SetTrigger("Turn");
+        projectileInstance.Turn();
     }
 
     private IEnumerator InputDelay()
