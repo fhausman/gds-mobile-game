@@ -37,6 +37,9 @@ public class Idle : IState
 
     public void Update()
     {
+        if (obj.projectileInstance.anim.GetCurrentAnimatorStateInfo(0).IsName("Charging_new"))
+            return;
+
         if (Input.GetMouseButton(0))// && Input.touchCount == 1)
         {
             if(EventSystem.current.IsPointerOverGameObject(/*Input.GetTouch(0).fingerId*/))

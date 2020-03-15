@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public Stake stake;
     public Spellbook spellbook;
     public UIManager ui;
+    public Tutorial tut;
     public bool tutorialEnabled = true;
 
     private int highScore = 0;
@@ -93,12 +94,19 @@ public class GameManager : MonoBehaviour
     {
         ui.PlayUi();
 
-        DestroyEnemies(false);
-        ActivateSpawnPoints();
+        if (!tutorialEnabled)
+        {
+            DestroyEnemies(false);
+            ActivateSpawnPoints();
 
-        witch.SetActive();
-        stake.Activate();
-        stake.ResetDurability();
+            witch.SetActive();
+            stake.Activate();
+            stake.ResetDurability();
+        }
+        else
+        {
+            tut.gameObject.SetActive(true);
+        }
     }
 
     private void DestroyProjectiles()

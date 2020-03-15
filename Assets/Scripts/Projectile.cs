@@ -6,7 +6,7 @@ public class Projectile : MonoBehaviour
 {
     public bool shouldDestroy = false;
 
-    private Animator anim;
+    public Animator anim { get; private set; }
     private Rigidbody2D rb;
     private CircleCollider2D coll;
     private SpriteRenderer sr;
@@ -38,7 +38,6 @@ public class Projectile : MonoBehaviour
         {
             obj.SendMessage("Hit");
         }
-
     }
 
     public void SetFlip(bool flip)
