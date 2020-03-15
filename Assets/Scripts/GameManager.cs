@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static bool acceptsPlayerInput = true;
+
     public Witch witch;
     public Stake stake;
     public Spellbook spellbook;

@@ -112,6 +112,51 @@ public class StrongPeasantTutorialState : IState
     }
 }
 
+public class PriestTutorialState : IState
+{
+    const string message =
+        "Priest is not holding torch, but he is giving speed to peasants that are going past him.";
+
+    public Tutorial tut;
+    private bool checkState = false;
+
+    public void Exit()
+    {
+    }
+
+    public void Init()
+    {
+        GameManager.acceptsPlayerInput = false;
+        tut.uiManager.SetTutorialText(message);
+        tut.StartCoroutine(SpawnEnemies());
+    }
+
+    public void Update()
+    {
+        if (!checkState)
+            return;
+
+        var enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        var priest = GameObject.FindGameObjectsWithTag("Priest");
+        if (enemies.Length == 0 && priest.Length == 0)
+            tut.states.ChangeState(5);
+    }
+    
+    private IEnumerator SpawnEnemies()
+    {
+        tut.spawnPointLeft.SpawnPriest();
+
+        yield return new WaitForSeconds(2.0f);
+
+        checkState = true;
+        tut.spawnPointLeft.SpawnMob(SpawnPoint.Enemies.BasicMob);
+
+        yield return new WaitForSeconds(1.0f);
+
+        GameManager.acceptsPlayerInput = true;
+    }
+}
+
 public class Tutorial : MonoBehaviour
 {
     public UIManager uiManager;
@@ -153,6 +198,7 @@ public class Tutorial : MonoBehaviour
         states.AddState(1, new WaitForProjectileToExplode { tut = this });
         states.AddState(2, new FirstPeasantTutorialState { tut = this });
         states.AddState(3, new StrongPeasantTutorialState { tut = this });
+        states.AddState(4, new PriestTutorialState { tut = this });
         states.ChangeState(0);
     }
 

@@ -136,16 +136,11 @@ public class SpawnPoint : MonoBehaviour
 
         spawnStrongMob = true;
     }
-    private IEnumerator SpawnSlyboot()
+    private IEnumerator SpawnSlybootInternal()
     {
         spawnSlyboot = false;
 
-        slybootInstance = Instantiate(enemies[Enemies.Slyboot]);
-        SetTransform(slybootInstance.transform);
-
-        var slybootComp = slybootInstance.GetComponent<Slyboot>();
-        slybootComp.direction = spawnDir;
-        slybootComp.speed = 1.0f + scoreSpeedMultiplier*additionalSpeed;
+        SpawnSlyboot();
 
         while (slybootInstance != null)
         {
@@ -153,6 +148,16 @@ public class SpawnPoint : MonoBehaviour
         }
 
         StartCoroutine("SlybootSpawnDelay");
+    }
+
+    public void SpawnSlyboot()
+    {
+        slybootInstance = Instantiate(enemies[Enemies.Slyboot]);
+        SetTransform(slybootInstance.transform);
+
+        var slybootComp = slybootInstance.GetComponent<Slyboot>();
+        slybootComp.direction = spawnDir;
+        slybootComp.speed = 1.0f + scoreSpeedMultiplier * additionalSpeed;
     }
 
     public void SpawnMob(int mobType)
@@ -164,17 +169,11 @@ public class SpawnPoint : MonoBehaviour
         enemy.GetComponent<Mob>().speed += scoreSpeedMultiplier * additionalSpeed;
     }
 
-    private IEnumerator SpawnPriest()
+    private IEnumerator SpawnPriestInternal()
     {
         spawnPriest = false;
 
-        priestInstance = Instantiate(enemies[Enemies.Priest]);
-        SetTransform(priestInstance.transform);
-
-        var priestComp = priestInstance.GetComponent<Priest>();
-        priestComp.direction = spawnDir;
-        priestComp.target = priestTarget.position;
-        priestComp.speed = 1.0f + scoreSpeedMultiplier * additionalSpeed;
+        SpawnPriest();
 
         while (priestInstance != null)
         {
@@ -182,6 +181,17 @@ public class SpawnPoint : MonoBehaviour
         }
 
         StartCoroutine("PriestSpawnDelay");
+    }
+
+    public void SpawnPriest()
+    {
+        priestInstance = Instantiate(enemies[Enemies.Priest]);
+        SetTransform(priestInstance.transform);
+
+        var priestComp = priestInstance.GetComponent<Priest>();
+        priestComp.direction = spawnDir;
+        priestComp.target = priestTarget.position;
+        priestComp.speed = 1.0f + scoreSpeedMultiplier * additionalSpeed;
     }
 
     void Start()
@@ -206,12 +216,12 @@ public class SpawnPoint : MonoBehaviour
 
         if (spawnPriest)
         {
-            StartCoroutine("SpawnPriest");
+            StartCoroutine("SpawnPriestInternal");
         }
 
         if (spawnSlyboot)
         {
-            StartCoroutine("SpawnSlyboot");
+            StartCoroutine("SpawnSlybootInternal");
         }
     }
 }
