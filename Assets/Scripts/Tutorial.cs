@@ -19,6 +19,7 @@ public class InitialTutorialState : IState
         tut.uiManager.ShowTutorial();
         tut.uiManager.SetTutorialText(message);
         tut.witch.SetInactive();
+        tut.stake.Deactivate();
         tut.spawnPointLeft.Deactivate();
         tut.spawnPointRight.Deactivate();
     }
@@ -62,7 +63,7 @@ public class WaitForProjectileToExplode : IState
 public class FirstPeasantTutorialState : IState
 {
     const string message =
-        "Hit the peasant before he reaches stack.";
+        "Hit the peasant before he reaches the stake.\nFor sake of tutorial you're immune now";
 
     public Tutorial tut;
 
@@ -157,39 +158,137 @@ public class PriestTutorialState : IState
     }
 }
 
+public class SlybootTutorialState : IState
+{
+    const string message =
+        "Spinster is not coming close to stake, but she is throwing torches. If her torch hits the stake it will receive single amount of damage.";
+
+    public Tutorial tut;
+    private bool checkState = false;
+
+    public void Exit()
+    {
+    }
+
+    public void Init()
+    {
+        GameManager.acceptsPlayerInput = false;
+        tut.uiManager.SetTutorialText(message);
+        tut.StartCoroutine(SpawnEnemies());
+    }
+
+    public void Update()
+    {
+        if (!checkState)
+            return;
+
+        var enemies = GameObject.FindGameObjectsWithTag("Slyboot");
+        if (enemies.Length == 0)
+            tut.states.ChangeState(6);
+    }
+
+    private IEnumerator SpawnEnemies()
+    {
+        tut.spawnPointRight.SpawnSlyboot();
+
+        yield return new WaitForSeconds(5.0f);
+
+        checkState = true;
+
+        GameManager.acceptsPlayerInput = true;
+    }
+}
+
+public class SpellbookInformationTutorialState : IState
+{
+    const string message =
+        "After each battle you'll receive some mana, you can spend it for powerful spells. Look for them in main menu after you die.";
+
+    public Tutorial tut;
+    private bool checkState = false;
+
+    public void Exit()
+    {
+    }
+
+    public void Init()
+    {
+        GameManager.acceptsPlayerInput = false;
+        tut.uiManager.SetTutorialText(message);
+        tut.StartCoroutine(Delay());
+    }
+
+    public void Update()
+    {
+        if (!checkState)
+            return;
+
+        if(Input.GetMouseButtonDown(0))
+        {
+            tut.states.ChangeState(7);
+        }
+    }
+
+    private IEnumerator Delay()
+    {
+        yield return new WaitForSeconds(1.0f);
+
+        checkState = true;
+    }
+}
+
+public class FinalTutorialState : IState
+{
+    const string message =
+        "Congratulations!\nYou're now ready to fight the mob!\nTouch the screen when you're ready for battle...";
+
+    public Tutorial tut;
+    private bool checkState = false;
+
+    public void Exit()
+    {
+    }
+
+    public void Init()
+    {
+        GameManager.acceptsPlayerInput = false;
+        tut.uiManager.SetTutorialText(message);
+        tut.StartCoroutine(Delay());
+    }
+
+    public void Update()
+    {
+        if (!checkState)
+            return;
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            tut.gameManager.tutorialEnabled = false;
+            tut.gameManager.Save();
+            tut.gameManager.RestartGame();
+            tut.gameObject.SetActive(false);
+        }
+    }
+
+    private IEnumerator Delay()
+    {
+        yield return new WaitForSeconds(1.0f);
+
+        checkState = true;
+    }
+}
+
+
 public class Tutorial : MonoBehaviour
 {
+    public GameManager gameManager;
     public UIManager uiManager;
     public SpawnPoint spawnPointLeft;
     public SpawnPoint spawnPointRight;
     public Witch witch;
+    public Stake stake;
 
     public StateMachine states { get; private set; } = new StateMachine();
-
-    //chwila na widok planszy
-
-    //Kiedy gra się odpala na początku widać tylko stos, bez tłuszczy.Następuje freeze i napis
-    //To shoot spark touch screen either on left or right. Longer holding will change parabola of the spark. 
-
-    //Ponownie, dopóki gracz nie zrobi tego co zostało napisane tutorial nie idzie dalej.Pojawia się pierwszy basic wieśniak. Znowu freeze- pojawia się napis,
-    //Hit the peasant before he reaches stack.
-
-    //że trzeba zabić wieśniaka zanim podejdzie z pochodnią do stosu.Freeze znika, wieśniak idzie do stosu.Kiedy gracz go zestrzeli pojawia się gruby wieśniak z drugiej strony.Pojawia się napis,
-    //Bigger peasant is more resistant. You need to hit him twice. 
-
-
-    //Kończy się freeze, wieśniak zaczyna iść.Kiedy gracz zastrzeli wieśniaka pojawia się ksiądz i basic wieśniak. Gra zatrzymuje się.
-    //Priest is not holding torch, but he is giving speed to peasants that are going past him.
-
-    //Gra rusza, wieśniak idzie, mija księdza i przyspiesza. Po zastrzeleniu ich pojawia się BABA. Gra freezuje. 
-    //Spinster is not coming close to stack, but she is throwing torches. If her torch hits the stack you need to hit it before it will ignite the stack.
-
-    //Po zestrzeleniu baby, graczowi odblokowuje się zaklęcie PRAISE SATAN
-    //After dying you can prepare spell in spell book for mana you have collected during game, that you can use in next game. Right now you have prepared spell PRAISE SATAN that is destroying all enemies on stage.
-
-    //Rusza tłum z prawej i z lewej.Gracz musi wcisnąć zaklęcie. Kiedy gracz je kliknie, wszyscy giną. 
-
-    //Now you are prepared to face angry mob! Good luck!
 
     void Start()
     {
@@ -199,6 +298,9 @@ public class Tutorial : MonoBehaviour
         states.AddState(2, new FirstPeasantTutorialState { tut = this });
         states.AddState(3, new StrongPeasantTutorialState { tut = this });
         states.AddState(4, new PriestTutorialState { tut = this });
+        states.AddState(5, new SlybootTutorialState { tut = this });
+        states.AddState(6, new SpellbookInformationTutorialState { tut = this });
+        states.AddState(7, new FinalTutorialState { tut = this });
         states.ChangeState(0);
     }
 

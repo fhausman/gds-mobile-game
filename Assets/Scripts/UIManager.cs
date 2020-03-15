@@ -30,7 +30,9 @@ public class UIManager : MonoBehaviour
         audioListener = GameObject.Find("Main Camera").GetComponent<AudioListener>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
-        mainMenu.transform.Find("Tutorial").GetComponent<Toggle>().isOn = gameManager.tutorialEnabled;
+        var tutorialToggle = mainMenu.transform.Find("Tutorial").GetComponent<Toggle>();
+        tutorialToggle.isOn = gameManager.tutorialEnabled;
+        gameManager.tutorialEnabled = tutorialToggle.isOn; //workaround
     }
 
     public void DisableAllChildren()
@@ -44,7 +46,6 @@ public class UIManager : MonoBehaviour
     public void Play()
     {
         gameManager.RestartGame();
-        PlayUi();
     }
 
     public void PlayUi()
@@ -97,6 +98,7 @@ public class UIManager : MonoBehaviour
 
     public void OnTutorialToggleChange(bool val)
     {
+        Debug.Log("hrhrhr");
         gameManager.tutorialEnabled = !gameManager.tutorialEnabled;
     }
 }

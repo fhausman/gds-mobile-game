@@ -24,9 +24,7 @@ public class Idle : IState
         obj.arc.direction = isLeftSideOfScreenClicked ? Vector2.left : Vector2.right;
         if (isLeftSideOfScreenClicked != obj.spriteRenderer.flipX)
         {
-            obj.spriteRenderer.flipX = isLeftSideOfScreenClicked;
-            obj.anim.SetTrigger("Turn");
-            obj.projectileInstance.Turn();
+            obj.Turn();
             obj.turn = true;
         }
     }
@@ -220,6 +218,13 @@ public class Witch : MonoBehaviour
 
         InstatiateProjectile();
         stateMachine.ChangeState(InputStates.Idle);
+    }
+
+    public void Turn()
+    {
+        spriteRenderer.flipX = !spriteRenderer.flipX;
+        anim.SetTrigger("Turn");
+        projectileInstance.Turn();
     }
 
     private IEnumerator InputDelay()
