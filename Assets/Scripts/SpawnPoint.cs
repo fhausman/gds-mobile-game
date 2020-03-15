@@ -155,7 +155,7 @@ public class SpawnPoint : MonoBehaviour
         StartCoroutine("SlybootSpawnDelay");
     }
 
-    private void SpawnMob(int mobType)
+    public void SpawnMob(int mobType)
     {
         var enemy = Instantiate(enemies[mobType]);
         SetTransform(enemy.transform, mobType == Enemies.BasicMob);

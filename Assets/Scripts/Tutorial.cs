@@ -48,12 +48,14 @@ public class WaitForProjectileToExplode : IState
 
     public void Update()
     {
-        var proj = GameObject.FindGameObjectsWithTag("Projectile");
-        if(proj.Length == 0)
+        var projs = GameObject.FindGameObjectsWithTag("Projectile");
+        foreach(var proj in projs)
         {
-            tut.states.ChangeState(2);
+            if(proj.GetComponent<Projectile>().anim.GetCurrentAnimatorStateInfo(0).IsName("End"))
+            {
+                tut.states.ChangeState(2);
+            }
         }
-
     }
 }
 
@@ -72,16 +74,41 @@ public class FirstPeasantTutorialState : IState
     public void Init()
     {
         tut.uiManager.SetTutorialText(message);
-        tut.witch.SetInactive();
+        tut.spawnPointLeft.SpawnMob(SpawnPoint.Enemies.BasicMob);
     }
 
     public void Update()
     {
-        if (Input.GetMouseButton(0))
-        {
-            tut.witch.SetActive();
-            tut.states.ChangeState(1);
-        }
+        var enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        if (enemies.Length == 0)
+            tut.states.ChangeState(3);
+
+    }
+}
+
+public class StrongPeasantTutorialState : IState
+{
+    const string message =
+        "Bigger peasant is more resistant. You need to hit him twice.";
+
+    public Tutorial tut;
+
+
+    public void Exit()
+    {
+    }
+
+    public void Init()
+    {
+        tut.uiManager.SetTutorialText(message);
+        tut.spawnPointRight.SpawnMob(SpawnPoint.Enemies.StrongMob);
+    }
+
+    public void Update()
+    {
+        var enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        if (enemies.Length == 0)
+            tut.states.ChangeState(4);
     }
 }
 
@@ -125,6 +152,7 @@ public class Tutorial : MonoBehaviour
         states.AddState(0, new InitialTutorialState { tut = this });
         states.AddState(1, new WaitForProjectileToExplode { tut = this });
         states.AddState(2, new FirstPeasantTutorialState { tut = this });
+        states.AddState(3, new StrongPeasantTutorialState { tut = this });
         states.ChangeState(0);
     }
 
