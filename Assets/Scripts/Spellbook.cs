@@ -132,17 +132,30 @@ public class Spellbook : MonoBehaviour
     {
         Debug.Log("Cast PS!!!");
         StartCoroutine(KillAllEnemiesInRange());
-        //praiseSatan.castButton.interactable = false;
-        //praiseSatan.active = false;
+        praiseSatan.castButton.interactable = false;
+        praiseSatan.active = false;
     }
 
     IEnumerator KillAllEnemiesInRange()
     {
         GameManager.acceptsPlayerInput = false;
         witch.Hide();
+
+        var spellsr = ps.GetComponent<SpriteRenderer>();
+        spellsr.flipX = witch.spriteRenderer.flipX;
+
+        var psr = witch.projectileInstance.GetComponent<SpriteRenderer>();
+        var oldlayer = psr.sortingLayerID;
+        psr.sortingLayerID = 0;
+        psr.sortingOrder = 0;
+        psr.enabled = false;
+
         ps.SetActive(true);
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.6f);
+
+        witch.Show();
+        psr.enabled = true;
 
         var time = 0.0f;
         var anim = ps.GetComponent<Animator>();
@@ -161,9 +174,9 @@ public class Spellbook : MonoBehaviour
             time += Time.deltaTime;
         }
 
-
         ps.SetActive(false);
-        witch.Show();
+        psr.sortingLayerID = oldlayer;
+        psr.sortingOrder = 9999;
         GameManager.acceptsPlayerInput = true;
     }
 

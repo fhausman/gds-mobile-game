@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
         spellbook.mana = saveData.mana;
         for(int i = 0; i < saveData.buyCounts.Count; i++)
         {
-            spellbook.spelldata[i].active = true;// saveData.activeSpells[i];
+            spellbook.spelldata[i].active = saveData.activeSpells[i];
             spellbook.spelldata[i].buyCount = saveData.buyCounts[i];
         }
     }
