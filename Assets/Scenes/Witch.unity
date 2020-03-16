@@ -5890,7 +5890,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1944189785}
-        m_MethodName: Back
+        m_MethodName: Spellbook
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
