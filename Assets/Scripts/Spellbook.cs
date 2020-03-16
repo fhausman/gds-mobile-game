@@ -27,7 +27,10 @@ public class Spellbook : MonoBehaviour
     }
 
     public Stake stake;
+    public Witch witch;
     public GameObject lightning;
+    public GameObject ffwf;
+    public GameObject ps;
     public Flash flash;
     public SpellData lilithsBlessing = new SpellData();
     public SpellData praiseSatan = new SpellData();
@@ -129,14 +132,21 @@ public class Spellbook : MonoBehaviour
     {
         Debug.Log("Cast PS!!!");
         StartCoroutine(KillAllEnemiesInRange());
-        praiseSatan.castButton.interactable = false;
-        praiseSatan.active = false;
+        //praiseSatan.castButton.interactable = false;
+        //praiseSatan.active = false;
     }
 
     IEnumerator KillAllEnemiesInRange()
     {
+        GameManager.acceptsPlayerInput = false;
+        witch.Hide();
+        ps.SetActive(true);
+
+        yield return new WaitForSeconds(0.5f);
+
         var time = 0.0f;
-        while (time < 1.0f)
+        var anim = ps.GetComponent<Animator>();
+        while (!anim.GetCurrentAnimatorStateInfo(0).IsName("End"))
         {
             var range = Mathf.Lerp(0.0f, 12.0f, time);
 
@@ -148,8 +158,13 @@ public class Spellbook : MonoBehaviour
 
             yield return null;
 
-            time += Time.deltaTime / 0.25f;
+            time += Time.deltaTime;
         }
+
+
+        ps.SetActive(false);
+        witch.Show();
+        GameManager.acceptsPlayerInput = true;
     }
 
     public void UnholyChant()
@@ -184,10 +199,35 @@ public class Spellbook : MonoBehaviour
 
     public void FightFireWithFire()
     {
-        Debug.Log("Cast FFWF!!!");
-        stake.ResetDurability();
+        GameManager.acceptsPlayerInput = false;
+        witch.Hide();
+        ffwf.SetActive(true);
+        StartCoroutine(WaitForFFWFEnd());
+
         fightFireWithFire.castButton.interactable = false;
         fightFireWithFire.active = false;
+    }
+
+    private IEnumerator WaitForFFWFEnd()
+    {
+        yield return new WaitForSeconds(0.3f);
+
+        var enemiesInRange = Physics2D.OverlapCircleAll(new Vector3(0.0f, -4.0f), 1.0f, LayerMask.GetMask("Enemies"));
+        foreach (var enemy in enemiesInRange)
+        {
+            enemy.SendMessage("SetDead");
+        }
+        stake.ResetDurability();
+
+        var anim = ffwf.GetComponent<Animator>();
+        while(!anim.GetCurrentAnimatorStateInfo(0).IsName("End"))
+        {
+            yield return null;
+        }
+
+        ffwf.SetActive(false);
+        witch.Show();
+        GameManager.acceptsPlayerInput = true;
     }
 
     private void Buy(SpellData obj)

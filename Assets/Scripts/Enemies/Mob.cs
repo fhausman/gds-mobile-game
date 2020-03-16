@@ -122,7 +122,7 @@ public class Mob : MonoBehaviour, ISpeedable
     public int numberOfLives;
     public StateMachine stateMachine { get; } = new StateMachine();
     public Scorcher scorcher;
-    public bool DealsDamage { get => anim.GetCurrentAnimatorStateInfo(0).IsName("Setting Fire"); }
+    public bool DealsDamage { get => anim.GetCurrentAnimatorStateInfo(0).IsName("Setting Fire") && rb != null; }
 
     private Rigidbody2D rb;
     public Animator anim { get; private set; }

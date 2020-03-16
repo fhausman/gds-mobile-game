@@ -234,6 +234,18 @@ public class Witch : MonoBehaviour
         projectileInstance.Turn();
     }
 
+    public void Hide()
+    {
+        spriteRenderer.enabled = false;
+        projectileInstance.GetComponent<SpriteRenderer>().enabled = false;
+    }
+
+    public void Show()
+    {
+        spriteRenderer.enabled = true;
+        projectileInstance.GetComponent<SpriteRenderer>().enabled = true;
+    }
+
     private IEnumerator InputDelay()
     {
         yield return new WaitForSeconds(0.025f);
