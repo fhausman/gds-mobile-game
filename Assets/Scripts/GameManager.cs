@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using TMPro;
 using UnityEngine;
@@ -15,17 +16,19 @@ public class GameManager : MonoBehaviour
     public UIManager ui;
     public Tutorial tut;
     public bool tutorialEnabled = true;
+    public bool soundEnabled = true;
     public TextMeshProUGUI highScoreText;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI manaText;
 
     private int highScore = 0;
-    private string saveFilePath { get => Application.persistentDataPath + "/witch_data.zdf"; }
+    private string saveFilePath { get => Application.persistentDataPath + "/witch_data_002.zdf"; }
 
     [System.Serializable]
     class SaveData
     {
         public bool tutorialEnabled = true;
+        public bool soundEnabled = true;
         public int mana = 0;
         public int highScore = 0;
         public List<int> buyCounts = new List<int>();
@@ -37,16 +40,15 @@ public class GameManager : MonoBehaviour
         var formatter = new BinaryFormatter();
         var file = new FileStream(saveFilePath, FileMode.Create);
 
-        var saveData = new SaveData();
-
-        saveData.tutorialEnabled = tutorialEnabled;
-        saveData.mana = spellbook.mana;
-        saveData.highScore = highScore;
-        foreach(var spelldata in spellbook.spelldata)
+        var saveData = new SaveData
         {
-            saveData.buyCounts.Add(spelldata.buyCount);
-            saveData.activeSpells.Add(spelldata.active);
-        }
+            tutorialEnabled = tutorialEnabled,
+            soundEnabled = soundEnabled,
+            mana = spellbook.mana,
+            highScore = highScore,
+            buyCounts = spellbook.spelldata.Select(x => x.buyCount).ToList(),
+            activeSpells = spellbook.spelldata.Select(x => x.active).ToList()
+        };
 
         formatter.Serialize(file, saveData);
         file.Close();
@@ -61,14 +63,16 @@ public class GameManager : MonoBehaviour
             var file = new FileStream(saveFilePath, FileMode.Open);
 
             saveData = formatter.Deserialize(file) as SaveData;
+
+            file.Close();
         }
         else
         {
             saveData = new SaveData();
         }
 
+        soundEnabled = saveData.soundEnabled;
         tutorialEnabled = saveData.tutorialEnabled;
-        Debug.Log(tutorialEnabled);
         highScore = saveData.highScore;
         spellbook.mana = saveData.mana;
         for(int i = 0; i < saveData.buyCounts.Count; i++)
@@ -81,7 +85,6 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         stake.onGameOver += GameOver;
-        Load();
     }
 
     public void GameOver()

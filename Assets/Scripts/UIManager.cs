@@ -12,6 +12,8 @@ public class UIManager : MonoBehaviour
     GameObject hud;
     GameObject gameOver;
     GameObject tutorialMessages;
+    Toggle tutorialToggle;
+    Toggle soundToggle;
 
     Spellbook spellbookManager;
     AudioListener audioListener;
@@ -30,7 +32,14 @@ public class UIManager : MonoBehaviour
         audioListener = GameObject.Find("Main Camera").GetComponent<AudioListener>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
-        var tutorialToggle = mainMenu.transform.Find("Tutorial").GetComponent<Toggle>();
+        tutorialToggle = mainMenu.transform.Find("Tutorial").GetComponent<Toggle>();
+        soundToggle = mainMenu.transform.Find("Sound").GetComponent<Toggle>();
+
+        gameManager.Load();
+
+        soundToggle.isOn = gameManager.soundEnabled;
+        gameManager.soundEnabled = soundToggle.isOn; //workaround
+
         tutorialToggle.isOn = gameManager.tutorialEnabled;
         gameManager.tutorialEnabled = tutorialToggle.isOn; //workaround
     }
@@ -71,6 +80,7 @@ public class UIManager : MonoBehaviour
     {
         DisableAllChildren();
         mainMenu.SetActive(true);
+        gameManager.Save();
     }
 
     public void GameOver()
@@ -93,7 +103,8 @@ public class UIManager : MonoBehaviour
 
     public void OnSoundToggleChange(bool val)
     {
-        audioListener.enabled = !audioListener.enabled;
+        gameManager.soundEnabled = !gameManager.soundEnabled;
+        audioListener.enabled = gameManager.soundEnabled;
     }
 
     public void OnTutorialToggleChange(bool val)
