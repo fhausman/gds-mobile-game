@@ -16,7 +16,7 @@ public class ArcLine : MonoBehaviour
 {
     private LineRenderer lr;
     private Vector3 startPosition;
-    private Vector3 endPosition = new Vector3(0.0f, 5.0f);
+    private Vector3 endPosition = new Vector3(0.0f, 4.5f);
     private float a { get => (-c / (range * range)); }
     private float c { get => startPosition.y + endPosition.y; }
 
