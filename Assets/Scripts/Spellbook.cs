@@ -28,6 +28,7 @@ public class Spellbook : MonoBehaviour
 
     public Stake stake;
     public GameObject lightning;
+    public Flash flash;
     public SpellData lilithsBlessing = new SpellData();
     public SpellData praiseSatan = new SpellData();
     public SpellData unholyChant = new SpellData();
@@ -163,6 +164,7 @@ public class Spellbook : MonoBehaviour
     {
         var priest = GameObject.FindGameObjectWithTag("Priest");
         var lightningInstance = Instantiate(lightning);
+        flash.QuickFlash(0.4f);
 
         if (priest != null)
         {

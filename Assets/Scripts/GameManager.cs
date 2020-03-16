@@ -82,7 +82,6 @@ public class GameManager : MonoBehaviour
     {
         stake.onGameOver += GameOver;
         Load();
-        Debug.Log(tutorialEnabled);
     }
 
     public void GameOver()
