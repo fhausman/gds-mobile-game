@@ -35,7 +35,8 @@ public class Idle : IState
 
     public void Update()
     {
-        if (obj.projectileInstance.anim.GetCurrentAnimatorStateInfo(0).IsName("Charging_new"))
+        var animInfo = obj.projectileInstance.anim.GetCurrentAnimatorStateInfo(0);
+        if (animInfo.IsName("Charging_new") || animInfo.IsName("Intro"))
             return;
 
         if (GameManager.acceptsPlayerInput && Input.GetMouseButton(0))// && Input.touchCount == 1)
@@ -155,6 +156,7 @@ public class Witch : MonoBehaviour
     public float inputDelay = 0.25f;
     public Animator anim;
     public SpriteRenderer spriteRenderer;
+    public Flash flash;
     
     [HideInInspector]
     public ArcLine arc;
@@ -181,13 +183,16 @@ public class Witch : MonoBehaviour
         stateMachine.Update();
     }
 
-    public void InstatiateProjectile()
+    public void InstatiateProjectile(bool playIntroAnimation = false)
     {
         projectileInstance = Instantiate(projectile).GetComponent<Projectile>();
         projectileInstance.transform.position = arc.transform.position;
         projectileInstance.GetComponent<Rigidbody2D>().isKinematic = true;
         projectileInstance.SetIdle();
         projectileInstance.SetFlip(spriteRenderer.flipX);
+
+        if(playIntroAnimation)
+            projectileInstance.anim.Play("Intro");
     }
 
     public void ReleaseProjectile()
@@ -214,9 +219,9 @@ public class Witch : MonoBehaviour
 
     public void SetActive()
     {
-        anim.Play("Idle");
-
-        InstatiateProjectile();
+        anim.Play("Intro");
+        flash.QuickFlash(2.0f);
+        InstatiateProjectile(true);
         stateMachine.ChangeState(InputStates.Idle);
     }
 

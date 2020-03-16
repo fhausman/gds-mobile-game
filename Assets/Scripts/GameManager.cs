@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using TMPro;
@@ -107,18 +108,25 @@ public class GameManager : MonoBehaviour
         if (!tutorialEnabled)
         {
             DestroyEnemies(false);
-            ActivateSpawnPoints();
 
             witch.SetActive();
             stake.Activate();
             stake.ResetDurability();
 
+            StartCoroutine(SpawnPointsActivation());
             acceptsPlayerInput = true;
         }
         else
         {
             tut.gameObject.SetActive(true);
         }
+    }
+
+    private IEnumerator SpawnPointsActivation()
+    {
+        yield return new WaitForSeconds(2.0f);
+
+        ActivateSpawnPoints();
     }
 
     private void DestroyProjectiles()
