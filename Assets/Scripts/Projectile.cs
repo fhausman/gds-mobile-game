@@ -7,6 +7,8 @@ public class Projectile : MonoBehaviour
     public bool shouldDestroy = false;
 
     public Animator anim { get; private set; }
+    public AudioSource audioSource;
+    public AudioClip[] audioClips;
     private Rigidbody2D rb;
     private CircleCollider2D coll;
     private SpriteRenderer sr;
@@ -18,6 +20,9 @@ public class Projectile : MonoBehaviour
         coll = GetComponent<CircleCollider2D>();
         sr = GetComponent<SpriteRenderer>();
         ps = transform.GetChild(0).gameObject;
+
+        audioSource.clip = audioClips[0];
+        audioSource.Play();
     }
 
     private void Update()
@@ -31,6 +36,8 @@ public class Projectile : MonoBehaviour
         Destroy(rb);
         Destroy(coll);
         ps.SetActive(false);
+        audioSource.clip = audioClips[1];
+        audioSource.Play();
 
         anim.SetTrigger("Explode");
         var objs = Physics2D.OverlapCircleAll(transform.position, 0.75f, LayerMask.GetMask("Enemies"));

@@ -92,6 +92,7 @@ public class Released : IState
 
     public void Init()
     {
+        obj.audioSource.Play();
         obj.projectileInstance.Throw(obj.arc.range);
         obj.anim.SetTrigger(obj.arc.range > 3.0f ? "Throw" : "FastThrow");
 
@@ -157,6 +158,7 @@ public class Witch : MonoBehaviour
     public Animator anim;
     public SpriteRenderer spriteRenderer;
     public Flash flash;
+    public AudioSource audioSource;
     
     [HideInInspector]
     public ArcLine arc;
