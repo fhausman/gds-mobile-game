@@ -98,7 +98,6 @@ public class UIManager : MonoBehaviour
 
     public void OnTutorialToggleChange(bool val)
     {
-        Debug.Log("hrhrhr");
         gameManager.tutorialEnabled = !gameManager.tutorialEnabled;
     }
 }

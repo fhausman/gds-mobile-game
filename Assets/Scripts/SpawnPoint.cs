@@ -58,6 +58,9 @@ public class SpawnPoint : MonoBehaviour
         spawnStrongMob = false;
         spawnPriest = false;
         spawnSlyboot = false;
+
+        startIncreasingSpeed = false;
+        scoreWhenAllTypesOfEnemiesSpawned = 0;
 }
 
     private float spawnNoise { get => Random.Range(-0.5f, 0.5f); }

@@ -1,16 +1,17 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class Score : MonoBehaviour
 {
     public static int value = 0;
 
-    private Text uiScore;
+    private TextMeshProUGUI uiScore;
 
     void Start()
     {
         value = 0;
-        uiScore = GetComponent<Text>();
+        uiScore = GetComponent<TextMeshProUGUI>();
     }
 
     void Update()

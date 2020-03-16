@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -13,6 +14,9 @@ public class GameManager : MonoBehaviour
     public UIManager ui;
     public Tutorial tut;
     public bool tutorialEnabled = true;
+    public TextMeshProUGUI highScoreText;
+    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI manaText;
 
     private int highScore = 0;
     private string saveFilePath { get => Application.persistentDataPath + "/witch_data.zdf"; }
@@ -162,8 +166,12 @@ public class GameManager : MonoBehaviour
         {
             highScore = Score.value;
         }
-
         spellbook.mana += Score.value / 5;
+
+        highScoreText.text = highScore.ToString();
+        scoreText.text = Score.value.ToString();
+        manaText.text = spellbook.mana.ToString();
+
         Score.value = 0;
     }
 }
