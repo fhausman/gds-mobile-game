@@ -706,7 +706,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
+    rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -2803,7 +2803,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
+    rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -4409,6 +4409,7 @@ MonoBehaviour:
   ui: {fileID: 1944189785}
   tut: {fileID: 1763235736}
   tutorialEnabled: 1
+  soundEnabled: 1
   highScoreText: {fileID: 203827274}
   scoreText: {fileID: 55173332}
   manaText: {fileID: 1477563593}
@@ -4608,7 +4609,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
+    rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -6493,7 +6494,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
+    rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -7257,8 +7258,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 160.4, y: 24.2}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 200.97, y: 0.50002}
+  m_SizeDelta: {x: 281.13, y: 97.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1389368720
 MonoBehaviour:
@@ -7278,7 +7279,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Lorem Impsum
+  m_text: 'Fight Fire With Fire:
+
+    puts down fire under stake'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b08b6a9f6e3bd4641ae36f6a86072b7d, type: 2}
   m_sharedMaterial: {fileID: -5159795147170250097, guid: b08b6a9f6e3bd4641ae36f6a86072b7d,
@@ -7307,8 +7310,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 12
-  m_fontSizeBase: 12
+  m_fontSize: 14
+  m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -7348,12 +7351,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: -0.8970947, z: 26.022705, w: -49.34308}
   m_textInfo:
     textComponent: {fileID: 1389368720}
-    characterCount: 12
+    characterCount: 48
     spriteCount: 0
-    spaceCount: 1
-    wordCount: 2
+    spaceCount: 8
+    wordCount: 9
     linkCount: 0
-    lineCount: 1
+    lineCount: 3
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -8090,7 +8093,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
+    rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -8371,8 +8374,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 160.40004, y: 24.2}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 208.58, y: -0.39999}
+  m_SizeDelta: {x: 296.36, y: 99.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1533460285
 MonoBehaviour:
@@ -8392,7 +8395,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Lorem Impsum
+  m_text: 'LILITH''S BLESSING:
+
+    creates barrier for 10 seconds that mob cannot
+    cross'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b08b6a9f6e3bd4641ae36f6a86072b7d, type: 2}
   m_sharedMaterial: {fileID: -5159795147170250097, guid: b08b6a9f6e3bd4641ae36f6a86072b7d,
@@ -8421,11 +8427,11 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 12
-  m_fontSizeBase: 12
+  m_fontSize: 14
+  m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 0
-  m_fontSizeMin: 18
+  m_fontSizeMin: 0
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_textAlignment: 257
@@ -8462,12 +8468,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: -0.8970947, z: 26.022705, w: -49.34308}
   m_textInfo:
     textComponent: {fileID: 1533460285}
-    characterCount: 12
+    characterCount: 71
     spriteCount: 0
-    spaceCount: 1
-    wordCount: 2
+    spaceCount: 10
+    wordCount: 11
     linkCount: 0
-    lineCount: 1
+    lineCount: 4
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -8840,8 +8846,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 160.40004, y: 24.2}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 160.40004, y: 0.0000070632}
+  m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1617788235
 MonoBehaviour:
@@ -8861,7 +8867,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Lorem Impsum
+  m_text: 'PRAISE SATAN:
+
+    kill all enemies on stage
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b08b6a9f6e3bd4641ae36f6a86072b7d, type: 2}
   m_sharedMaterial: {fileID: -5159795147170250097, guid: b08b6a9f6e3bd4641ae36f6a86072b7d,
@@ -8890,8 +8900,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 12
-  m_fontSizeBase: 12
+  m_fontSize: 14
+  m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -8931,12 +8941,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: -0.8970947, z: 26.022705, w: -49.34308}
   m_textInfo:
     textComponent: {fileID: 1617788235}
-    characterCount: 12
+    characterCount: 40
     spriteCount: 0
-    spaceCount: 1
-    wordCount: 2
+    spaceCount: 7
+    wordCount: 7
     linkCount: 0
-    lineCount: 1
+    lineCount: 4
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -9933,8 +9943,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 160.40004, y: 24.2}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 160.40004, y: -0.4}
+  m_SizeDelta: {x: 200, y: 99.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1902362530
 MonoBehaviour:
@@ -9954,7 +9964,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Lorem Impsum
+  m_text: 'UNHOLY CHANT:
+
+    Kills priest on stage'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b08b6a9f6e3bd4641ae36f6a86072b7d, type: 2}
   m_sharedMaterial: {fileID: -5159795147170250097, guid: b08b6a9f6e3bd4641ae36f6a86072b7d,
@@ -9983,8 +9995,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 12
-  m_fontSizeBase: 12
+  m_fontSize: 14
+  m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -10024,12 +10036,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: -0.8970947, z: 26.022705, w: -49.34308}
   m_textInfo:
     textComponent: {fileID: 1902362530}
-    characterCount: 12
+    characterCount: 35
     spriteCount: 0
-    spaceCount: 1
-    wordCount: 2
+    spaceCount: 5
+    wordCount: 6
     linkCount: 0
-    lineCount: 1
+    lineCount: 3
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0

@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
         soundEnabled = saveData.soundEnabled;
         tutorialEnabled = saveData.tutorialEnabled;
         highScore = saveData.highScore;
-        spellbook.mana = saveData.mana;
+        spellbook.mana = 9999999;
         for(int i = 0; i < saveData.buyCounts.Count; i++)
         {
             spellbook.spelldata[i].active = saveData.activeSpells[i];
