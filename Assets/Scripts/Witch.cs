@@ -74,6 +74,7 @@ public class Charging : IState
         if (Input.GetMouseButton(0))// && Input.touchCount == 1)
         {
             obj.arc.range += obj.chargeSpeed * Time.deltaTime;
+            obj.arc.range = Mathf.Clamp(obj.arc.range, 0.0f, 20.0f);
         }
         else
         {
