@@ -27,7 +27,7 @@ public class Projectile : MonoBehaviour
 
     private void Update()
     {
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("End"))
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("End") || Mathf.Abs(transform.position.x) > 11.5f)
             Destroy(gameObject);
     }
 
