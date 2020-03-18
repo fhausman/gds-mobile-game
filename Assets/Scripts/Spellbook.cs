@@ -140,9 +140,10 @@ public class Spellbook : MonoBehaviour
 
     IEnumerator KillAllEnemiesInRange()
     {
-        GameManager.acceptsPlayerInput = false;
-        witch.Hide();
+        var mask = ps.GetComponent<SpriteMask>();
+        mask.enabled = true;
 
+        GameManager.acceptsPlayerInput = false;
         var spellsr = ps.GetComponent<SpriteRenderer>();
         spellsr.flipX = witch.spriteRenderer.flipX;
 
@@ -155,8 +156,8 @@ public class Spellbook : MonoBehaviour
         ps.SetActive(true);
 
         yield return new WaitForSeconds(0.6f);
-
-        witch.Show();
+        
+        mask.enabled = false;
         psr.enabled = true;
 
         var time = 0.0f;
