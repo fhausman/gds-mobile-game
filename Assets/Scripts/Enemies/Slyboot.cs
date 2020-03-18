@@ -155,11 +155,13 @@ public class Slyboot : MonoBehaviour, ISpeedable
 
     public void Destroy()
     {
+        StopAllCoroutines();
         Destroy(gameObject);
     }
 
     public void Disable()
     {
+        StopAllCoroutines();
         Destroy(rb);
     }
 

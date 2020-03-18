@@ -85,6 +85,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         stake.onGameOver += GameOver;
+        stake.onGameOver += witch.Burn;
     }
 
     public void GameOver()

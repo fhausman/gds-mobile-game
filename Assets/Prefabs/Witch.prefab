@@ -48,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectile: {fileID: 5331731768593307225, guid: 7d3cecc124c4d1a49b4c193bae376602,
     type: 3}
+  death: {fileID: 4979348406602076197, guid: b6868dd39e7641344945535740b1f164, type: 3}
   chargeSpeed: 10
   inputDelay: 0.25
   anim: {fileID: 4065151822039200096}
@@ -386,7 +387,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
+  m_MaskInteraction: 2
   m_SpriteSortPoint: 0
 --- !u!95 &4065151822039200096
 Animator:

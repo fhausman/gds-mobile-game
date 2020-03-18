@@ -153,6 +153,7 @@ public class Inactive : IState
 public class Witch : MonoBehaviour
 {
     public GameObject projectile;
+    public GameObject death;
     public float chargeSpeed = 10.0f;
     public float inputDelay = 0.25f;
     public Animator anim;
@@ -221,6 +222,8 @@ public class Witch : MonoBehaviour
 
     public void SetActive()
     {
+        death.SetActive(false);
+
         anim.Play("Intro");
         flash.QuickFlash(2.0f);
         InstatiateProjectile(true);
@@ -232,6 +235,17 @@ public class Witch : MonoBehaviour
         spriteRenderer.flipX = !spriteRenderer.flipX;
         anim.SetTrigger("Turn");
         projectileInstance.Turn();
+    }
+
+    public void Burn()
+    {
+        death.GetComponent<SpriteRenderer>().flipX = spriteRenderer.flipX;
+        death.SetActive(true);
+    }
+
+    public void HideDeathFire()
+    {
+        death.SetActive(false);
     }
 
     public void Hide()
