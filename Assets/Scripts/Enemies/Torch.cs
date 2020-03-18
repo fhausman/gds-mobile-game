@@ -26,10 +26,15 @@ public class Torch : MonoBehaviour
 
     public void Hit()
     {
-        Schorche(0.05f);
+        Scorche(0.12f);
     }
 
-    public void Schorche(float time)
+    public void SetDead()
+    {
+        Scorche(0.12f);
+    }
+
+    public void Scorche(float time)
     {
         scorcher.scorchTime = time;
         subScorcher.scorchTime = time;

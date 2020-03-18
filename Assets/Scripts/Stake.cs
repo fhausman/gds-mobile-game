@@ -38,7 +38,7 @@ public class Stake : MonoBehaviour
                 var torch = obj.gameObject.GetComponent<Torch>();
                 if (torch.active)
                 {
-                    torch.Schorche(0.5f);
+                    torch.Scorche(0.5f);
                     durability -= damagePerSecond;
                 }
                 continue;

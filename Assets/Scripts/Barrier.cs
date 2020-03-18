@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class Barrier : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public GameObject overPart;
+    public Animator mainAnimator;
 
-    // Update is called once per frame
-    void Update()
+    void OnTriggerEnter2D(Collider2D col)
     {
-        
+        Debug.Log(string.Format("{0} : {1}", col.gameObject.layer, LayerMask.NameToLayer("Enemies")));
+        if (col.gameObject.layer == LayerMask.NameToLayer("Enemies"))
+        {
+            col.gameObject.SendMessage("SetDead");
+        }
     }
 }
