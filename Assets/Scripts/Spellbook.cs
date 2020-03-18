@@ -215,7 +215,6 @@ public class Spellbook : MonoBehaviour
     public void FightFireWithFire()
     {
         GameManager.acceptsPlayerInput = false;
-        witch.Hide();
         ffwf.SetActive(true);
         StartCoroutine(WaitForFFWFEnd());
 
@@ -241,7 +240,6 @@ public class Spellbook : MonoBehaviour
         }
 
         ffwf.SetActive(false);
-        witch.Show();
         GameManager.acceptsPlayerInput = true;
     }
 
