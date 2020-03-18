@@ -8,7 +8,7 @@ public class InitialTutorialState : IState
         "To shoot spark touch screen either on left or right. Longer holding will change parabola of the spark.";
 
     public Tutorial tut;
-    
+    private bool activated = false;
 
     public void Exit()
     {
@@ -17,8 +17,7 @@ public class InitialTutorialState : IState
     public void Init()
     {
         tut.uiManager.ShowTutorial();
-        tut.uiManager.SetTutorialText(message);
-        tut.witch.SetInactive();
+        tut.witch.SetActive();
         tut.stake.Deactivate();
         tut.spawnPointLeft.Deactivate();
         tut.spawnPointRight.Deactivate();
@@ -26,9 +25,16 @@ public class InitialTutorialState : IState
 
     public void Update()
     {
+        if (tut.witch.anim.GetCurrentAnimatorStateInfo(0).IsName("Intro"))
+            return;
+        else if(!activated)
+        {
+            activated = true;
+            tut.uiManager.SetTutorialText(message);
+        }
+
         if(Input.GetMouseButton(0))
         {
-            tut.witch.SetActive();
             tut.states.ChangeState(1);
         }
     }
@@ -263,9 +269,14 @@ public class FinalTutorialState : IState
 
         if (Input.GetMouseButtonDown(0))
         {
+            Score.value = 0;
             tut.gameManager.tutorialEnabled = false;
             tut.gameManager.Save();
-            tut.gameManager.RestartGame();
+            tut.stake.Activate();
+            tut.spawnPointLeft.Activate();
+            tut.spawnPointRight.Activate();
+            tut.uiManager.PlayUi();
+            GameManager.acceptsPlayerInput = true;
             tut.gameObject.SetActive(false);
         }
     }
