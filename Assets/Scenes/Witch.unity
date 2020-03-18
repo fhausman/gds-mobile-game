@@ -324,6 +324,7 @@ MonoBehaviour:
     type: 3}
   ffwf: {fileID: 1388296824}
   ps: {fileID: 657731796}
+  barrier: {fileID: 67919774144447469}
   flash: {fileID: 134438751}
   lilithsBlessing:
     basePrice: 1000
@@ -10804,6 +10805,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6471881602668806266}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &67919774144447469 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2106330919673614506, guid: 718f15c8700e5cb40b34d9a03aa21a77,
+    type: 3}
+  m_PrefabInstance: {fileID: 6471881602668806266}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3758b625e40023b42a5c6cce4828496d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &979477074402530350
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11202,6 +11215,16 @@ PrefabInstance:
       propertyPath: m_SpriteTilingProperty.oldSize.x
       value: 0.96
       objectReference: {fileID: 0}
+    - target: {fileID: 4105241130626210701, guid: 718f15c8700e5cb40b34d9a03aa21a77,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4425376113615737017, guid: 718f15c8700e5cb40b34d9a03aa21a77,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6422681362149344144, guid: 718f15c8700e5cb40b34d9a03aa21a77,
         type: 3}
       propertyPath: m_RootOrder
@@ -11230,11 +11253,21 @@ PrefabInstance:
     - target: {fileID: 6422681362149344145, guid: 718f15c8700e5cb40b34d9a03aa21a77,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6422681362149344147, guid: 718f15c8700e5cb40b34d9a03aa21a77,
         type: 3}
       propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6422681362149344147, guid: 718f15c8700e5cb40b34d9a03aa21a77,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6422681362149344147, guid: 718f15c8700e5cb40b34d9a03aa21a77,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
