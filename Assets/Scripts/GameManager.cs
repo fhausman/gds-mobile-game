@@ -105,7 +105,7 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         DestroyProjectiles();
-        ui.PlayUi();
+        ui.DisableAllChildren();
 
         Debug.Log(tutorialEnabled);
         if (!tutorialEnabled)
@@ -129,6 +129,7 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(2.0f);
 
+        ui.PlayUi();
         ActivateSpawnPoints();
     }
 
