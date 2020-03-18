@@ -31,6 +31,7 @@ public class Spellbook : MonoBehaviour
     public GameObject lightning;
     public GameObject ffwf;
     public GameObject ps;
+    public Barrier barrier;
     public Flash flash;
     public SpellData lilithsBlessing = new SpellData();
     public SpellData praiseSatan = new SpellData();
@@ -97,7 +98,8 @@ public class Spellbook : MonoBehaviour
     public void LilithsBlessing()
     {
         Debug.Log("Cast LB!!!");
-        StartCoroutine(StopEnemies());
+        barrier.gameObject.SetActive(true);
+        barrier.CreateBarrier();
         lilithsBlessing.castButton.interactable = false;
         lilithsBlessing.active = false;
     }
