@@ -41,6 +41,6 @@ Material:
     - _Fade: 1
     - _Scale: 50
     m_Colors:
-    - _Color: {r: 23.968628, g: 9.035295, b: 0, a: 0}
+    - _Color: {r: 11.984314, g: 4.5176473, b: 0, a: 0}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
