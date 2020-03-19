@@ -273,6 +273,7 @@ public class FinalTutorialState : IState
             tut.gameManager.tutorialEnabled = false;
             tut.gameManager.Save();
             tut.stake.Activate();
+            tut.stake.ResetDurability();
             tut.spawnPointLeft.Activate();
             tut.spawnPointRight.Activate();
             tut.uiManager.PlayUi();
