@@ -4893,9 +4893,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shouldDestroy: 0
   audioSource: {fileID: 8723353106899241816}
-  audioClips:
-  - {fileID: 8300000, guid: 9a3846769d7a6bb44823d6468fcb18d9, type: 3}
-  - {fileID: 8300000, guid: a7f104597db289149ab9a0af972021ee, type: 3}
+  throwSounds:
+  - {fileID: 8300000, guid: 3b90674311ff21748801483344a10142, type: 3}
+  - {fileID: 8300000, guid: 8fed4d75519da324987615573daae18f, type: 3}
+  - {fileID: 8300000, guid: f43c804184931364aa8f7d13fba181d3, type: 3}
+  - {fileID: 8300000, guid: eaa5b85c2edd51048891119ca2ebc984, type: 3}
+  explosionSounds:
+  - {fileID: 8300000, guid: fc8a5146618cd734a9a7ad693a25c132, type: 3}
 --- !u!95 &5018191713750951845
 Animator:
   serializedVersion: 3

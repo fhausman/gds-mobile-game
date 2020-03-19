@@ -8,7 +8,8 @@ public class Projectile : MonoBehaviour
 
     public Animator anim { get; private set; }
     public AudioSource audioSource;
-    public AudioClip[] audioClips;
+    public AudioClip[] throwSounds;
+    public AudioClip[] explosionSounds;
     private Rigidbody2D rb;
     private CircleCollider2D coll;
     private SpriteRenderer sr;
@@ -24,9 +25,6 @@ public class Projectile : MonoBehaviour
         sortingLayer = sr.sortingLayerID;
         sortingOrder = sr.sortingOrder;
         ps = transform.GetChild(0).gameObject;
-
-        audioSource.clip = audioClips[0];
-        audioSource.Play();
     }
 
     private void Update()
@@ -43,7 +41,7 @@ public class Projectile : MonoBehaviour
         Destroy(rb);
         Destroy(coll);
         ps.SetActive(false);
-        audioSource.clip = audioClips[1];
+        audioSource.clip = explosionSounds[0];
         audioSource.Play();
 
         anim.Play("Explode");
@@ -99,5 +97,8 @@ public class Projectile : MonoBehaviour
     {
         ps.SetActive(true);
         anim.Play(range > 3.0f ? "Throw" : "Fly");
+
+        audioSource.clip = throwSounds[Random.Range(0, throwSounds.Length)];
+        audioSource.Play();
     }
 }
