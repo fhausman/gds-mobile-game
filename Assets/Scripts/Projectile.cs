@@ -37,6 +37,9 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
+        if (col.gameObject.CompareTag("Barrier"))
+            return;
+
         Destroy(rb);
         Destroy(coll);
         ps.SetActive(false);

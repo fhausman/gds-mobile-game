@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 2106330919673614506}
   m_Layer: 0
   m_Name: Lilith's Blessing
-  m_TagString: Untagged
+  m_TagString: Barrier
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
