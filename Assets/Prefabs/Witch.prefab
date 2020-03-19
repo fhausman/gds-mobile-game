@@ -55,6 +55,8 @@ MonoBehaviour:
   spriteRenderer: {fileID: 1694618845270601005}
   flash: {fileID: 0}
   audioSource: {fileID: 7662836850474651218}
+  inactiveSprite: {fileID: -9213962817682175303, guid: 1720bac4a0220c145bc06216dedc034c,
+    type: 3}
   arc: {fileID: 0}
   projectileInstance: {fileID: 0}
   turn: 0

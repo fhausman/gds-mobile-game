@@ -143,11 +143,7 @@ public class Inactive : IState
 
     public void Init()
     {
-        foreach (var trigger in new string[] { "Idle", "Throw", "FastThrow", "Turn", "Charge" })
-        {
-            obj.anim.ResetTrigger(trigger);
-        }
-
+        obj.anim.Play("Empty");
     }
 
     public void Update()
@@ -165,7 +161,8 @@ public class Witch : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public Flash flash;
     public AudioSource audioSource;
-    
+    public Sprite inactiveSprite;
+
     [HideInInspector]
     public ArcLine arc;
     [HideInInspector]
@@ -223,6 +220,7 @@ public class Witch : MonoBehaviour
 
         ResetArcRange();
         stateMachine.ChangeState(InputStates.Inactive);
+        spriteRenderer.sprite = inactiveSprite;
     }
 
     public void SetActive()
