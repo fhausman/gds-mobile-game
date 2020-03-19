@@ -67,7 +67,7 @@ public class Charging : IState
     {
         if (!obj.turn)
         {
-            obj.anim.SetTrigger("Charge");
+            obj.anim.Play("Charge");
             obj.projectileInstance.SetCharge();
         }
         obj.turn = false;
@@ -99,7 +99,7 @@ public class Released : IState
     {
         obj.audioSource.Play();
         obj.projectileInstance.Throw(obj.arc.range);
-        obj.anim.SetTrigger(obj.arc.range > 3.0f ? "Throw" : "FastThrow");
+        obj.anim.Play(obj.arc.range > 3.0f ? "Throw" : "FastThrow");
 
         obj.ReleaseProjectile();
         obj.ResetArcRange();
@@ -238,7 +238,7 @@ public class Witch : MonoBehaviour
     public void Turn()
     {
         spriteRenderer.flipX = !spriteRenderer.flipX;
-        anim.SetTrigger("Turn");
+        anim.Play("Turn");
         projectileInstance.Turn();
     }
 
