@@ -65,6 +65,11 @@ public class Projectile : MonoBehaviour
         sr.enabled = true;
     }
 
+    public void EnableSpriteRenderer()
+    {
+        sr.enabled = true;
+    }
+
     public void SetFlip(bool flip)
     {
         sr.flipX = flip;

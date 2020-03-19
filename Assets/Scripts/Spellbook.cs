@@ -154,6 +154,7 @@ public class Spellbook : MonoBehaviour
         yield return new WaitForSeconds(0.6f);
         
         mask.enabled = false;
+        witch.projectileInstance.EnableSpriteRenderer();
 
         var time = 0.0f;
         var anim = ps.GetComponent<Animator>();
