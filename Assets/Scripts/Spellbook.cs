@@ -147,18 +147,13 @@ public class Spellbook : MonoBehaviour
         var spellsr = ps.GetComponent<SpriteRenderer>();
         spellsr.flipX = witch.spriteRenderer.flipX;
 
-        var psr = witch.projectileInstance.GetComponent<SpriteRenderer>();
-        var oldlayer = psr.sortingLayerID;
-        psr.sortingLayerID = 0;
-        psr.sortingOrder = 0;
-        psr.enabled = false;
 
+        witch.projectileInstance.Hide();
         ps.SetActive(true);
 
         yield return new WaitForSeconds(0.6f);
         
         mask.enabled = false;
-        psr.enabled = true;
 
         var time = 0.0f;
         var anim = ps.GetComponent<Animator>();
@@ -178,8 +173,7 @@ public class Spellbook : MonoBehaviour
         }
 
         ps.SetActive(false);
-        psr.sortingLayerID = oldlayer;
-        psr.sortingOrder = 9999;
+        witch.projectileInstance.Show();
         GameManager.acceptsPlayerInput = true;
     }
 

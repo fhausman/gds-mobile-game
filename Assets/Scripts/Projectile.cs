@@ -13,12 +13,16 @@ public class Projectile : MonoBehaviour
     private CircleCollider2D coll;
     private SpriteRenderer sr;
     private GameObject ps;
+    private int sortingLayer;
+    private int sortingOrder;
     private void Awake()
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         coll = GetComponent<CircleCollider2D>();
         sr = GetComponent<SpriteRenderer>();
+        sortingLayer = sr.sortingLayerID;
+        sortingOrder = sr.sortingOrder;
         ps = transform.GetChild(0).gameObject;
 
         audioSource.clip = audioClips[0];
@@ -45,6 +49,20 @@ public class Projectile : MonoBehaviour
         {
             obj.SendMessage("Hit");
         }
+    }
+
+    public void Hide()
+    {
+        sr.sortingLayerID = 0;
+        sr.sortingOrder = 0;
+        sr.enabled = false;
+    }
+
+    public void Show()
+    {
+        sr.sortingLayerID = sortingLayer;
+        sr.sortingOrder = sortingOrder;
+        sr.enabled = true;
     }
 
     public void SetFlip(bool flip)
