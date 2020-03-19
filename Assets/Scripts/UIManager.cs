@@ -35,6 +35,11 @@ public class UIManager : MonoBehaviour
 
         gameManager.Load();
 
+        UpdateToggles();
+    }
+
+    public void UpdateToggles()
+    {
         soundToggle.isOn = gameManager.soundEnabled;
         tutorialToggle.isOn = gameManager.tutorialEnabled;
     }
@@ -75,6 +80,7 @@ public class UIManager : MonoBehaviour
     {
         DisableAllChildren();
         mainMenu.SetActive(true);
+        UpdateToggles();
         gameManager.Save();
     }
 

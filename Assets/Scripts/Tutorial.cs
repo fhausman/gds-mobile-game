@@ -12,6 +12,7 @@ public class InitialTutorialState : IState
 
     public void Exit()
     {
+        activated = false;
     }
 
     public void Init()
@@ -277,6 +278,7 @@ public class FinalTutorialState : IState
             tut.spawnPointLeft.Activate();
             tut.spawnPointRight.Activate();
             tut.uiManager.PlayUi();
+            tut.uiManager.SetTutorialText("");
             GameManager.acceptsPlayerInput = true;
             tut.gameObject.SetActive(false);
         }
@@ -313,11 +315,16 @@ public class Tutorial : MonoBehaviour
         states.AddState(5, new SlybootTutorialState { tut = this });
         states.AddState(6, new SpellbookInformationTutorialState { tut = this });
         states.AddState(7, new FinalTutorialState { tut = this });
-        states.ChangeState(0);
+        gameObject.SetActive(false);
     }
 
     void Update()
     {
         states.Update();
+    }
+
+    public void Begin()
+    {
+        states.ChangeState(0);
     }
 }

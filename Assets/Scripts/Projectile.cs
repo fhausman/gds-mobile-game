@@ -43,7 +43,7 @@ public class Projectile : MonoBehaviour
         audioSource.clip = audioClips[1];
         audioSource.Play();
 
-        anim.SetTrigger("Explode");
+        anim.Play("Explode");
         var objs = Physics2D.OverlapCircleAll(transform.position, 0.75f, LayerMask.GetMask("Enemies"));
         foreach (var obj in objs)
         {
@@ -78,23 +78,23 @@ public class Projectile : MonoBehaviour
     public void Turn()
     {
         sr.flipX = !sr.flipX;
-        anim.SetTrigger("Turn");
+        anim.Play("Turn");
     }
 
     public void SetIdle()
     {
         ps.SetActive(false);
-        anim.SetTrigger("Idle");
+        //anim.Play("Idle");
     }
 
     public void SetCharge()
     {
-        anim.SetTrigger("Charge");
+        anim.Play("Charge");
     }
 
     public void Throw(float range)
     {
         ps.SetActive(true);
-        anim.SetTrigger(range > 3.0f ? "Throw" : "FastThrow");
+        anim.Play(range > 3.0f ? "Throw" : "Fly");
     }
 }

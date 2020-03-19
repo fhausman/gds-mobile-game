@@ -107,7 +107,6 @@ public class GameManager : MonoBehaviour
         DestroyProjectiles();
         ui.DisableAllChildren();
 
-        Debug.Log(tutorialEnabled);
         if (!tutorialEnabled)
         {
             DestroyEnemies(false);
@@ -122,6 +121,7 @@ public class GameManager : MonoBehaviour
         else
         {
             tut.gameObject.SetActive(true);
+            tut.Begin();
         }
     }
 
