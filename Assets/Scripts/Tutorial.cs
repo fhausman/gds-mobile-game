@@ -5,7 +5,7 @@ using UnityEngine;
 public class InitialTutorialState : IState
 {
     const string message =
-        "To shoot spark touch screen either on left or right. Longer holding will change parabola of the spark.";
+        "To shoot a spark touch the screen on either left or right. The longer you hold the more the parabola of the spark will change.";
 
     public Tutorial tut;
     private bool activated = false;
@@ -70,7 +70,7 @@ public class WaitForProjectileToExplode : IState
 public class FirstPeasantTutorialState : IState
 {
     const string message =
-        "Hit the peasant before he reaches the stake.\nFor sake of tutorial you're immune now";
+        "Hit the peasant before he reaches the stake.\nFor the duration of the tutorial you're immune from all damage.";
 
     public Tutorial tut;
 
@@ -123,7 +123,7 @@ public class StrongPeasantTutorialState : IState
 public class PriestTutorialState : IState
 {
     const string message =
-        "Priest is not holding torch, but he is giving speed to peasants that are going past him.";
+        "Priest is not holding a torch, but he is giving more speed to the peasants that are going past him.";
 
     public Tutorial tut;
     private bool checkState = false;
@@ -168,7 +168,7 @@ public class PriestTutorialState : IState
 public class SlybootTutorialState : IState
 {
     const string message =
-        "Spinster is not coming close to stake, but she is throwing torches. If her torch hits the stake it will receive single amount of damage.";
+        "The spinster will not come close to the stake, but she will throw torches. If her torch hits the stake, the stake will receive a single amount of damage.";
 
     public Tutorial tut;
     private bool checkState = false;
@@ -209,7 +209,7 @@ public class SlybootTutorialState : IState
 public class SpellbookInformationTutorialState : IState
 {
     const string message =
-        "After each battle you'll receive some mana, you can spend it for powerful spells. Look for them in main menu after you die.";
+        "After each battle you'll receive some mana so you can spend it for powerful spells. Look for them in the main menu after you die.";
 
     public Tutorial tut;
     private bool checkState = false;
@@ -247,7 +247,7 @@ public class SpellbookInformationTutorialState : IState
 public class FinalTutorialState : IState
 {
     const string message =
-        "Congratulations!\nYou're now ready to fight the mob!\nTouch the screen when you're ready for battle...";
+        "Congratulations! You're now ready to fight the mob! Touch the screen when you're ready for battle..";
 
     public Tutorial tut;
     private bool checkState = false;
