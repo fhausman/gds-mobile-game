@@ -97,6 +97,7 @@ public class Released : IState
 
     public void Init()
     {
+        obj.audioSource.clip = obj.throwSound;
         obj.audioSource.Play();
         obj.projectileInstance.Throw(obj.arc.range);
         obj.anim.Play(obj.arc.range > 3.0f ? "Throw" : "FastThrow");
@@ -161,6 +162,9 @@ public class Witch : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public Flash flash;
     public AudioSource audioSource;
+    public AudioClip throwSound;
+    public AudioClip releaseSound;
+    public AudioClip creatingProjectileSound;
     public Sprite inactiveSprite;
 
     [HideInInspector]
@@ -228,6 +232,7 @@ public class Witch : MonoBehaviour
         death.SetActive(false);
 
         anim.Play("Intro");
+        StartCoroutine(PlayReleaseEffect());
         flash.QuickFlash(2.0f);
         InstatiateProjectile(true);
         stateMachine.ChangeState(InputStates.Idle);
@@ -263,9 +268,21 @@ public class Witch : MonoBehaviour
         projectileInstance.GetComponent<SpriteRenderer>().enabled = true;
     }
 
-    private IEnumerator InputDelay()
+    private IEnumerator PlayReleaseEffect()
     {
-        yield return new WaitForSeconds(0.025f);
-        stateMachine.ChangeState(InputStates.Idle);
+        yield return new WaitForSeconds(0.7f);
+
+        audioSource.clip = releaseSound;
+        audioSource.Play();
+
+        while(audioSource.isPlaying)
+        {
+            yield return null;
+        }
+
+        audioSource.clip = creatingProjectileSound;
+        audioSource.Play();
     }
+
+
 }
