@@ -12,6 +12,7 @@ public class Stake : MonoBehaviour
 
     private SpriteRenderer sr;
     private Animator anim;
+    private AudioSource audioSource;
     private Bounds bounds;
 
     public void ResetDurability()
@@ -24,6 +25,7 @@ public class Stake : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         bounds = GetComponent<BoxCollider2D>().bounds;
         anim = GetComponentInChildren<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void CheckForDamage()
@@ -58,12 +60,6 @@ public class Stake : MonoBehaviour
         }
     }
 
-    IEnumerator TorchHit(Torch torch)
-    {
-        yield return null;
-
-    }
-
     void ShowDamage()
     {
         anim.SetFloat("Durability", durability);
@@ -74,6 +70,9 @@ public class Stake : MonoBehaviour
         ShowDamage();
         if (!active)
             return;
+
+
+        audioSource.volume = 0.3f - durability * 0.3f;
 
         if (durability < 0.0f)
         {
