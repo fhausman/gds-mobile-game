@@ -17,6 +17,7 @@ public class Stake : MonoBehaviour
 
     public void ResetDurability()
     {
+        audioSource.volume = 0.0f;
         durability = 1.0f;
     }
 

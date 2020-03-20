@@ -128,6 +128,7 @@ public class Priest : MonoBehaviour
     private Rigidbody2D rb;
     private PriestBuffArea buffArea;
     private Material material;
+    private SoundManager sm;
 
     public void ActivateBuffArea()
     {
@@ -188,6 +189,7 @@ public class Priest : MonoBehaviour
             yield return null;
         }
 
+        sm.PriestBellSound();
         obj.IncreaseSpeed();
     }
 
@@ -198,6 +200,7 @@ public class Priest : MonoBehaviour
         buffArea = transform.GetChild(0).gameObject.GetComponent<PriestBuffArea>();
         buffArea.onBuffBehaviour += PlayBuffAnimation;
         material = GetComponent<SpriteRenderer>().material;
+        sm = GameObject.Find("Ambient Sounds").GetComponent<SoundManager>();
 
         scorcher = new Scorcher(gameObject, material);
 
