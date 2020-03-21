@@ -33,6 +33,10 @@ public class Spellbook : MonoBehaviour
     public GameObject ps;
     public Barrier barrier;
     public Flash flash;
+    public AudioClip thunder;
+    public AudioSource thunderSource;
+    public AudioClip chant;
+    public AudioSource chantSource;
     public SpellData lilithsBlessing = new SpellData();
     public SpellData praiseSatan = new SpellData();
     public SpellData unholyChant = new SpellData();
@@ -188,8 +192,11 @@ public class Spellbook : MonoBehaviour
 
     IEnumerator KillPriest()
     {
+        thunderSource.PlayOneShot(thunder);
+        chantSource.PlayOneShot(chant);
         var priest = GameObject.FindGameObjectWithTag("Priest");
         var lightningInstance = Instantiate(lightning);
+        
         flash.QuickFlash(0.4f);
 
         if (priest != null)
