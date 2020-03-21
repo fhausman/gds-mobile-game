@@ -4241,6 +4241,16 @@ PrefabInstance:
       propertyPath: strongMobSpawnRate
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 6047976500201208523, guid: 8c8a61cbc3ec7894785326bfb2b10b2c,
+        type: 3}
+      propertyPath: hordeMobCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6047976500201208523, guid: 8c8a61cbc3ec7894785326bfb2b10b2c,
+        type: 3}
+      propertyPath: hordeStrongMobCount
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6568928539405662978, guid: 8c8a61cbc3ec7894785326bfb2b10b2c,
         type: 3}
       propertyPath: m_Name
@@ -12182,6 +12192,16 @@ PrefabInstance:
         type: 3}
       propertyPath: strongMobSpawnRate
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6047976500201208523, guid: 8c8a61cbc3ec7894785326bfb2b10b2c,
+        type: 3}
+      propertyPath: hordeMobCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6047976500201208523, guid: 8c8a61cbc3ec7894785326bfb2b10b2c,
+        type: 3}
+      propertyPath: hordeStrongMobCount
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6568928539405662978, guid: 8c8a61cbc3ec7894785326bfb2b10b2c,
         type: 3}
