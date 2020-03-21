@@ -65,6 +65,7 @@ public class PriestDead : IState
 
     public void Init()
     {
+        priest.audioSource.PlayOneShot(priest.deathSound);
         priest.Disable();
         priest.StartCoroutine(priest.scorcher.ScorchAndDestroy());
     }
@@ -124,6 +125,8 @@ public class Priest : MonoBehaviour
     public StateMachine stateMachine { get; } = new StateMachine();
     public Scorcher scorcher;
     public Animator anim;
+    public AudioSource audioSource;
+    public AudioClip deathSound;
 
     private Rigidbody2D rb;
     private PriestBuffArea buffArea;
