@@ -278,8 +278,8 @@ public class FinalTutorialState : IState
             tut.spawnPointLeft.Activate();
             tut.spawnPointRight.Activate();
             tut.uiManager.PlayUi();
+            tut.witch.StartCoroutine(InputDelay());
             tut.uiManager.SetTutorialText("");
-            GameManager.acceptsPlayerInput = true;
             tut.gameObject.SetActive(false);
         }
     }
@@ -289,6 +289,13 @@ public class FinalTutorialState : IState
         yield return new WaitForSeconds(1.0f);
 
         checkState = true;
+    }
+    
+    private IEnumerator InputDelay()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        GameManager.acceptsPlayerInput = true;
     }
 }
 
