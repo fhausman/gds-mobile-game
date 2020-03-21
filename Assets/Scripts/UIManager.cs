@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    public AudioSource audioSource;
+    public AudioClip[] sounds;
+
     GameObject mainMenu;
     GameObject spellbook;
     GameObject credits;
@@ -52,6 +55,11 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void BellSound()
+    {
+        audioSource.PlayOneShot(sounds[Random.Range(0, sounds.Length)]);
+    }
+
     public void Play()
     {
         gameManager.RestartGame();
@@ -66,18 +74,16 @@ public class UIManager : MonoBehaviour
 
     public void Spellbook()
     {
+        BellSound();
         DisableAllChildren();
         spellbook.SetActive(true);
         spellbookManager.UpdateShop();
     }
-    public void Credits()
-    {
-        DisableAllChildren();
-        credits.SetActive(true);
-    }
 
     public void Back()
     {
+        BellSound();
+
         DisableAllChildren();
         mainMenu.SetActive(true);
         UpdateToggles();
@@ -86,30 +92,41 @@ public class UIManager : MonoBehaviour
 
     public void GameOver()
     {
+        BellSound();
+
         DisableAllChildren();
         gameOver.SetActive(true);
     }
 
     public void ShowTutorial()
     {
+        BellSound();
+
         DisableAllChildren();
         tutorialMessages.SetActive(true);
     }
 
     public void SetTutorialText(string text)
     {
+        if(text != "")
+            BellSound();
+
         var message = tutorialMessages.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         message.text = text;
     }
 
     public void OnSoundToggleChange(bool val)
     {
+        BellSound();
+
         gameManager.soundEnabled = val;
         AudioListener.volume = val ? 1 : 0;
     }
 
     public void OnTutorialToggleChange(bool val)
     {
+        BellSound();
+
         gameManager.tutorialEnabled = val;
     }
 }
