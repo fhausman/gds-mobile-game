@@ -24,7 +24,6 @@ public class UIManager : MonoBehaviour
     {
         mainMenu = transform.Find("MainMenu").gameObject;
         spellbook = transform.Find("Spellbook").gameObject;
-        credits = transform.Find("Credits").gameObject;
         hud = transform.Find("HUD").gameObject;
         gameOver = transform.Find("GameOverMenu").gameObject;
         tutorialMessages = transform.Find("TutorialMessages").gameObject;
