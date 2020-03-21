@@ -70,6 +70,7 @@ public class SpawnPoint : MonoBehaviour
 
         startIncreasingSpeed = false;
         scoreWhenAllTypesOfEnemiesSpawned = 0;
+        prevHordeCounter = 0;
 }
 
     private float spawnNoise { get => Random.Range(-0.5f, 0.5f); }
