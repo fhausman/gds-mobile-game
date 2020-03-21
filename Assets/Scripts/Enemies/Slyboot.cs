@@ -123,6 +123,7 @@ public class Slyboot : MonoBehaviour, ISpeedable
     public AnimatorOverrideController BackwardsRuntimeController;
     public AudioSource audioSource;
     public AudioClip babaDead;
+    public AudioClip babaThrow;
 
     private Rigidbody2D rb;
     private Transform stakeTransform;
@@ -146,6 +147,8 @@ public class Slyboot : MonoBehaviour, ISpeedable
 
     public void Throw()
     {
+        audioSource.PlayOneShot(babaThrow);
+
         var torchInstance = Instantiate(torch);
         torchInstance.transform.position = torchSpawnPosition.position;
 

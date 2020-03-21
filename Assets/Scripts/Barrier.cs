@@ -7,6 +7,8 @@ public class Barrier : MonoBehaviour
     public GameObject overPart;
     public Animator mainAnimator;
     public BoxCollider2D col;
+    public AudioSource audioSource;
+    public AudioClip endSound;
     public float duration = 10.0f;
 
     public void CreateBarrier()
@@ -30,12 +32,16 @@ public class Barrier : MonoBehaviour
 
         overPart.SetActive(true);
 
-        yield return new WaitForSeconds(10.0f);
+        yield return new WaitForSeconds(9.30f);
 
         overPart.SetActive(false);
         col.enabled = false;
 
         mainAnimator.Play("End");
+
+        audioSource.PlayOneShot(endSound);
+
+        yield return new WaitForSeconds(0.7f);
 
         gameObject.SetActive(false);
     }

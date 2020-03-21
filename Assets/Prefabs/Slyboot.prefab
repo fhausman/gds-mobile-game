@@ -275,6 +275,7 @@ MonoBehaviour:
     type: 2}
   audioSource: {fileID: 5393029629454557972}
   babaDead: {fileID: 8300000, guid: 1ba74cd82f452a746a7aa0313aa425bf, type: 3}
+  babaThrow: {fileID: 8300000, guid: 882c1c5681631264b8c5b7ee21cb6761, type: 3}
 --- !u!1 &3087875620386284085
 GameObject:
   m_ObjectHideFlags: 0
