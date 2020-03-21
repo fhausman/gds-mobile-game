@@ -11,7 +11,6 @@ public class UIManager : MonoBehaviour
 
     GameObject mainMenu;
     GameObject spellbook;
-    GameObject credits;
     GameObject hud;
     GameObject gameOver;
     GameObject tutorialMessages;
@@ -57,7 +56,7 @@ public class UIManager : MonoBehaviour
 
     public void BellSound()
     {
-        audioSource.PlayOneShot(sounds[Random.Range(0, sounds.Length)]);
+        audioSource.PlayOneShot(sounds[0]);
     }
 
     public void Play()
@@ -82,7 +81,7 @@ public class UIManager : MonoBehaviour
 
     public void Back()
     {
-        BellSound();
+        audioSource.PlayOneShot(sounds[1]);
 
         DisableAllChildren();
         mainMenu.SetActive(true);

@@ -141,7 +141,7 @@ public class Spellbook : MonoBehaviour
     public void PraiseSatan()
     {
         mainSource.PlayOneShot(energyBlast);
-        secondarySource.PlayOneShot(praise);
+        secondarySource.PlayOneShot(praise, 0.5f);
 
         Debug.Log("Cast PS!!!");
         StartCoroutine(KillAllEnemiesInRange());
