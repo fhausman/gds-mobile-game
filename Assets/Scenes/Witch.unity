@@ -524,6 +524,8 @@ MonoBehaviour:
   chant: {fileID: 8300000, guid: 523eab30b0f90cc4d9ba8687ba269943, type: 3}
   energyBlast: {fileID: 8300000, guid: 5c5e6fe5594296b4689a2fb752a46a57, type: 3}
   praise: {fileID: 8300000, guid: 9d8ebdfce50bfbf48a121d3d577407ba, type: 3}
+  ffwfSound: {fileID: 8300000, guid: d60877416fcef7d4da621c402aed97e6, type: 3}
+  ffwfSecondarySound: {fileID: 8300000, guid: 35694a13a52c3c4429b66429b5df8bbf, type: 3}
   mainSource: {fileID: 67514071}
   secondarySource: {fileID: 67514072}
   lilithsBlessing:

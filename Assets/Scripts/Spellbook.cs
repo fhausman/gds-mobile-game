@@ -37,6 +37,8 @@ public class Spellbook : MonoBehaviour
     public AudioClip chant;
     public AudioClip energyBlast;
     public AudioClip praise;
+    public AudioClip ffwfSound;
+    public AudioClip ffwfSecondarySound;
     public AudioSource mainSource;
     public AudioSource secondarySource;
     public SpellData lilithsBlessing = new SpellData();
@@ -222,6 +224,9 @@ public class Spellbook : MonoBehaviour
 
     public void FightFireWithFire()
     {
+        mainSource.PlayOneShot(ffwfSound);
+        secondarySource.PlayOneShot(ffwfSecondarySound);
+
         GameManager.acceptsPlayerInput = false;
         ffwf.SetActive(true);
         StartCoroutine(WaitForFFWFEnd());
