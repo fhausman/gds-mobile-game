@@ -34,9 +34,11 @@ public class Spellbook : MonoBehaviour
     public Barrier barrier;
     public Flash flash;
     public AudioClip thunder;
-    public AudioSource thunderSource;
     public AudioClip chant;
-    public AudioSource chantSource;
+    public AudioClip energyBlast;
+    public AudioClip praise;
+    public AudioSource mainSource;
+    public AudioSource secondarySource;
     public SpellData lilithsBlessing = new SpellData();
     public SpellData praiseSatan = new SpellData();
     public SpellData unholyChant = new SpellData();
@@ -136,6 +138,9 @@ public class Spellbook : MonoBehaviour
 
     public void PraiseSatan()
     {
+        mainSource.PlayOneShot(energyBlast);
+        secondarySource.PlayOneShot(praise);
+
         Debug.Log("Cast PS!!!");
         StartCoroutine(KillAllEnemiesInRange());
         praiseSatan.castButton.interactable = false;
@@ -192,8 +197,8 @@ public class Spellbook : MonoBehaviour
 
     IEnumerator KillPriest()
     {
-        thunderSource.PlayOneShot(thunder);
-        chantSource.PlayOneShot(chant);
+        mainSource.PlayOneShot(thunder);
+        secondarySource.PlayOneShot(chant);
         var priest = GameObject.FindGameObjectWithTag("Priest");
         var lightningInstance = Instantiate(lightning);
         
