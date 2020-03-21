@@ -24,8 +24,11 @@ public class SpawnPoint : MonoBehaviour
     public float priestSpawnDelay = 10.0f;
     public float slybootSpawnDelay = 30.0f;
     public float slybootSpawnRate = 15.0f;
-
     public float additionalSpeed = 0.10f;
+
+    public int hordeMobCount = 5;
+    public int hordeStrongMobCount = 2;
+
     public int scoreSpeedMultiplier { get => startIncreasingSpeed ? (Score.value - scoreWhenAllTypesOfEnemiesSpawned) / 1000 : 1; }
 
     private bool active = false;
@@ -35,6 +38,9 @@ public class SpawnPoint : MonoBehaviour
     private bool spawnSlyboot = false;
     private bool startIncreasingSpeed = false;
     private int scoreWhenAllTypesOfEnemiesSpawned = 0;
+
+    private int prevHordeCounter = 0;
+    private int hordeCounter { get => Score.value / 5000; }
 
     private GameObject slybootInstance = null;
     private GameObject priestInstance = null;
@@ -225,6 +231,38 @@ public class SpawnPoint : MonoBehaviour
         if (spawnSlyboot)
         {
             StartCoroutine("SpawnSlybootInternal");
+        }
+
+        SpawnHorde();
+    }
+
+    private void SpawnHorde()
+    {
+        if (hordeCounter > prevHordeCounter)
+        {
+            StartCoroutine(SpawnHordeMob());
+            StartCoroutine(SpawnStrongHorde());
+            prevHordeCounter = hordeCounter;
+        }
+    }
+
+    private IEnumerator SpawnHordeMob()
+    {
+        for(int i = 0; i < hordeMobCount; i++)
+        {
+            SpawnMob(Enemies.BasicMob);
+
+            yield return new WaitForSeconds(3.0f + Random.Range(-0.5f, 0.5f));
+        }
+    }
+
+    private IEnumerator SpawnStrongHorde()
+    {
+        for (int i = 0; i < hordeStrongMobCount; i++)
+        {
+            SpawnMob(Enemies.StrongMob);
+
+            yield return new WaitForSeconds(5.0f + Random.Range(-0.5f, 0.5f));
         }
     }
 }
