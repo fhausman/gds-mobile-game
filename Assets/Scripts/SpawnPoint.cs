@@ -41,6 +41,9 @@ public class SpawnPoint : MonoBehaviour
 
     private int prevHordeCounter = 0;
     private int hordeCounter { get => Score.value / 5000; }
+    private bool mobSpawning = false;
+    private bool strongMobSpawning = false;
+    private bool hordeSpawning { get => mobSpawning && strongMobSpawning; }
 
     private GameObject slybootInstance = null;
     private GameObject priestInstance = null;
@@ -210,7 +213,7 @@ public class SpawnPoint : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!active)
+        if (!active || hordeSpawning)
             return;
 
         if (spawnBasicMob)
@@ -248,21 +251,29 @@ public class SpawnPoint : MonoBehaviour
 
     private IEnumerator SpawnHordeMob()
     {
+        mobSpawning = true;
+
         for(int i = 0; i < hordeMobCount; i++)
         {
             SpawnMob(Enemies.BasicMob);
 
             yield return new WaitForSeconds(3.0f + Random.Range(-0.5f, 0.5f));
         }
+
+        mobSpawning = false;
     }
 
     private IEnumerator SpawnStrongHorde()
     {
+        strongMobSpawning = true;
+
         for (int i = 0; i < hordeStrongMobCount; i++)
         {
             SpawnMob(Enemies.StrongMob);
 
             yield return new WaitForSeconds(5.0f + Random.Range(-0.5f, 0.5f));
         }
+
+        strongMobSpawning = false;
     }
 }
