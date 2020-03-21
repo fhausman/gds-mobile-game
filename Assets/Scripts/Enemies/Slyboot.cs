@@ -79,6 +79,7 @@ public class SlybootDead : IState
     public void Init()
     {
         slyboot.Disable();
+        slyboot.audioSource.PlayOneShot(slyboot.babaDead);
         slyboot.StartCoroutine(slyboot.scorcher.ScorchAndDestroy());
     }
 
@@ -120,6 +121,8 @@ public class Slyboot : MonoBehaviour, ISpeedable
     public Animator anim;
     public RuntimeAnimatorController ForwardsRuntimeController;
     public AnimatorOverrideController BackwardsRuntimeController;
+    public AudioSource audioSource;
+    public AudioClip babaDead;
 
     private Rigidbody2D rb;
     private Transform stakeTransform;
@@ -156,6 +159,14 @@ public class Slyboot : MonoBehaviour, ISpeedable
     public void Destroy()
     {
         StopAllCoroutines();
+        StartCoroutine(DestroyDelay());
+    }
+
+    private IEnumerator DestroyDelay()
+    {
+        while (audioSource.isPlaying)
+            yield return null;
+
         Destroy(gameObject);
     }
 
