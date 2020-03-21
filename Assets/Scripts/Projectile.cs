@@ -44,7 +44,7 @@ public class Projectile : MonoBehaviour
         audioSource.clip = explosionSounds[0];
         audioSource.Play();
 
-        anim.Play("Explode");
+        anim.Play(col.gameObject.CompareTag("Ground") ? "ExplodeGround" : "Explode");
         var objs = Physics2D.OverlapCircleAll(transform.position, 0.75f, LayerMask.GetMask("Enemies"));
         foreach (var obj in objs)
         {

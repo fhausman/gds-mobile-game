@@ -12,6 +12,7 @@ TagManager:
   - SpawnPoint
   - Projectile
   - Barrier
+  - Ground
   layers:
   - Default
   - TransparentFX

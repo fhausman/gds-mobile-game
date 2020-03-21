@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    public GameObject logo;
     public AudioSource audioSource;
     public AudioClip[] sounds;
 
@@ -60,6 +61,7 @@ public class UIManager : MonoBehaviour
 
     public void Play()
     {
+        logo.SetActive(false);
         gameManager.RestartGame();
     }
 
@@ -84,6 +86,7 @@ public class UIManager : MonoBehaviour
 
         DisableAllChildren();
         mainMenu.SetActive(true);
+        logo.SetActive(true);
         UpdateToggles();
         gameManager.Save();
     }
