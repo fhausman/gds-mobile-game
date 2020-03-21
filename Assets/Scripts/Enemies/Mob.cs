@@ -61,6 +61,7 @@ public class MobDamaged : IState
 
     public void Init()
     {
+        mob.audioSource.PlayOneShot(mob.deathSound[Random.Range(0, mob.deathSound.Length)]);
         mob.SetVelocity(Vector2.zero);
         mob.anim.SetTrigger("Damage");
         previousState = mob.stateMachine.currentStateId;
@@ -85,6 +86,7 @@ public class MobDead : IState
 
     public void Init()
     {
+        mob.audioSource.PlayOneShot(mob.deathSound[Random.Range(0, mob.deathSound.Length)]);
         mob.Disable();
         mob.StartCoroutine(mob.scorcher.ScorchAndDestroy());
     }
@@ -122,6 +124,8 @@ public class Mob : MonoBehaviour, ISpeedable
     public int numberOfLives;
     public StateMachine stateMachine { get; } = new StateMachine();
     public Scorcher scorcher;
+    public AudioSource audioSource;
+    public AudioClip[] deathSound;
     public bool DealsDamage { get => anim.GetCurrentAnimatorStateInfo(0).IsName("Setting Fire") && rb != null; }
 
     private Rigidbody2D rb;
