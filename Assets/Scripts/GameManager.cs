@@ -22,14 +22,14 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI manaText;
 
     private int highScore = 0;
-    private string saveFilePath { get => Application.persistentDataPath + "/witch_data_002.zdf"; }
+    private string saveFilePath { get => Application.persistentDataPath + "/witch_data_003.zdf"; }
 
     [System.Serializable]
     class SaveData
     {
         public bool tutorialEnabled = true;
         public bool soundEnabled = true;
-        public int mana = 0;
+        public int mana = 2000;
         public int highScore = 0;
         public List<int> buyCounts = new List<int>();
         public List<bool> activeSpells = new List<bool>();
@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
         soundEnabled = saveData.soundEnabled;
         tutorialEnabled = saveData.tutorialEnabled;
         highScore = saveData.highScore;
-        spellbook.mana = 9999999;
+        spellbook.mana = saveData.mana;
         for(int i = 0; i < saveData.buyCounts.Count; i++)
         {
             spellbook.spelldata[i].active = saveData.activeSpells[i];
