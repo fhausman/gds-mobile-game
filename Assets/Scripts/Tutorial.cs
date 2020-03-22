@@ -230,7 +230,7 @@ public class SlybootTutorialState : IState
     {
         tut.spawnPointRight.SpawnSlyboot();
 
-        yield return new WaitForSeconds(5.0f);
+        yield return new WaitForSeconds(0.3f);
 
         checkState = true;
 
