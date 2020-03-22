@@ -178,7 +178,7 @@ public class GameManager : MonoBehaviour
         {
             highScore = Score.value;
         }
-        spellbook.mana += Score.value / 5;
+        spellbook.mana += Score.value / 3;
 
         highScoreText.text = highScore.ToString();
         scoreText.text = Score.value.ToString();
