@@ -69,9 +69,11 @@ public class SpawnPoint : MonoBehaviour
         spawnSlyboot = false;
 
         startIncreasingSpeed = false;
+        mobSpawning = false;
+        strongMobSpawning = false;
         scoreWhenAllTypesOfEnemiesSpawned = 0;
         prevHordeCounter = 0;
-}
+    }
 
     private float spawnNoise { get => Random.Range(-0.5f, 0.5f); }
 
@@ -244,6 +246,10 @@ public class SpawnPoint : MonoBehaviour
     {
         if (hordeCounter > prevHordeCounter)
         {
+            Debug.Log("Spawn Horde");
+            mobSpawning = true;
+            strongMobSpawning = true;
+
             StartCoroutine(SpawnHordeMob());
             StartCoroutine(SpawnStrongHorde());
             prevHordeCounter = hordeCounter;
@@ -252,28 +258,32 @@ public class SpawnPoint : MonoBehaviour
 
     private IEnumerator SpawnHordeMob()
     {
-        mobSpawning = true;
+        yield return new WaitForSeconds(2.0f);
 
         for(int i = 0; i < hordeMobCount; i++)
         {
             SpawnMob(Enemies.BasicMob);
 
-            yield return new WaitForSeconds(3.0f + Random.Range(-0.5f, 0.5f));
+            yield return new WaitForSeconds(2.0f + Random.Range(-0.5f, 0.5f));
         }
+
+        yield return new WaitForSeconds(13.0f);
 
         mobSpawning = false;
     }
 
     private IEnumerator SpawnStrongHorde()
     {
-        strongMobSpawning = true;
+        yield return new WaitForSeconds(3.0f);
 
         for (int i = 0; i < hordeStrongMobCount; i++)
         {
             SpawnMob(Enemies.StrongMob);
 
-            yield return new WaitForSeconds(5.0f + Random.Range(-0.5f, 0.5f));
+            yield return new WaitForSeconds(3.0f + Random.Range(-0.5f, 0.5f));
         }
+
+        yield return new WaitForSeconds(13.0f);
 
         strongMobSpawning = false;
     }

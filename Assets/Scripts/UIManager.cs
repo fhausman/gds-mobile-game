@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    public GameObject logo;
+    public Animator logo;
     public AudioSource audioSource;
     public AudioClip[] sounds;
 
@@ -52,6 +52,8 @@ public class UIManager : MonoBehaviour
         {
             child.gameObject.SetActive(false);
         }
+
+        logo.Play("Outro");
     }
 
     public void BellSound()
@@ -61,7 +63,7 @@ public class UIManager : MonoBehaviour
 
     public void Play()
     {
-        logo.SetActive(false);
+        logo.Play("Outro");
         gameManager.RestartGame();
     }
 
@@ -86,7 +88,7 @@ public class UIManager : MonoBehaviour
 
         DisableAllChildren();
         mainMenu.SetActive(true);
-        logo.SetActive(true);
+        logo.Play("Intro");
         UpdateToggles();
         gameManager.Save();
     }

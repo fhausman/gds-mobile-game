@@ -4132,7 +4132,7 @@ PrefabInstance:
     - target: {fileID: 6047976500201208523, guid: 8c8a61cbc3ec7894785326bfb2b10b2c,
         type: 3}
       propertyPath: basicMobSpawnRate
-      value: 4.5
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6047976500201208523, guid: 8c8a61cbc3ec7894785326bfb2b10b2c,
         type: 3}
@@ -4157,7 +4157,7 @@ PrefabInstance:
     - target: {fileID: 6047976500201208523, guid: 8c8a61cbc3ec7894785326bfb2b10b2c,
         type: 3}
       propertyPath: slybootSpawnRate
-      value: 20
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 6047976500201208523, guid: 8c8a61cbc3ec7894785326bfb2b10b2c,
         type: 3}
@@ -4172,7 +4172,7 @@ PrefabInstance:
     - target: {fileID: 6047976500201208523, guid: 8c8a61cbc3ec7894785326bfb2b10b2c,
         type: 3}
       propertyPath: hordeStrongMobCount
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6568928539405662978, guid: 8c8a61cbc3ec7894785326bfb2b10b2c,
         type: 3}
@@ -5619,6 +5619,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7871684627423178871, guid: 98107d1457ec3de46886a2cf6f44e95e,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7871684627423178871, guid: 98107d1457ec3de46886a2cf6f44e95e,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 6437531721940673314, guid: 98107d1457ec3de46886a2cf6f44e95e,
@@ -7207,9 +7217,9 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1167142949}
   m_CullTransparentMesh: 0
---- !u!1 &1176262903 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -2880321630719512912, guid: 98107d1457ec3de46886a2cf6f44e95e,
+--- !u!95 &1176262905 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1491749869749722929, guid: 98107d1457ec3de46886a2cf6f44e95e,
     type: 3}
   m_PrefabInstance: {fileID: 900525062}
   m_PrefabAsset: {fileID: 0}
@@ -11606,7 +11616,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35801f49e60d71d479f13cb2b6ca71b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  logo: {fileID: 1176262903}
+  logo: {fileID: 1176262905}
   audioSource: {fileID: 1944189786}
   sounds:
   - {fileID: 8300000, guid: b07bb45636f700642b37793fb86ab708, type: 3}
@@ -13247,7 +13257,7 @@ PrefabInstance:
     - target: {fileID: 6047976500201208523, guid: 8c8a61cbc3ec7894785326bfb2b10b2c,
         type: 3}
       propertyPath: basicMobSpawnRate
-      value: 4.5
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6047976500201208523, guid: 8c8a61cbc3ec7894785326bfb2b10b2c,
         type: 3}
@@ -13262,7 +13272,7 @@ PrefabInstance:
     - target: {fileID: 6047976500201208523, guid: 8c8a61cbc3ec7894785326bfb2b10b2c,
         type: 3}
       propertyPath: slybootSpawnDelay
-      value: 45
+      value: 48
       objectReference: {fileID: 0}
     - target: {fileID: 6047976500201208523, guid: 8c8a61cbc3ec7894785326bfb2b10b2c,
         type: 3}
@@ -13282,7 +13292,7 @@ PrefabInstance:
     - target: {fileID: 6047976500201208523, guid: 8c8a61cbc3ec7894785326bfb2b10b2c,
         type: 3}
       propertyPath: hordeStrongMobCount
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6568928539405662978, guid: 8c8a61cbc3ec7894785326bfb2b10b2c,
         type: 3}
