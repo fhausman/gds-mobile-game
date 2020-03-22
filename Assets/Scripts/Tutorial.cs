@@ -73,24 +73,39 @@ public class FirstPeasantTutorialState : IState
         "Hit the peasant before he reaches the stake.\nFor the duration of the tutorial you're immune from all damage.";
 
     public Tutorial tut;
-
+    private bool checkState = false;
 
     public void Exit()
     {
+        checkState = false;
     }
 
     public void Init()
     {
+        GameManager.acceptsPlayerInput = false;
         tut.uiManager.SetTutorialText(message);
-        tut.spawnPointLeft.SpawnMob(SpawnPoint.Enemies.BasicMob);
+        tut.StartCoroutine(SpawnEnemies());
     }
 
     public void Update()
     {
+        if (!checkState)
+            return;
+
         var enemies = GameObject.FindGameObjectsWithTag("Enemy");
         if (enemies.Length == 0)
             tut.states.ChangeState(3);
 
+    }
+
+    private IEnumerator SpawnEnemies()
+    {
+        checkState = true;
+        tut.spawnPointLeft.SpawnMob(SpawnPoint.Enemies.BasicMob);
+
+        yield return new WaitForSeconds(2.0f);
+
+        GameManager.acceptsPlayerInput = true;
     }
 }
 
@@ -100,23 +115,38 @@ public class StrongPeasantTutorialState : IState
         "Bigger peasant is more resistant. You need to hit him twice.";
 
     public Tutorial tut;
-
+    private bool checkState = false;
 
     public void Exit()
     {
+        checkState = false;
     }
 
     public void Init()
     {
+        GameManager.acceptsPlayerInput = false;
         tut.uiManager.SetTutorialText(message);
-        tut.spawnPointRight.SpawnMob(SpawnPoint.Enemies.StrongMob);
+        tut.StartCoroutine(SpawnEnemies());
     }
 
     public void Update()
     {
+        if (!checkState)
+            return;
+
         var enemies = GameObject.FindGameObjectsWithTag("Enemy");
         if (enemies.Length == 0)
             tut.states.ChangeState(4);
+    }
+
+    private IEnumerator SpawnEnemies()
+    {
+        checkState = true;
+        tut.spawnPointRight.SpawnMob(SpawnPoint.Enemies.StrongMob);
+
+        yield return new WaitForSeconds(2.0f);
+
+        GameManager.acceptsPlayerInput = true;
     }
 }
 
@@ -130,6 +160,7 @@ public class PriestTutorialState : IState
 
     public void Exit()
     {
+        checkState = false;
     }
 
     public void Init()
@@ -175,6 +206,7 @@ public class SlybootTutorialState : IState
 
     public void Exit()
     {
+        checkState = false;
     }
 
     public void Init()
@@ -216,6 +248,7 @@ public class SpellbookInformationTutorialState : IState
 
     public void Exit()
     {
+        checkState = false;
     }
 
     public void Init()
@@ -254,6 +287,7 @@ public class FinalTutorialState : IState
 
     public void Exit()
     {
+        checkState = false;
     }
 
     public void Init()

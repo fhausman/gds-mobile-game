@@ -53,7 +53,8 @@ public class UIManager : MonoBehaviour
             child.gameObject.SetActive(false);
         }
 
-        logo.Play("Outro");
+        if(!logo.GetCurrentAnimatorStateInfo(0).IsName("End"))
+            logo.Play("Outro");
     }
 
     public void BellSound()
@@ -63,7 +64,6 @@ public class UIManager : MonoBehaviour
 
     public void Play()
     {
-        logo.Play("Outro");
         gameManager.RestartGame();
     }
 
@@ -76,6 +76,7 @@ public class UIManager : MonoBehaviour
 
     public void Spellbook()
     {
+        logo.gameObject.SetActive(false);
         BellSound();
         DisableAllChildren();
         spellbook.SetActive(true);
@@ -88,6 +89,7 @@ public class UIManager : MonoBehaviour
 
         DisableAllChildren();
         mainMenu.SetActive(true);
+        logo.gameObject.SetActive(true);
         logo.Play("Intro");
         UpdateToggles();
         gameManager.Save();
