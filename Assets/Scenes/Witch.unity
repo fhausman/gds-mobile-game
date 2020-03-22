@@ -533,6 +533,10 @@ MonoBehaviour:
     multiplier: 2
     buyCount: 0
     bookButton: {fileID: 1812650499}
+    bookImage: {fileID: 686757454}
+    bookImageActive: {fileID: 21300000, guid: 3c2289d72d6233540b85518af62e5935, type: 3}
+    bookImageInactive: {fileID: 21300000, guid: a730976086ce621439087ffe31875bae,
+      type: 3}
     castButton: {fileID: 1751532108}
     priceText: {fileID: 2027847948}
     active: 0
@@ -541,6 +545,10 @@ MonoBehaviour:
     multiplier: 2
     buyCount: 0
     bookButton: {fileID: 1157581424}
+    bookImage: {fileID: 99683295}
+    bookImageActive: {fileID: 21300000, guid: 8c455b04864147b42b1556aee8f9e117, type: 3}
+    bookImageInactive: {fileID: 21300000, guid: eaa9a2b5fed07124ea0a3a87aab18a17,
+      type: 3}
     castButton: {fileID: 2124928554}
     priceText: {fileID: 943795685}
     active: 0
@@ -549,6 +557,10 @@ MonoBehaviour:
     multiplier: 2
     buyCount: 0
     bookButton: {fileID: 933617470}
+    bookImage: {fileID: 392681661}
+    bookImageActive: {fileID: 21300000, guid: e9482833f76674942b17e6c209a21612, type: 3}
+    bookImageInactive: {fileID: 21300000, guid: ca2d08556e13c49468b707492aa54657,
+      type: 3}
     castButton: {fileID: 1419918556}
     priceText: {fileID: 1913168866}
     active: 0
@@ -557,6 +569,10 @@ MonoBehaviour:
     multiplier: 2
     buyCount: 0
     bookButton: {fileID: 1772521039}
+    bookImage: {fileID: 949908615}
+    bookImageActive: {fileID: 21300000, guid: 8f6a8632657a4634c999871f9c04d7f5, type: 3}
+    bookImageInactive: {fileID: 21300000, guid: a8242b8d2311d9c4a962458153f441f7,
+      type: 3}
     castButton: {fileID: 1432702554}
     priceText: {fileID: 1891484406}
     active: 0
@@ -8459,8 +8475,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 558.97876, y: -225}
-  m_SizeDelta: {x: 218.1275, y: 450}
+  m_AnchoredPosition: {x: 558.97876, y: -253.19597}
+  m_SizeDelta: {x: 218.1275, y: 506.39194}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1419918556
 MonoBehaviour:
@@ -8493,7 +8509,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
     m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 21300000, guid: ca2d08556e13c49468b707492aa54657, type: 3}
+    m_DisabledSprite: {fileID: 21300000, guid: 0a1dd04d12ae23d42b1808e0d9d34809, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -8534,7 +8550,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e9482833f76674942b17e6c209a21612, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f60cb7be646d34248b8f96e45574f312, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8691,8 +8707,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 783.9363, y: -225}
-  m_SizeDelta: {x: 218.1275, y: 450}
+  m_AnchoredPosition: {x: 783.9363, y: -253.19597}
+  m_SizeDelta: {x: 218.1275, y: 506.39194}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1432702554
 MonoBehaviour:
@@ -8725,7 +8741,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
     m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 21300000, guid: a8242b8d2311d9c4a962458153f441f7, type: 3}
+    m_DisabledSprite: {fileID: 21300000, guid: 843fb862a22a68b4096322d005cdaa1b, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -8766,7 +8782,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8f6a8632657a4634c999871f9c04d7f5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 66ede8f8523abad49a7196bfd38c6638, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -10378,8 +10394,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 109.06375, y: -225}
-  m_SizeDelta: {x: 218.1275, y: 450}
+  m_AnchoredPosition: {x: 109.06375, y: -253.19597}
+  m_SizeDelta: {x: 218.1275, y: 506.39194}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1751532108
 MonoBehaviour:
@@ -10412,7 +10428,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
     m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 21300000, guid: a730976086ce621439087ffe31875bae, type: 3}
+    m_DisabledSprite: {fileID: 21300000, guid: 22c9223cb39a60944a0f684341b818c6, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -10453,7 +10469,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3c2289d72d6233540b85518af62e5935, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 64ed4d3d79d3b2b43ba1ab75f6cee893, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -12522,8 +12538,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 334.02124, y: -225}
-  m_SizeDelta: {x: 218.1275, y: 450}
+  m_AnchoredPosition: {x: 334.02124, y: -253.19597}
+  m_SizeDelta: {x: 218.1275, y: 506.39194}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2124928554
 MonoBehaviour:
@@ -12556,7 +12572,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
     m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 21300000, guid: eaa9a2b5fed07124ea0a3a87aab18a17, type: 3}
+    m_DisabledSprite: {fileID: 21300000, guid: c44ea94c611950c40a6bf15c3862e250, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -12597,7 +12613,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8c455b04864147b42b1556aee8f9e117, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 46ff8279d131c9540b7df1528cf833cf, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

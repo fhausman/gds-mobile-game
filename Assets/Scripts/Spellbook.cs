@@ -14,6 +14,9 @@ public class Spellbook : MonoBehaviour
         public int multiplier;
         public int buyCount;
         public Button bookButton;
+        public Image bookImage;
+        public Sprite bookImageActive;
+        public Sprite bookImageInactive;
         public Button castButton;
         public TextMeshProUGUI priceText;
         [HideInInspector]
@@ -62,6 +65,7 @@ public class Spellbook : MonoBehaviour
         {
             spell.UpdatePrice();
             spell.bookButton.interactable = (mana >= spell.cost && !spell.active);
+            spell.bookImage.sprite = spell.active ? spell.bookImageActive : spell.bookImageInactive;
         }
     }
 
@@ -260,8 +264,8 @@ public class Spellbook : MonoBehaviour
     {
         mana -= obj.cost;
         obj.buyCount += 1;
-        UpdateShop();
         obj.bookButton.interactable = false;
         obj.active = true;
+        UpdateShop();
     }
 }
