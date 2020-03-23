@@ -26,7 +26,7 @@ public class PriestWalking : IState
 
     public void Update()
     {
-        float step = priest.speed * Time.deltaTime;
+        float step = Mathf.Clamp(priest.speed, 0.5f, 2.5f) * Time.deltaTime;
         priest.transform.position = Vector2.MoveTowards(priest.transform.position, priest.target, step);
 
         if(Mathf.Abs(priest.transform.position.x - priest.target.x) <= 0 + 0.1f)

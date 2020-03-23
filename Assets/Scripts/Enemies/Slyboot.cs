@@ -27,7 +27,7 @@ public class SlybootRunning : IState
 
     public void Update()
     {
-        slyboot.SetVelocity(slyboot.speedMultiplier * slyboot.speed * slyboot.direction);
+        slyboot.SetVelocity(slyboot.speedMultiplier * Mathf.Clamp(slyboot.speed, 0.5f, 2.5f) * slyboot.direction);
     }
 
     IEnumerator ThrowDelay()
