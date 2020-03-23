@@ -25,6 +25,7 @@ public class SpawnPoint : MonoBehaviour
     public float slybootSpawnDelay = 30.0f;
     public float slybootSpawnRate = 15.0f;
     public float additionalSpeed = 0.10f;
+    public float hordeDelay = 0.0f;
 
     public int hordeMobCount = 5;
     public int hordeStrongMobCount = 2;
@@ -117,7 +118,8 @@ public class SpawnPoint : MonoBehaviour
 
         spawnPriest = true;
         startIncreasingSpeed = true;
-        scoreWhenAllTypesOfEnemiesSpawned = Score.value;
+        if(scoreWhenAllTypesOfEnemiesSpawned == 0)
+            scoreWhenAllTypesOfEnemiesSpawned = Score.value;
     }
 
     private IEnumerator SlybootSpawnDelay()
@@ -175,13 +177,19 @@ public class SpawnPoint : MonoBehaviour
         slybootComp.speed = 1.0f + scoreSpeedMultiplier * additionalSpeed;
     }
 
-    public void SpawnMob(int mobType)
+    public GameObject SpawnMob(int mobType)
     {
         var enemy = Instantiate(enemies[mobType]);
         SetTransform(enemy.transform, mobType == Enemies.BasicMob);
-        
-        enemy.GetComponent<Mob>().direction = spawnDir;
-        enemy.GetComponent<Mob>().speed += scoreSpeedMultiplier * additionalSpeed;
+
+        var mobComp = enemy.GetComponent<Mob>();
+        mobComp.direction = spawnDir;
+        mobComp.speed += scoreSpeedMultiplier * additionalSpeed;
+
+        if (mobType == Enemies.StrongMob)
+            mobComp.speed = Mathf.Clamp(mobComp.speed, 0.5f, 2.0f);
+
+        return enemy;
     }
 
     private IEnumerator SpawnPriestInternal()
@@ -258,32 +266,72 @@ public class SpawnPoint : MonoBehaviour
 
     private IEnumerator SpawnHordeMob()
     {
+        var enemies = new List<GameObject>();
+
         yield return new WaitForSeconds(4.0f);
 
         for(int i = 0; i < hordeMobCount; i++)
         {
-            SpawnMob(Enemies.BasicMob);
+            enemies.Add(SpawnMob(Enemies.BasicMob));
 
             yield return new WaitForSeconds(2.0f + Random.Range(-0.5f, 0.5f));
         }
 
-        yield return new WaitForSeconds(13.0f);
+        while(true)
+        {
+            yield return new WaitForSeconds(0.5f);
+
+            var enemiesExist = false;
+            foreach (var enemy in enemies)
+            {
+                if (enemy != null)
+                {
+                    enemiesExist = true;
+                    break;
+                }
+            }
+
+            if (!enemiesExist)
+                break;
+        }
+
+        yield return new WaitForSeconds(3.0f + hordeDelay);
 
         mobSpawning = false;
     }
 
     private IEnumerator SpawnStrongHorde()
     {
+        var enemies = new List<GameObject>();
+
         yield return new WaitForSeconds(5.0f);
 
         for (int i = 0; i < hordeStrongMobCount; i++)
         {
-            SpawnMob(Enemies.StrongMob);
+            enemies.Add(SpawnMob(Enemies.StrongMob));
 
             yield return new WaitForSeconds(3.0f + Random.Range(-0.5f, 0.5f));
         }
 
-        yield return new WaitForSeconds(13.0f);
+        while (true)
+        {
+            yield return new WaitForSeconds(0.5f);
+
+            var enemiesExist = false;
+            foreach (var enemy in enemies)
+            {
+                if (enemy != null)
+                {
+                    enemiesExist = true;
+                    break;
+                }
+            }
+
+            if (!enemiesExist)
+                break;
+        }
+
+        yield return new WaitForSeconds(3.0f + hordeDelay);
 
         strongMobSpawning = false;
     }

@@ -27,7 +27,7 @@ public class MobRunning : IState
 
     public void Update()
     {
-        mob.SetVelocity(mob.speedMultiplier * Mathf.Clamp(mob.speed, 0.0f, 5.0f) * mob.direction);
+        mob.SetVelocity(mob.speedMultiplier * Mathf.Clamp(mob.speed, 0.0f, 4.0f) * mob.direction);
     }
 }
 

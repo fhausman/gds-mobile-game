@@ -241,6 +241,7 @@ public class Spellbook : MonoBehaviour
 
     private IEnumerator WaitForFFWFEnd()
     {
+        ffwf.GetComponent<SpriteRenderer>().flipX = witch.spriteRenderer.flipX;
         yield return new WaitForSeconds(0.3f);
 
         var enemiesInRange = Physics2D.OverlapCircleAll(new Vector3(0.0f, -4.0f), 1.0f, LayerMask.GetMask("Enemies"));
