@@ -64,6 +64,8 @@ public class UIManager : MonoBehaviour
 
     public void Play()
     {
+        BellSound();
+
         gameManager.RestartGame();
     }
 
