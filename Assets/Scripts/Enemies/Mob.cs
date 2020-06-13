@@ -63,7 +63,7 @@ public class MobDamaged : IState
     {
         mob.audioSource.PlayOneShot(mob.deathSound[Random.Range(0, mob.deathSound.Length)]);
         mob.SetVelocity(Vector2.zero);
-        mob.anim.SetTrigger("Damage");
+        mob.anim.Play("Damage");
         previousState = mob.stateMachine.currentStateId;
     }
 
@@ -220,11 +220,11 @@ public class Mob : MonoBehaviour, ISpeedable
     void Hit()
     {
         --numberOfLives;
-        if (numberOfLives == 0)
+        if (numberOfLives <= 0 && stateMachine.currentStateId != MobStates.Dead)
         {
             SetDead();
         }
-        else
+        else if(stateMachine.currentStateId != MobStates.Dead)
         {
             SetDamage();
         }
