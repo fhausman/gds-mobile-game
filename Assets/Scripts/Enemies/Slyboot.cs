@@ -80,7 +80,8 @@ public class SlybootDead : IState
     {
         slyboot.Disable();
         slyboot.audioSource.PlayOneShot(slyboot.babaDead);
-        slyboot.StartCoroutine(slyboot.scorcher.ScorchAndDestroy());
+        //slyboot.StartCoroutine(slyboot.scorcher.ScorchAndDestroy());
+        slyboot.anim.Play("Death");
     }
 
     public void Update()
@@ -119,6 +120,7 @@ public class Slyboot : MonoBehaviour, ISpeedable
     public StateMachine stateMachine { get; } = new StateMachine();
     public Scorcher scorcher;
     public Animator anim;
+    public SpriteRenderer sr;
     public RuntimeAnimatorController ForwardsRuntimeController;
     public AnimatorOverrideController BackwardsRuntimeController;
     public AudioSource audioSource;
@@ -167,6 +169,8 @@ public class Slyboot : MonoBehaviour, ISpeedable
 
     private IEnumerator DestroyDelay()
     {
+        sr.enabled = false;
+
         while (audioSource.isPlaying)
             yield return null;
 
@@ -207,7 +211,8 @@ public class Slyboot : MonoBehaviour, ISpeedable
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        material = GetComponent<SpriteRenderer>().material;
+        sr = GetComponent<SpriteRenderer>();
+        material = sr.material;
         stakeTransform = GameObject.Find("Stake").transform;
 
         scorcher = new Scorcher(gameObject, material);

@@ -67,7 +67,8 @@ public class PriestDead : IState
     {
         priest.audioSource.PlayOneShot(priest.deathSound);
         priest.Disable();
-        priest.StartCoroutine(priest.scorcher.ScorchAndDestroy());
+        //priest.StartCoroutine(priest.scorcher.ScorchAndDestroy());
+        priest.anim.Play("Dead");
     }
 
     public void Update()
@@ -91,8 +92,6 @@ public class PriestDeadByLightning : IState
 
     public void Update()
     {
-        if (!priest.anim.GetCurrentAnimatorStateInfo(0).IsName("DeadByLightning"))
-            priest.Destroy();
     }
 }
 

@@ -42,7 +42,7 @@ public class Idle : IState
         if (GameManager.acceptsPlayerInput && Input.GetMouseButton(0))// && Input.touchCount == 1)
         {
             if(EventSystem.current.IsPointerOverGameObject(
-#if !UNITY_EDITOR
+#if !UNITY_EDITOR && UNITY_ANDROID
                 Input.GetTouch(0).fingerId
 #endif
                 ))

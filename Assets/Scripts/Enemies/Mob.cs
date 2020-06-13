@@ -88,7 +88,8 @@ public class MobDead : IState
     {
         mob.audioSource.PlayOneShot(mob.deathSound[Random.Range(0, mob.deathSound.Length)]);
         mob.Disable();
-        mob.StartCoroutine(mob.scorcher.ScorchAndDestroy());
+        //mob.StartCoroutine(mob.scorcher.ScorchAndDestroy());
+        mob.anim.Play("Death");
     }
 
     public void Update()
